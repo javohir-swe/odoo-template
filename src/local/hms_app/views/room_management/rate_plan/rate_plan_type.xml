@@ -1,0 +1,33 @@
+<!-- accommodation_offer_views.xml -->
+<odoo>
+	<data>
+
+		<!-- Tree View for Smoking In Room -->
+		<record id="rate_plan_type_view_tree" model="ir.ui.view">
+			<field name="name">typetree</field>
+			<field name="model">types</field>
+			<field name="arch" type="xml">
+				<tree string="Rate plan types">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form View for Smoking In Room -->
+		<record id="rate_plan_type_view_form" model="ir.ui.view">
+			<field name="name">typeform</field>
+			<field name="model">types</field>
+			<field name="arch" type="xml">
+				<form string="Rate plan type">
+					<sheet>
+						<group>
+							<field name="name" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</odoo>
+  

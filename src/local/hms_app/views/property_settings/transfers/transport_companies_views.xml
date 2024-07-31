@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_transport_companies_tree" model="ir.ui.view">
+        <field name="name">transport.companies.tree</field>
+        <field name="model">transport.companies</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="email_for_notifications" />
+<!--                <field name="usd" />-->
+<!--                <field name="uzs" />-->
+<!--                <field name="rub" />-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_transport_companies_form" model="ir.ui.view">
+        <field name="name">transport.companies.form</field>
+        <field name="model">transport.companies</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name" />
+                    <field name="email_for_notifications" />
+<!--                    <field name="usd" />-->
+<!--                    <field name="uzs" />-->
+<!--                    <field name="rub" />-->
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

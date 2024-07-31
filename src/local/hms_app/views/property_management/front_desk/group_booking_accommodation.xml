@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="view_group_booking_accommodation_form" model="ir.ui.view">
+            <field name="name">group.booking.accommodation.form</field>
+            <field name="model">group.booking.accommodation</field>
+            <field name="arch" type="xml">
+                <form string="Group Booking Accommodation">
+                    <sheet>
+                        <group>
+                            <field name="room_type" />
+                            <field name="beds" />
+                            <field name="extra_beds" />
+                            <field name="dates_of_stay_from" />
+                            <field name="dates_of_stay_to" />
+                            <field name="rooms" domain="[('id', 'in', available_rooms)]"/>
+                            <field name="available_rooms" widget="many2many_tags" readonly="1" invisible="1"/>
+                            <field name="guests"/>
+                            <field name="guest_full_name"/>
+                            <field name="dates_of_stay"/>
+                            <field name="group_booking_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

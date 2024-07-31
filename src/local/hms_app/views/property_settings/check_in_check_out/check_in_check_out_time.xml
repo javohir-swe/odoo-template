@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_check_in_check_out_time_tree" model="ir.ui.view">
+        <field name="name">check.in.check.out.time.tree</field>
+        <field name="model">check.in.check.out.time</field>
+        <field name="arch" type="xml">
+            <tree>
+<!--                <field name="the_role_valid_from" string="Time" />-->
+                <field name="surcharge_for_late_check_out" string="Charge rule" />
+                <field name="display_value" string="Rate plan" />
+                <field name="availability_text" />
+                <field name="half_hour_intervals"/>
+                <!-- <field name="the_role_valid_from" />
+                <field name="rate_price" class="oe_inline" />
+                <field name="rate_percent" class="oe_inline" />
+                <field name="rate_price_currency" class="oe_inline" /> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_check_in_check_out_time_form" model="ir.ui.view">
+        <field name="name">check.in.check.out.time.form</field>
+        <field name="model">check.in.check.out.time</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="half_hour_intervals" class="oe_inline" />
+                        <field name="reason" />
+                    </group>
+                    <div class="d-flex align-items-start gap-2">
+                        <label for="surcharge_for_late_check_out">Charge for early check-in</label>
+                        <field name="surcharge_for_late_check_out" />
+                        <field name="rate_price" class="oe_inline"
+                            invisible="surcharge_for_late_check_out not in ['fixed_rate','hourly_fixed_rate']" />
+                        <field name="rate_price_currency" class="oe_inline"
+                            invisible="surcharge_for_late_check_out not in ['fixed_rate','hourly_fixed_rate']" />
+                        <field name="rate_percent" class="oe_inline"
+                            invisible="surcharge_for_late_check_out != 'percent_of_the_day_rate'" />
+                        <span
+                            invisible="surcharge_for_late_check_out != 'percent_of_the_day_rate'">%</span>
+                    </div>
+                    <div class="d-flex align-items-start gap-2">
+                        <field name="select_the_availability" />
+                        <label for="select_the_availability">Select the availability
+                        </label>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_check_in_check_out_time" model="ir.actions.act_window">
+        <field name="name">Times</field>
+        <field name="res_model">check.in.check.out.time</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

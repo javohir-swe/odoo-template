@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--  -->
+    <record id="view_group_booking_tree" model="ir.ui.view">
+        <field name="name">group.booking.tree</field>
+        <field name="model">group_booking</field>
+        <field name="arch" type="xml">
+            <tree string="Group Booking">
+                <field name="group_name"/>
+                <field name="customer_company_id"/>
+                <!-- <field name="agent_company_id" /> -->
+                <!-- <field name="profile_id" /> -->
+                <!-- <field name="first_name" /> -->
+                <!-- <field name="last_name" /> -->
+                <field name="dates_of_stay_from"/>
+                <field name="dates_of_stay_to"/>
+                <field name="total_amount"/>
+                <!-- <field name="done" /> -->
+            </tree>
+        </field>
+    </record>
+    <!-- Form -->
+    <record id="view_group_booking_form" model="ir.ui.view">
+        <field  name="name">group.booking.form</field>
+        <field  name="model">group_booking</field>
+        <field  name="arch" type="xml">
+            <form string="Group Booking">
+                <!-- <field  name="js_field" widget="group_booking"/> -->
+                <sheet>
+                    <notebook>
+                        <page name="general" string="General info">
+                            <group>
+                                <field invisible="0" name="id"/>
+                                <field invisible="0" name="group_name" string="Group name"/>
+                                <field invisible="0" name="customer_company_id" string="Customer company"/>
+                                <field invisible="0" name="agent_company_id" string="Agent company"/>
+                                <field invisible="0" name="profile_id" string="Profile" required="1"/>
+<!--                                <field invisible="0" name="first_name" string="Firs Name"/>-->
+<!--                                <field invisible="0" name="last_name" string="Last name"/>-->
+<!--                                <field invisible="0" name="middle_name" string="Middle name"/>-->
+<!--                                <field invisible="0" name="phone_number" string="Phone number"/>-->
+<!--                                <field invisible="0" name="email" string="Email"/>-->
+                            </group>
+                        </page>
+                        <page name="rooms_rate_plan" string="Rooms and rate plans">
+                            <group>
+                                <field invisible="0" name="dates_of_stay_from" string="Date of stay from"/>
+                                <field invisible="0" name="dates_of_stay_to" string="Date of stay to"/>
+                                <field invisible="0" name="nights" string="Night"
+                                />
+                                <field invisible="0" name="check_in_times" string="Check in time"/>
+                                <field invisible="0" name="check_out_times" string="Check out time"/>
+                                <field invisible="0" name="rooms_info_ids">
+                                    <tree editable="bottom">
+                                        <field invisible="0" name="room_type"/>
+                                        <field invisible="0" name="dates_of_stay_from"/>
+                                        <field invisible="0" name="dates_of_stay_to"/>
+                                        <field invisible="0" name="available"/>
+                                        <field invisible="0" name="adult_id"/>
+                                        <field invisible="0" name="adult_ids"/>  <!-- Added this line -->
+                                        <field invisible="0" name="rooms_id"/>
+                                        <field invisible="0" name="rate_plan"/>
+                                        <field invisible="0" name="price"/>
+                                    </tree>
+                                </field>
+                                <field invisible="0" name="total_amount" string="Total amount"/>
+                            </group>
+                        </page>
+                        <page name="booking_details" string="Booking Details">
+                            <group>
+                                <field invisible="0" name="booking_details_ids" string="Booking Details">
+                                    <tree>
+                                        <field invisible="0" name="room_type"/>
+                                        <field invisible="0" name="date_of_stay"/>
+                                        <field invisible="0" name="rooms" domain="[('room_type', '=', room_type)]"/>
+                                        <field invisible="0" name="guest"/>
+                                        <field invisible="0" name="rate_plan"/>
+                                        <field invisible="0" name="price"/>
+                                        <field invisible="0" name="discount"/>
+                                        <field invisible="0" name="check_in"/>
+                                        <field invisible="0" name="check_out"/>
+                                        <field invisible="0" name="amount"/>
+                                        <field invisible="0" name="group_booking_id"/>
+                                    </tree>
+                                </field>
+                                <field invisible="0" name="detail_total_amount" string="Detail Total Amount"/>
+                                <field invisible="0" name="comment" string="Comment"/>
+                            </group>
+                        </page>
+                        <page name="accommodation" string="Accommodation">
+                            <group>
+                                <field invisible="0" name="accommodation_ids" string="Accommodation">
+                                    <tree>
+                                        <field invisible="0" name="room_type"/>
+                                        <field invisible="0" name="beds"/>
+                                        <field invisible="0" name="extra_beds"/>
+                                        <field invisible="0" name="rooms"/>
+                                        <field invisible="0" name="guests"/>
+                                        <field invisible="0" name="guest_full_name"/>
+                                        <field invisible="0" name="dates_of_stay"/>
+                                        <field invisible="0" name="group_booking_id"/>
+                                    </tree>
+                                </field>
+                                <field invisible="0" name="done" string="Done"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

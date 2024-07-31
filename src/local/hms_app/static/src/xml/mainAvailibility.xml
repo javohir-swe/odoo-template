@@ -1,0 +1,229 @@
+<templates xml:space="preserve">
+    <t t-name="hms_app.CalendarRenderer">
+        <div class="o_list_renderer o_renderer table-responsive availability"
+        tabindex="-1"
+        t-ref="root">
+            <div class="place_loader" t-att-class="{'active': state.loading}" >
+              <div class="loader"></div>
+            </div>
+
+            <div class="w-100 d-flex justify-content-between align-items-center p-3">
+                <h2 class="availability-name">Room Availability</h2>
+            </div>
+
+            <div class="w-100 pt-0 pl-3 availability-container">
+                <div class="availability-content mb-3 p-2">
+                    <div class="content-header">
+                        <ul>
+                            <li>
+                                <a href="#" t-att-class="{active: state.activeTab === 'availability'}" t-on-click.prevent="() => this.setActiveTab('availability')">Availability</a>
+                            </li>
+                            <li>
+                                <a href="#" t-att-class="{active: state.activeTab === 'calendar'}" t-on-click.prevent="() => this.setActiveTab('calendar')">Calendar</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="room-type-default" t-att-class="{' d-none': state.activeTab === 'calendar'}">
+                        <div class="room-type-table">
+                            <table class="o_list_view table table-sm table-hover w-50 bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Room type</th>
+                                        <th>Default availability</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="state.defaultData" t-as="info" t-key="info">
+                                            <tr>
+                                                <td  class="room-default mt-4"><t t-esc="info[0].room_type[1]"/></td>
+                                                <td>
+                                                  <!-- <input  type="number" t-att-value="info[0].number" t-att-data-room-type="info[0].room_type[1]" class="form-control" /> -->
+                                                    <input
+                                                        style="font-family: Inter"
+                                                        type="number"
+                                                        t-att-value="info[0].number"
+                                                        t-att-data-room-type="info[0].room_type[1]"
+                                                        class="form-control"
+                                                        t-att-id="info[0].room_type[1]"
+                                                        t-on-input="validateInput"
+                                                        t-on-blur="validateInput"
+                                                    />
+                                                </td>
+                                            </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <button t-on-click.prevent="() => this.saveDataDefault()" class="btn btn-primary-save">Save</button>
+                        </div>
+
+
+
+                    </div>
+                    <div class="room-type-table-container non-select mt-3" t-att-class="{' d-none': state.activeTab === 'availability'}">
+                        <div class="room-type-table">
+                            <div class="flex justify-content-between w-100">
+                                <h2>Room type</h2>
+                            </div>
+                            <table class="o_list_view table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="background: #fff"></th>
+                                        <th>Default availability</th>
+                                        <th>Front Desk availability</th>
+                                        <th>Online availability</th>
+                                        <th>Bookings</th>
+                                        <th>Cancellations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="props.model.data.records" t-as="info" t-key="info">
+                                        <t t-if="this.props.model.data.records[info].rawRecord.date === this.state.selectedDate">
+                                            <tr>
+                                                <td class="room-name"><t t-esc="this.props.model.data.records[info].rawRecord.room_type[1]" /></td>
+                                                <td t-esc="this.props.model.data.records[info].rawRecord.default" class="room-default"></td>
+                                                <td t-esc="this.props.model.data.records[info].rawRecord.front_desk" class="room-online"></td>
+                                                <td t-esc="this.props.model.data.records[info].rawRecord.online" class="room-online"></td>
+                                                <td>
+                                                    <p class="room-book">
+                                                        <t t-esc="this.props.model.data.records[info].rawRecord.bookings"/>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="room-book">
+                                                        <t t-esc="this.props.model.data.records[info].rawRecord.cancellations" />
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="room-open-close non-select" t-att-class="{' d-none': state.activeTab === 'availability'}">
+                        <div class="open-table-container-data">
+                            <div class="d-flex align-items-start justify-content-between">
+                                <h2>Room Open/Close</h2>
+                                <!-- <div class="availibility-content-data" t-att-class="{' d-none': state.activeTab === 'availability'}">
+                                    <div class="form-group">
+                                        <label for="start_date" class="av_filter-content">Period from</label>
+                                        <input type="date" id="start_date" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="end_date" class="av_filter-content">to</label>
+                                        <input type="date" id="end_date" class="form-control" />
+                                    </div>
+                                    <button class="btn btn-primary av_filter-content" style="margin-right:150px">Show</button>
+                                    <button class="btn btn-secondary av_filter-content ml-3">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.83325 5.8333H4.99992C4.55789 5.8333 4.13397 6.00889 3.82141 6.32146C3.50885 6.63402
+                                    3.33325 7.05794 3.33325 7.49997V15C3.33325 15.442 3.50885 15.8659 3.82141
+                                    16.1785C4.13397 16.491 4.55789 16.6666 4.99992 16.6666H12.4999C12.9419
+                                    16.6666 13.3659 16.491 13.6784 16.1785C13.991 15.8659 14.1666 15.442 14.1666
+                                    15V14.1666M13.3333 4.16663L15.8333 6.66663M16.9874 5.48747C17.3156 5.15926
+                                    17.5 4.71412 17.5 4.24997C17.5 3.78581 17.3156 3.34067 16.9874
+                                    3.01247C16.6592 2.68426 16.2141 2.49988 15.7499 2.49988C15.2858 2.49988
+                                    14.8406 2.68426 14.5124 3.01247L7.49992 9.99997V12.5H9.99992L16.9874
+                                    5.48747Z" stroke="#42526E" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"/>
+                                        </svg>
+                                        Bulk edit
+                                    </button>
+                                </div> -->
+                            </div>
+                            <ul>
+                                <t t-foreach="this.state.uniqueRoomNames" t-as="roomName" t-key="roomName">
+                                    <li t-att-class="{'active': roomName === state.activeRoom}" t-on-click="() => this.setActiveRoom(roomName)">
+                                        <t t-esc="roomName" />
+                                    </li>
+                                </t>
+                            </ul>
+                            <div class="month w-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" t-on-click="prevMonth" t-att-class="{'disabled': this.state.monthRestriction == -1}" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <path d="M12.5 5.5L7.5 10.5L12.5 15.5" stroke="#7A869A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <p t-esc="this.state.monthName"></p>
+                                <svg xmlns="http://www.w3.org/2000/svg" t-on-click="nextMonth" t-att-class="{'disabled': this.state.monthRestriction == 3}" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                    <path d="M7.5 5.5L12.5 10.5L7.5 15.5" stroke="#7A869A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <table class="close-table">
+                                <thead>
+                                    <tr>
+                                        <t t-foreach="this.state.weekdays" t-as="weekday" t-key="weekday">
+                                            <th><t t-esc="weekday"/></th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="state.calendar" t-as="week" t-key="week[0].day">
+                                        <tr>
+                                            <t t-foreach="week" t-as="dayObj" t-key="dayObj.day">
+                                                <td t-att-class="{'empty': dayObj.type !== 'current'}">
+                                                    <t t-if="dayObj">
+                                                        <div class="data-container-cell" t-on-click.prevent="() => this.onCellClick(dayObj)">
+                                                            <p class="cell-date" t-esc="dayObj.day" t-att-class="(this.state.selectedDate == handleDateClick(dayObj.day, this.state.monthName) &amp;&amp; dayObj.type == 'current') ? 'active' : ''"/>
+                                                            <div class="d-flex mt-3" style="cursor: pointer;" t-on-click.prevent="(e) => e.stopPropagation()">
+                                                                <t t-foreach="this.state.records" t-as="data" t-key="data">
+                                                                    <t t-if="this.state.records[data].rawRecord.date == handleDateClick(dayObj.day, this.state.monthName) &amp;&amp; this.state.records[data].rawRecord.room_type[1] === state.activeRoom">
+                                                                        <t t-if="dayObj.type == 'current'">
+                                                                            <svg t-att-class="!this.state.records[data].rawRecord.close_open ? 'd-none' : 'd-flex'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                                <path d="M9.33333 8V8.00667M2 14H14M4 14V3.33333C4 2.97971 4.14048 2.64057 4.39052 2.39052C4.64057 2.14048 4.97971 2 5.33333 2H10.6667C11.0203 2 11.3594 2.14048 11.6095 2.39052C11.8595 2.64057 12 2.97971 12 3.33333V14" stroke="#00875A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                            </svg>
+                                                                            <svg t-att-class="!this.state.records[data].rawRecord.close_open ? 'd-flex' : 'd-none'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                                <path d="M5.33325 7.33333V4.66667C5.33325 3.95942 5.6142 3.28115 6.1143 2.78105C6.6144 2.28095 7.29267 2 7.99992 2C8.70716 2 9.38544 2.28095 9.88554 2.78105C10.3856 3.28115 10.6666 3.95942 10.6666 4.66667V7.33333M3.33325 8.66667C3.33325 8.31304 3.47373 7.97391 3.72378 7.72386C3.97382 7.47381 4.31296 7.33333 4.66659 7.33333H11.3333C11.6869 7.33333 12.026 7.47381 12.2761 7.72386C12.5261 7.97391 12.6666 8.31304 12.6666 8.66667V12.6667C12.6666 13.0203 12.5261 13.3594 12.2761 13.6095C12.026 13.8595 11.6869 14 11.3333 14H4.66659C4.31296 14 3.97382 13.8595 3.72378 13.6095C3.47373 13.3594 3.33325 13.0203 3.33325 12.6667V8.66667ZM7.33325 10.6667C7.33325 10.8435 7.40349 11.013 7.52851 11.1381C7.65354 11.2631 7.82311 11.3333 7.99992 11.3333C8.17673 11.3333 8.3463 11.2631 8.47132 11.1381C8.59635 11.013 8.66659 10.8435 8.66659 10.6667C8.66659 10.4899 8.59635 10.3203 8.47132 10.1953C8.3463 10.0702 8.17673 10 7.99992 10C7.82311 10 7.65354 10.0702 7.52851 10.1953C7.40349 10.3203 7.33325 10.4899 7.33325 10.6667Z" stroke="#DE350B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                            </svg>
+                                                                            <p class="room-status" t-on-click.prevent="(event) => { event.stopPropagation(); this.updateStatus(this.state.records[data].rawRecord) }" style="padding-left: 10px" t-att-class="!this.state.records[data].rawRecord.close_open ? 'text-danger' : 'text-success'"><t t-esc="!this.state.records[data].rawRecord.close_open ? 'Close' : 'Open'" /></p>
+                                                                        </t>
+                                                                    </t>
+                                                                </t>
+                                                                <t t-if="dayObj.type != 'current'">
+                                                                    <p class="noData-cell">-</p>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" t-att-class="this.state.isModal ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isModal = false" >
+                <div class="modal-dialog w-75">
+                  <div class="modal-content w-100" t-on-click.prevent="(e) => e.stopPropagation()">
+                    <div class="modal-header d-flex justify-content-between align-items-center">
+                      <h5 class="modal-title">Room type availability</h5>
+                      <h5 class="modal-title" id="avModalDataDate"></h5>
+                    </div>
+                    <div class="modal-body w-100">
+                      <table class="av-modal-table">
+                        <thead>
+                            <tr>
+                                <th>Room type</th>
+                                <th>Default availability</th>
+                                <th>Front desk availbility</th>
+                                <th>Online availability</th>
+                                <th>Bookings</th>
+                                <th>Cancellations</th>
+                            </tr>
+                        </thead>
+                        <tbody id="av-tbody">
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer gap-2">
+                      <button class="btn primaryBtn" t-on-click="saveData">Save</button>
+                      <button class="btn dangerBtn" t-on-click.prevent="() => state.isModal = false">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

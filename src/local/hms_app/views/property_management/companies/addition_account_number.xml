@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_addition_account_number_tree" model="ir.ui.view">
+            <field name="name">addition.account.number.tree</field>
+            <field name="model">addition.account.number</field>
+            <field name="arch" type="xml">
+                <tree string="Qo'shimcha valyuta hisob raqamlari">
+                    <field name="currency"/>
+                    <field name="name_legal_entity"/>
+                    <field name="legal_name"/>
+                    <field name="bank_name"/>
+                    <field name="SWIFT"/>
+                    <field name="account"/>
+                    <field name="correspondent_name"/>
+                    <field name="correspondent_swift"/>
+                    <field name="correspondent_account"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_addition_account_number_form" model="ir.ui.view">
+            <field name="name">addition.account.number.form</field>
+            <field name="model">addition.account.number</field>
+            <field name="arch" type="xml">
+                <form string="Qo'shimcha valyuta hisob raqamlari">
+                    <sheet>
+                        <h1 class="oe_title">Qo'shimcha valyuta hisob raqamlari</h1>
+                        <group>
+                            <field name="currency" />
+                            <field name="name_legal_entity" />
+                            <field name="legal_name" />
+                            <field name="bank_name" />
+                            <field name="SWIFT" />
+                            <field name="account" />
+                            <field name="correspondent_name" />
+                            <field name="correspondent_swift" />
+                            <field name="correspondent_account"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+
+        <record id="view_settings_form" model="ir.ui.view">
+            <field name="name">Settings Form</field>
+            <field name="model">settings</field>
+            <field name="arch" type="xml">
+                <form string="Settings" create="0" delete="0">
+                    <notebook>
+                        <page string="Main settings">
+                            <group>
+                                <field name="housekeeping" string="Housekeeping"/>
+                                <field name="guest_profiles"/>
+                                <field name="auto_create"/>
+                                <field name="paid_services"/>
+                                <field name="accommodation"/>
+                                <field name="seal" widget="image"/>
+                                <field name="administrator"/>
+                                <field name="fullname"/>
+                                <field name="fullname_inlatin"/>
+                                <field name="job_title"/>
+                                <field name="jobtitle_inlatin"/>
+                                <field name="signature" widget="image"/>
+                                <field name="show_accountant"/>
+                                <field name="new_booking"/>
+                                <field name="booking_modifi"/>
+                                <field name="booking_cancel"/>
+                                <field name="enable_split"/>
+                                <field name="checkin_times"/>
+                                <field name="checkout_times"/>
+                            </group>
+                        </page>
+                        <page string="References">
+                            <group>
+                                <field name="references_ids">
+                                    <tree>
+                                        <field name="reference_name"/>
+<!--                                        <field name="default_element"/>-->
+                                        <field name="number_of_elements"/>
+                                        <field name="date_last_modified"/>
+                                        <field name="modified_by_user_id"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+
+                        <page string="Document templates">
+                            <group>
+                                <field name="job_title" string="Soon :)" readonly="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Data import">
+                            <group>
+                                <field name="job_title" string="Soon :)" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+    </data>
+
+</odoo>

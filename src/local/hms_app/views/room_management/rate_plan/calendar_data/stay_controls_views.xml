@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_rate_plan_stay_controls_tree" model="ir.ui.view">
+        <field name="name">rate.plan.stay.controls.tree</field>
+        <field name="model">rate_plan.stay_controls</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="rate_plan_id" />
+                <field name="guest_id" />
+                <field name="child_age_range" />
+                <field name="relevant_date" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+    <!-- Form View -->
+    <record id="view_rate_plan_stay_controls_form" model="ir.ui.view">
+        <field name="name">rate.plan.stay.controls.form</field>
+        <field name="model">rate_plan.stay_controls</field>
+        <field name="arch" type="xml">
+            <form string="Stay Controls">
+                <sheet>
+                    <group>
+                        <field name="rate_plan_id" />
+                        <field name="room_type_id" />
+                        <field name="guest_id" />
+                        <field name="child_age_range" />
+                        <field name="filter_id" />
+                        <field name="relevant_date" />
+                        <field name="status" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

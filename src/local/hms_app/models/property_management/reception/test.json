@@ -1,0 +1,54 @@
+{
+  "type": "arrivals",
+  "data": [
+    {
+      "reception_id": 1,
+      "booking_number": "213121312",
+      "customer": "first_name last_name",
+      "room_number": "215",
+      "check_in_time": "27/06/2024/ 14:00",
+      "room_type": "Deluxe",
+      "Balance": "480 000 uzs",
+      "tags": " ",
+      "notes": "No",
+      "nights": "1",
+      "guest_comment": "test",
+      "arrival_status": "overdue"
+    }
+  ],
+  "type": "departures",
+  "data": [
+    {
+      "reception_id": 1,
+      "booking_number": "213121312",
+      "customer": "first_name last_name",
+      "room_number": "215",
+      "check_in_time": "27/06/2024/ 14:00",
+      "room_type": "Deluxe",
+      "Balance": "480 000 uzs",
+      "tags": " ",
+      "notes": "No",
+      "nights": "1",
+      "guest_comment": "test",
+      "arrival_status": "overdue"
+    }
+  ],
+
+  "type": "occupied_room",
+  "data": [
+    {
+      "reception_id": 1,
+      "booking_number": "213121312",
+      "customer": "first_name last_name",
+      "room_number": "215",
+      "check_in_time": "27/06/2024/ 14:00",
+      "room_type": "Deluxe",
+      "Balance": "480 000 uzs",
+      "tags": " ",
+      "notes": "No",
+      "nights": "1",
+      "guest_comment": "test",
+      "arrival_status": "overdue"
+    }
+  ]
+}

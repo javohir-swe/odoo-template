@@ -1,0 +1,35 @@
+<!-- room_image_views.xml -->
+<odoo>
+	<data>
+
+		<!-- Tree View -->
+		<record id="view_room_image_tree" model="ir.ui.view">
+			<field name="name">accommodation.Photo.tree</field>
+			<field name="model">room_image</field>
+			<field name="arch" type="xml">
+				<tree string="Accommodation Photos">
+					<field name="photo" widget="image" class="o_custom_image"
+						options='{"size": [100, 100]}' />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form View -->
+		<record id="view_room_image_form" model="ir.ui.view">
+			<field name="name">accommodation.Photo.form</field>
+			<field name="model">room_image</field>
+			<field name="arch" type="xml">
+				<form string="Accommodation Photo">
+					<sheet>
+						<group>
+							<field name="photo" widget="image"
+								options='{"size": [150, 150],"image_preview": " photo"}' />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</odoo>
+  

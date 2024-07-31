@@ -1,0 +1,316 @@
+<templates xml:space="preserve">
+  <t t-name="hms_app.HouseKeeping">
+    <div class="o_list_renderer o_renderer table-responsive" t-att-class="uniqueRendererClass" tabindex="-1" t-ref="root">
+      <div class="place_loader" t-att-class="{'active': state.loading}">
+        <div class="loader"></div>
+      </div>
+
+      <div class="hk-title d-flex align-items-center justify-content-between mt-2">
+        <h2>Room service</h2>
+        <span t-on-click="toggleHeader" class="d-flex hk-title__btn">
+          Statistics
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 15L12 9L18 15" stroke="#364662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 15L12 9L18 15" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 15L12 9L18 15" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 15L12 9L18 15" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="hk-container show" id="hk-container">
+        <div class="hk-container__block">
+          <h3>Room occupancy</h3>
+          <div class="hk-container__block--row">
+            <span class="hk-container__block--name">Vacant</span>
+            <div class="hk-container__block--container">
+              <span class="hk-container__block--default"></span>
+              <span class="hk-container__block--bar hk-container__block--bar-1" t-att-style="'width: ' + (this.state.status.clean * 100 / this.state.roomCount) + '%';"></span>
+            </div>
+            <span>
+              <t t-esc="this.state.status.clean"/>
+            </span>
+          </div>
+          <div class="hk-container__block--row">
+            <span class="hk-container__block--name">Occupied</span>
+            <div class="hk-container__block--container">
+              <span class="hk-container__block--default"></span>
+              <span class="hk-container__block--bar hk-container__block--bar-2" t-att-style="'width: ' + (this.state.status.clean * 100 / this.state.roomCount) + '%';"></span>
+            </div>
+            <span>
+              <t t-esc="this.state.status.clean"/>
+            </span>
+          </div>
+          <div class="hk-container__block--row">
+            <span class="hk-container__block--name">Out of order</span>
+            <div class="hk-container__block--container">
+              <span class="hk-container__block--default"></span>
+              <span class="hk-container__block--bar hk-container__block--bar-3" t-att-style="'width: ' + (this.state.status.outOfOrder * 100 / this.state.roomCount) + '%';"></span>
+            </div>
+            <span class="count">
+              <t t-esc="this.state.status.outOfOrder"/>
+            </span>
+          </div>
+        </div>
+        <div class="hk-container__block">
+          <h3>Cleaning status</h3>
+          <div class="hk-container__block--row">
+            <span class="hk-container__block--name">Need to clean</span>
+            <div class="hk-container__block--container">
+              <span class="hk-container__block--default"></span>
+              <span class="hk-container__block--bar hk-container__block--bar-4" t-att-style="'width: ' + (this.state.status.dirty * 100 / this.state.roomCount) + '%';"></span>
+            </div>
+            <span>
+              <t t-esc="this.state.status.dirty"/>
+            </span>
+          </div>
+          <div class="hk-container__block--row">
+            <span class="hk-container__block--name">Clean</span>
+            <div class="hk-container__block--container">
+              <span class="hk-container__block--default"></span>
+              <span class="hk-container__block--bar hk-container__block--bar-5" t-att-style="'width: ' + (this.state.status.clean * 100 / this.state.roomCount) + '%';"></span>
+            </div>
+            <span>
+              <t t-esc="this.state.status.clean"/>
+            </span>
+          </div>
+          <div class="hk-container__block--row">
+            <span class="hk-container__block--name">Checked</span>
+            <div class="hk-container__block--container">
+              <span class="hk-container__block--default"></span>
+              <span class="hk-container__block--bar hk-container__block--bar-6" t-att-style="'width: ' + (this.state.status.inspected * 100 / this.state.roomCount) + '%';"></span>
+            </div>
+            <span>
+              <t t-esc="this.state.status.inspected"/>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-container-main">
+        <div class="room-container" style="padding: 20px">
+          <div style="gap:12px" class="d-flex justify-content-between">
+            <div class="hk-table">
+              <div class="select-wrapper">
+                <label style="width:170px">Cleaning status:</label>
+                <select t-on-change="(e) => { this.state.selected_status = e.target.value; this.filteredData(); }" class="dataf-select">
+                  <option>All</option>
+                  <option>Need to clean</option>
+                  <option>Clean</option>
+                  <option>Checked</option>
+                  <option>Out of order</option>
+                </select>
+              </div>
+              <div class="select-wrapper">
+                <label>Building:</label>
+                <select t-on-change="(e) => { this.state.selected_building = e.target.value; this.filteredData(); }" class="dataf-select">
+                  <option>All</option>
+                  <t t-foreach="this.state.buildings" t-as="building" t-key="building">
+                    <option>
+                      <t t-esc="building"/>
+                    </option>
+                  </t>
+                </select>
+              </div>
+              <div class="select-wrapper">
+                <label>Floor:</label>
+                <select t-on-change="(e) => { this.state.selected_floor = e.target.value; this.filteredData(); }" class="dataf-select">
+                  <option>All</option>
+                  <t t-foreach="this.state.floors" t-as="floor" t-key="floor">
+                    <option>
+                      <t t-esc="floor"/>
+                    </option>
+                  </t>
+                </select>
+              </div>
+              <div t-on-change="(e) => { this.state.selected_roomType = e.target.value; this.filteredData(); }" class="select-wrapper">
+                <label style="width:150px">Room type:</label>
+                <select class="dataf-select">
+                  <option>All</option>
+                  <t t-foreach="this.state.roomTypes" t-as="roomType" t-key="roomType">
+                    <option>
+                      <t t-esc="roomType"/>
+                    </option>
+                  </t>
+                </select>
+              </div>
+              <div class="select-wrapper">
+                <label style="width:120px">Occupancy status:</label>
+                <select style="width:70px" class="dataf-select">
+                  <option>All</option>
+                  <option>All</option>
+                  <option>All</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="button-wrapper">
+              <div t-on-click="openXLS" class="hk-table__excel-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M11.6665 2.5V5.83333C11.6665 6.05435 11.7543 6.26631 11.9106 6.42259C12.0669 6.57887 12.2788 6.66667 12.4998 6.66667H15.8332M11.6665 2.5H5.83317C5.39114 2.5 4.96722 2.67559 4.65466 2.98816C4.3421 3.30072 4.1665 3.72464 4.1665 4.16667V15.8333C4.1665 16.2754 4.3421 16.6993 4.65466 17.0118C4.96722 17.3244 5.39114 17.5 5.83317 17.5H14.1665C14.6085 17.5 15.0325 17.3244 15.345 17.0118C15.6576 16.6993 15.8332 16.2754 15.8332 15.8333V6.66667M11.6665 2.5L15.8332 6.66667M9.99984 14.1667V9.16667M9.99984 14.1667L7.9165 12.0833M9.99984 14.1667L12.0832 12.0833" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                    Export
+              </div>
+              <div class="xls-modal" t-att-class="this.state.xls_modal ? 'd-block' : 'd-none'">
+                <p>In progress</p>
+              </div>
+            </div>
+
+          </div>
+
+          <table class="hk-dttable" t-ref="table">
+            <thead class="dtabble-list">
+              <tr>
+                <th>Room</th>
+                <th>Building</th>
+                <th>Floor</th>
+                <th>Room type</th>
+                <th>Occupancy</th>
+                <th>Number of adults/children</th>
+                <th>Room will be vacant</th>
+                <th>Room will be occupied</th>
+                <th>Out of order</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody class="ui-sortable">
+              <t t-foreach="this.state.filteredData" t-as="record" t-key="record.id">
+                <tr>
+                  <td class="room-number">
+                    <t t-esc="record.data.number"/>
+                  </td>
+                  <td>
+                    <t t-esc="record.data.building_id[1]"/>
+                  </td>
+                  <td>
+                    <t t-esc="record.data.floor_id[1]"/>
+                  </td>
+                  <td>
+                    <t t-esc="record.data.room_type[1]"/>
+                  </td>
+                  <td>
+                    <t t-esc="record.data.occupancy ? record.data.occupancy : ''"/>
+                  </td>
+                  <td>
+                    <t t-esc="record.data.people_count"/>
+                  </td>
+                  <td>
+                    <t t-esc="record.data.room_will_be_vacant_period"/>
+                  </td>
+                  <td>
+                    <t t-esc="record.data.room_will_be_occupied_period"/>
+                  </td>
+                  <td style="width:150px">
+                    <t t-esc="record.data.out_of_order_period"/>
+                  </td>
+                  <td style="width:100px">
+                    <span class="room-status" t-att-class="statusChecking(record.data.status).class">
+                      <t t-esc="statusChecking(record.data.status).text"/>
+                    </span>
+                  </td>
+                  <td class="cursor-pointer" t-on-click.prevent="() => openModal(record.data.id)">
+                    <i>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3.3335 10.0001C3.3335 10.2211 3.42129 10.4331 3.57757 10.5893C3.73385 10.7456 3.94582 10.8334 4.16683 10.8334C4.38784 10.8334 4.5998 10.7456 4.75608 10.5893C4.91237 10.4331 5.00016 10.2211 5.00016 10.0001C5.00016 9.77907 4.91237 9.56711 4.75608 9.41083C4.5998 9.25455 4.38784 9.16675 4.16683 9.16675C3.94582 9.16675 3.73385 9.25455 3.57757 9.41083C3.42129 9.56711 3.3335 9.77907 3.3335 10.0001Z" stroke="#6B778C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.16683 10.0001C9.16683 10.2211 9.25463 10.4331 9.41091 10.5893C9.56719 10.7456 9.77915 10.8334 10.0002 10.8334C10.2212 10.8334 10.4331 10.7456 10.5894 10.5893C10.7457 10.4331 10.8335 10.2211 10.8335 10.0001C10.8335 9.77907 10.7457 9.56711 10.5894 9.41083C10.4331 9.25455 10.2212 9.16675 10.0002 9.16675C9.77915 9.16675 9.56719 9.25455 9.41091 9.41083C9.25463 9.56711 9.16683 9.77907 9.16683 10.0001Z" stroke="#6B778C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15.0002 10.0001C15.0002 10.2211 15.088 10.4331 15.2442 10.5893C15.4005 10.7456 15.6125 10.8334 15.8335 10.8334C16.0545 10.8334 16.2665 10.7456 16.4228 10.5893C16.579 10.4331 16.6668 10.2211 16.6668 10.0001C16.6668 9.77907 16.579 9.56711 16.4228 9.41083C16.2665 9.25455 16.0545 9.16675 15.8335 9.16675C15.6125 9.16675 15.4005 9.25455 15.2442 9.41083C15.088 9.56711 15.0002 9.77907 15.0002 10.0001Z" stroke="#6B778C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </i>
+                    <div class="action-modal" t-on-click.prevent="(e) => e.stopPropagation()">
+                      <ul t-if="state.action_modal === record.data.id" class="m-0">
+                        <t t-if="record.data.status !=='need_to_clean'">
+                          <li t-on-click.prevent="()=> saveStatus('need_to_clean')">
+                            <i>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M14.25 4.5H15C15.3978 4.5 15.7794 4.65804 16.0607 4.93934C16.342 5.22064 16.5 5.60218 16.5 6C16.5 6.99456 16.1049 7.94839 15.4017 8.65165C14.6984 9.35491 13.7446 9.75 12.75 9.75H9V11.25M3.75 3.75C3.75 3.35218 3.90804 2.97064 4.18934 2.68934C4.47064 2.40804 4.85218 2.25 5.25 2.25H12.75C13.1478 2.25 13.5294 2.40804 13.8107 2.68934C14.092 2.97064 14.25 3.35218 14.25 3.75V5.25C14.25 5.64782 14.092 6.02936 13.8107 6.31066C13.5294 6.59196 13.1478 6.75 12.75 6.75H5.25C4.85218 6.75 4.47064 6.59196 4.18934 6.31066C3.90804 6.02936 3.75 5.64782 3.75 5.25V3.75ZM7.5 12C7.5 11.8011 7.57902 11.6103 7.71967 11.4697C7.86032 11.329 8.05109 11.25 8.25 11.25H9.75C9.94891 11.25 10.1397 11.329 10.2803 11.4697C10.421 11.6103 10.5 11.8011 10.5 12V15C10.5 15.1989 10.421 15.3897 10.2803 15.5303C10.1397 15.671 9.94891 15.75 9.75 15.75H8.25C8.05109 15.75 7.86032 15.671 7.71967 15.5303C7.57902 15.3897 7.5 15.1989 7.5 15V12Z" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </i>
+                            <button class="modal-btn1">Need to clean</button>
+                          </li>
+                        </t>
+                        <t t-if="record.data.status !== 'clean'">
+                          <li t-on-click.prevent="()=> saveStatus('clean')">
+                            <i>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M12 13.5C12.3978 13.5 12.7794 13.658 13.0607 13.9393C13.342 14.2206 13.5 14.6022 13.5 15C13.5 14.6022 13.658 14.2206 13.9393 13.9393C14.2206 13.658 14.6022 13.5 15 13.5C14.6022 13.5 14.2206 13.342 13.9393 13.0607C13.658 12.7794 13.5 12.3978 13.5 12C13.5 12.3978 13.342 12.7794 13.0607 13.0607C12.7794 13.342 12.3978 13.5 12 13.5ZM12 4.5C12.3978 4.5 12.7794 4.65804 13.0607 4.93934C13.342 5.22064 13.5 5.60218 13.5 6C13.5 5.60218 13.658 5.22064 13.9393 4.93934C14.2206 4.65804 14.6022 4.5 15 4.5C14.6022 4.5 14.2206 4.34196 13.9393 4.06066C13.658 3.77936 13.5 3.39782 13.5 3C13.5 3.39782 13.342 3.77936 13.0607 4.06066C12.7794 4.34196 12.3978 4.5 12 4.5ZM6.75 13.5C6.75 12.3065 7.22411 11.1619 8.06802 10.318C8.91193 9.47411 10.0565 9 11.25 9C10.0565 9 8.91193 8.52589 8.06802 7.68198C7.22411 6.83807 6.75 5.69347 6.75 4.5C6.75 5.69347 6.27589 6.83807 5.43198 7.68198C4.58807 8.52589 3.44347 9 2.25 9C3.44347 9 4.58807 9.47411 5.43198 10.318C6.27589 11.1619 6.75 12.3065 6.75 13.5Z" stroke="#ffa500" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </i>
+                            <button class="modal-btn2">Clean</button>
+                          </li>
+                        </t>
+                        <t t-if="record.data.status !== 'checked'">
+                          <li t-on-click.prevent="()=> saveStatus('checked')">
+                            <i>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M6.75 9L8.25 10.5L11.25 7.5M2.25 9C2.25 9.88642 2.42459 10.7642 2.76381 11.5831C3.10303 12.4021 3.60023 13.1462 4.22703 13.773C4.85382 14.3998 5.59794 14.897 6.41689 15.2362C7.23583 15.5754 8.11358 15.75 9 15.75C9.88642 15.75 10.7642 15.5754 11.5831 15.2362C12.4021 14.897 13.1462 14.3998 13.773 13.773C14.3998 13.1462 14.897 12.4021 15.2362 11.5831C15.5754 10.7642 15.75 9.88642 15.75 9C15.75 8.11358 15.5754 7.23583 15.2362 6.41689C14.897 5.59794 14.3998 4.85382 13.773 4.22703C13.1462 3.60023 12.4021 3.10303 11.5831 2.76381C10.7642 2.42459 9.88642 2.25 9 2.25C8.11358 2.25 7.23583 2.42459 6.41689 2.76381C5.59794 3.10303 4.85382 3.60023 4.22703 4.22703C3.60023 4.85382 3.10303 5.59794 2.76381 6.41689C2.42459 7.23583 2.25 8.11358 2.25 9Z" stroke="#36b37e" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </i>
+                            <button class="modal-btn3">Checked</button>
+                          </li>
+                        </t>
+                        <t t-if="record.data.status !== 'out_of_order'">
+                          <li t-on-click.prevent="()=> this.state.fixing_modal = true">
+                            <i>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M14.25 4.5H15C15.3978 4.5 15.7794 4.65804 16.0607 4.93934C16.342 5.22064 16.5 5.60218 16.5 6C16.5 6.99456 16.1049 7.94839 15.4017 8.65165C14.6984 9.35491 13.7446 9.75 12.75 9.75H9V11.25M3.75 3.75C3.75 3.35218 3.90804 2.97064 4.18934 2.68934C4.47064 2.40804 4.85218 2.25 5.25 2.25H12.75C13.1478 2.25 13.5294 2.40804 13.8107 2.68934C14.092 2.97064 14.25 3.35218 14.25 3.75V5.25C14.25 5.64782 14.092 6.02936 13.8107 6.31066C13.5294 6.59196 13.1478 6.75 12.75 6.75H5.25C4.85218 6.75 4.47064 6.59196 4.18934 6.31066C3.90804 6.02936 3.75 5.64782 3.75 5.25V3.75ZM7.5 12C7.5 11.8011 7.57902 11.6103 7.71967 11.4697C7.86032 11.329 8.05109 11.25 8.25 11.25H9.75C9.94891 11.25 10.1397 11.329 10.2803 11.4697C10.421 11.6103 10.5 11.8011 10.5 12V15C10.5 15.1989 10.421 15.3897 10.2803 15.5303C10.1397 15.671 9.94891 15.75 9.75 15.75H8.25C8.05109 15.75 7.86032 15.671 7.71967 15.5303C7.57902 15.3897 7.5 15.1989 7.5 15V12Z" stroke="#42526e" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </i>
+                            <button class="modal-btn4">Out of order</button>
+                          </li>
+                        </t>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="modal fix-container" t-att-class="this.state.fixing_modal ? 'd-block' : 'd-none'">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="maintenance-form">
+              <div class="modal-header">
+                <h5 class="modal-title">List of scheduled maintenance</h5>
+              </div>
+              <div class="modal-body fix-body gap-3">
+                <div class="maintenance">
+                  <p class="m-0">Maintenance type</p>
+                  <input type="text" id="maintenance-type" readonly="1" value="Out of Order" class="right-side"/>
+                </div>
+                <div class="maintenance">
+                  <p class="m-0">Maintenance description</p>
+                  <textarea id="maintenance-desc" class="right-side"></textarea>
+                </div>
+                <div class="maintenance">
+                  <p class="m-0">Unavailable for accommodation from</p>
+                  <div class="right-side">
+                    <input required="1" t-att-value="this.state.todayDate" id="maintenance-dateIn" type="date" placeholder="dd/mm/yyyy"/>
+                    <input required="1" id="maintenance-timeIn" type="time" value="12:00"/>
+                  </div>
+                </div>
+                <div class="maintenance">
+                  <p class="m-0">Unavailable for accommodation until</p>
+                  <div class="right-side">
+                    <input required="1" t-att-value="this.state.nextDayDate" id="maintenance-dateOut" type="date" placeholder="dd/mm/yyyy"/>
+                    <input required="1" id="maintenance-timeOut" type="time" value="12:00"/>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer mt-3">
+                <div class="action-buttons d-flex gap-2">
+                  <button type="button" class="btn btn-success" t-on-click.prevent="() => this.saveStatus('out_of_order')">Save</button>
+                  <button class="btn btn-danger" t-on-click.prevent="() => this.state.fixing_modal=false">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </t>
+</templates>

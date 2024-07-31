@@ -1,0 +1,37 @@
+<odoo>
+
+    <!-- Menuitem -->
+<!--    <menuitem id="menu_service_photo_root" name="Service Photos" sequence="10"/>-->
+
+<!--    <menuitem id="menu_service_photo" name="Service Photos" parent="menu_service_photo_root" action="action_service_photo" sequence="10"/>-->
+
+    <!-- Tree View -->
+    <record id="view_service_photo_tree" model="ir.ui.view">
+        <field name="name">service.photo.tree</field>
+        <field name="model">service.photo</field>
+        <field name="arch" type="xml">
+            <tree string="Service Photos">
+                <field name="photo" widget="image" class="o_custom_image"
+                    options='{"size": [100, 100]}' />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_service_photo_form" model="ir.ui.view">
+        <field name="name">service.photo.form</field>
+        <field name="model">service.photo</field>
+        <field name="arch" type="xml">
+            <form string="Service Photo">
+                <group>
+					<sheet>
+						<group>
+							<field name="photo" widget="image"
+								options='{"size": [150, 150],"image_preview": " photo"}' string="" />
+						</group>
+					</sheet>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

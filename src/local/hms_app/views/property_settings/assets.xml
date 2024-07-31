@@ -1,0 +1,21 @@
+<odoo>
+	<data>
+		<template id="assets_backend" name="property_settings assets" inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+				<script type="text/javascript" src="/property_settings/static/src/js/dynamic_phone.js"></script>
+			</xpath>
+		</template>
+
+		<!-- <template id="assets_backend" name="location_assets" inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+				<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeWnPhCu5X3-PyY20R6uwi8ynPLzTkZ10&amp;callback=initMap"
+					async="async" defer="defer"></script>
+
+
+				<script type="text/javascript" src="/property_settings/static/src/js/location_map.js"></script>
+			</xpath>
+		</template> -->
+
+	</data>
+</odoo>

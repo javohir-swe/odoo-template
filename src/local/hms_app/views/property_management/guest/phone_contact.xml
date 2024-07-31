@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+        <record id="view_phone_contact_tree" model="ir.ui.view">
+            <field name="name">phone.contact.tree</field>
+            <field name="model">phone.contact</field>
+            <field name="arch" type="xml">
+                <tree string="Phone Contacts">
+                    <field name="guest_id"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_phone_contact_form" model="ir.ui.view">
+            <field name="name">phone.contact.form</field>
+            <field name="model">phone.contact</field>
+            <field name="arch" type="xml">
+                <form string="Phone Contact">
+                    <header>
+                        <h1 class="oe_title">Phone Contact</h1>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="guest_id" invisible="1"/>
+                            <field name="phone"/>
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="action_phone_contact_tree" model="ir.actions.act_window">
+            <field name="name">Phone Contacts</field>
+            <field name="res_model">phone.contact</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_phone_contact_tree"/>
+        </record>
+
+        <record id="action_phone_contact_form" model="ir.actions.act_window">
+            <field name="name">Phone Contact</field>
+            <field name="res_model">phone.contact</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_phone_contact_form"/>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

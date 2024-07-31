@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_electronic_devices_tree" model="ir.ui.view">
+            <field name="name">electronic.devices.tree</field>
+            <field name="model">electronic_devices</field>
+            <field name="arch" type="xml">
+                <tree string="Electronic Devices">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_electronic_devices_form" model="ir.ui.view">
+            <field name="name">electronic.devices.form</field>
+            <field name="model">electronic_devices</field>
+            <field name="arch" type="xml">
+                <form string="Electronic Device">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+							<field name="icon" widget="image"
+								options='{"size": [150, 150],"image_preview": " photo"}' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

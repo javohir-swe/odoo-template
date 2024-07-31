@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <!-- Tree View for VideoAndAudio -->
+        <record id="view_video_and_audio_tree" model="ir.ui.view">
+            <field name="name">video.and.audio.tree</field>
+            <field name="model">video_and_audio</field>
+            <field name="arch" type="xml">
+                <tree string="Video and Audio">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for VideoAndAudio -->
+        <record id="view_video_and_audio_form" model="ir.ui.view">
+            <field name="name">video.and.audio.form</field>
+            <field name="model">video_and_audio</field>
+            <field name="arch" type="xml">
+                <form string="Video and Audio">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+							<field name="icon" widget="image"
+								options='{"size": [150, 150],"image_preview": " photo"}' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

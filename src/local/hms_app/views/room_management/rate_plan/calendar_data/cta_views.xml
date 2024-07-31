@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_rate_plan_cta_tree" model="ir.ui.view">
+            <field name="name">rate.plan.cta.tree</field>
+            <field name="model">rate_plan.cta</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="rate_plan_id" />
+                    <field name="room_type_id" />
+                    <field name="filter_id" />
+                    <field name="relevant_date" />
+                    <field name="status" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_rate_plan_cta_form" model="ir.ui.view">
+            <field name="name">rate.plan.cta.form</field>
+            <field name="model">rate_plan.cta</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="rate_plan_id" />
+                            <field name="room_type_id" />
+                            <field name="relevant_date" />
+                            <field name="status" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_accounting_calendar_tree" model="ir.ui.view">
+        <field name="name">accounting.calendar.tree</field>
+        <field name="model">accounting.calendar</field>
+        <field name="arch" type="xml">
+            <tree js_class="Detailed">
+            <!-- <tree> -->
+                <field name="booking_id"/>
+                <field name="booking_number"/>
+                <field name="guest_id"/>
+                <field name="check_in_date"/>
+                <field name="check_out_date"/>
+                <field name="total"/>
+                <field name="commission_amount"/>
+                <field name="point_of_sale"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_accounting_calendar_form" model="ir.ui.view">
+        <field name="name">accounting.calendar.form</field>
+        <field name="model">accounting.calendar</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="booking_id"/>
+                        <field name="status"/>
+                        <field name="booking_number"/>
+                        <field name="guest_id"/>
+                        <field name="check_in_date"/>
+                        <field name="check_out_date"/>
+                        <field name="check_in_time"/>
+                        <field name="checkout_time"/>
+                        <field name="total"/>
+                        <field name="commission_amount"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

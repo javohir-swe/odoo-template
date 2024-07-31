@@ -1,0 +1,20 @@
+<templates xml:space="preserve">
+    <t t-name="hms.Footer">
+        <div class="footer">
+            <div class="footer_content">
+                <div class="footer_information">
+                    <p>© 2024. All rights reserved. info@movo.uz </p>
+                </div>
+                <div class="footer_apps">
+                    <p> <a href="#" class="link">Terms of site use</a>  | <a href="#" class="link"> Privacy policy</a>  </p>
+                    <!-- <a href="https://play.google.com/store/apps/details?id=com.odoo.mobile" target="_blank">
+                        <img class="download_app" height="40" width="135" src="https://download.odoocdn.com/digests/digest/static/src/img/google_play.png" />
+                    </a>
+                    <a href="https://itunes.apple.com/us/app/odoo/id1272543640" target="_blank">
+                        <img class="download_app" height="40" width="135" src="https://download.odoocdn.com/digests/digest/static/src/img/app_store.png" />
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

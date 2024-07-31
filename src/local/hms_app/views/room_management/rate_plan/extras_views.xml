@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Extra Service -->
+    <record id="view_rate_plan_service_tree" model="ir.ui.view">
+        <field name="name">rate.plan.service.tree</field>
+        <field name="model">rate_plan.service</field>
+        <field name="arch" type="xml">
+            <tree string="Extra Service">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_rate_plan_service_form" model="ir.ui.view">
+        <field name="name">rate.plan.service.form</field>
+        <field name="model">rate_plan.service</field>
+        <field name="arch" type="xml">
+            <form string="Extra Service">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Extras -->
+    <record id="view_rate_plan_extras_tree" model="ir.ui.view">
+        <field name="name">rate.plan.extras.tree</field>
+        <field name="model">rate_plan.extras</field>
+        <field name="arch" type="xml">
+            <tree string="Rate Plan Extras">
+                <field name="service_name" decoration-info='1' />
+                <field name="room_types_count" decoration-info='1' widget="badge" />
+                <field name="included_or_extra" />
+                <field name="service_type" />
+                <field name="status" invisible="1" column_invisible="1" />
+                <field name="status_tag" widget="badge" decoration-success="status == True"
+                    decoration-danger="status == False" />
+                <field name="included_or_extra" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_rate_plan_extras_form" model="ir.ui.view">
+        <field name="name">rate.plan.extras.form</field>
+        <field name="model">rate_plan.extras</field>
+        <field name="arch" type="xml">
+            <form string="Rate Plan Extras">
+                <sheet>
+                    <group>
+                        <field name="service_name" />
+                        <field name="service_type" />
+                        <field name="room_types" widget="many2many_tags" />
+                        <field name="status" widget="boolean_toggle" />
+                        <field name="included_or_extra" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

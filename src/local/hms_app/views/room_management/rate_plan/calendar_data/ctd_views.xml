@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_rate_plan_ctd_tree" model="ir.ui.view">
+        <field name="name">rate.plan.rate.plan.ctd.tree</field>
+        <field name="model">rate_plan.rate_plan_ctd</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="rate_plan_id" />
+                <field name="room_type_id" />
+                <field name="relevant_date" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_rate_plan_ctd_form" model="ir.ui.view">
+        <field name="name">rate.plan.rate.plan.ctd.form</field>
+        <field name="model">rate_plan.rate_plan_ctd</field>
+        <field name="arch" type="xml">
+            <form string="Rate Plan CTD">
+                <sheet>
+                    <group>
+                        <field name="rate_plan_id" />
+                        <field name="room_type_id" />
+                        <field name="filter_id" />
+                        <field name="relevant_date" />
+                        <field name="status" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

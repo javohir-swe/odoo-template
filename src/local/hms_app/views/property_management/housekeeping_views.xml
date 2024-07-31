@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data><!-- Tree View -->
+        <record id="view_housekeeping_tree" model="ir.ui.view">
+            <field name="name">housekeeping.tree</field>
+            <field name="model">room_inventory.housekeeping</field>
+            <field name="arch" type="xml">
+               <tree string="Room Inventory" delete="0" js_class="HouseKeeping">
+               <!-- <tree string="Room Inventory"> -->
+                    <field name="id" string="ID"/>
+                    <field name="number" string="Room"/>
+                    <field name="building_id" string="Building"/>
+                    <field name="floor_id" string="Floor"/>
+                    <field name="room_type" string="Room type"/>
+                    <field name="occupancy" string="Occupancy"/>
+                    <field name="people_count" string="Number of adults/children"/>
+                    <field name="room_will_be_vacant_period" string="Room will be vacant"/>
+                    <field name="room_will_be_occupied_period" string="Room will be occupied"/>
+                    <field name="out_of_order_period" string="Out Of Order"/>
+                    <field name="status" string="Status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_housekeeping_search" model="ir.ui.view">
+            <field name="name">housekeeping.search</field>
+            <field name="model">room_inventory.housekeeping</field>
+            <field name="arch" type="xml">
+                <search string="Room Inventory">
+                    <field name="building_id"/>
+                    <field name="floor_id"/>
+                    <field name="room_type"/>
+                    <field name="occupancy"/>
+                    <field name="status"/>
+
+                    <filter string="All" name="all" domain="[]"/>
+                    <filter string="Dirty" name="dirty" domain="[('status', '=', 'need_to_clean')]"/>
+                    <filter string="Clean" name="clean" domain="[('status', '=', 'clean')]"/>
+                    <filter string="Inspected" name="inspected" domain="[('status', '=', 'checked')]"/>
+                    <filter string="Out of Order" name="out_of_order" domain="[('status', '=', 'out_of_order')]"/>
+                    <filter string="Vacant" name="vacant" domain="[('occupancy', '=', 'bo\'sh')]"/>
+                    <filter string="Occupied" name="occupied" domain="[('occupancy', '=', 'band')]"/>
+
+                    <!-- Dynamic Filter for Room Type -->
+                    <separator string="Room Types"/>
+                    <filter name="room_type_filter" string="Room Type" domain="[]" context="{'group_by':'room_type'}"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_housekeeping_form_popup" model="ir.ui.view">
+            <field name="name">housekeeping.popup.form</field>
+            <field name="model">room_inventory.housekeeping</field>
+            <field name="arch" type="xml">
+                <form string="Housekeeping Popup" delete="0">
+                    <sheet>
+                        <group>
+                            <field name="number" invisible="1"/>
+                            <field name="status"/>
+                        </group>
+                        <group invisible="status != 'out_of_order'">
+                            <field name="out_of_order_ids" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="works"/>
+                                    <field name="description"/>
+                                    <field name="unavailable_from"/>
+                                    <field name="unavailable_until"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="works"/>
+                                        <field name="description"/>
+                                        <field name="unavailable_from"/>
+                                        <field name="unavailable_until"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="view_group_services_tree" model="ir.ui.view">
+            <field name="name">group.services.tree</field>
+            <field name="model">group.services</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="service_count" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_group_services_form" model="ir.ui.view">
+            <field name="name">group.services.form</field>
+            <field name="model">group.services</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="service" />
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

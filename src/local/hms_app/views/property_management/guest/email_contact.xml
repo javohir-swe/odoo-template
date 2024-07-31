@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+        <record id="view_email_contact_tree" model="ir.ui.view">
+            <field name="name">email.contact.tree</field>
+            <field name="model">email.contact</field>
+            <field name="arch" type="xml">
+                <tree string="Email Contacts">
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_email_contact_form" model="ir.ui.view">
+            <field name="name">email.contact.form</field>
+            <field name="model">email.contact</field>
+            <field name="arch" type="xml">
+                <form string="Email Contact">
+                    <header>
+                        <h1 class="oe_title">Email Contact</h1>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="email"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+
+        </record>
+
+        <record id="action_email_contact_tree" model="ir.actions.act_window">
+            <field name="name">Email Contacts</field>
+            <field name="res_model">email.contact</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_email_contact_tree"/>
+        </record>
+
+        <record id="action_email_contact_form" model="ir.actions.act_window">
+            <field name="name">Email Contact</field>
+            <field name="res_model">email.contact</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_email_contact_form"/>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

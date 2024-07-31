@@ -1,0 +1,159 @@
+<odoo>
+    <data>
+
+        <record id="view_guest_tree" model="ir.ui.view">
+            <field name="name">guest.tree</field>
+            <field name="model">guest</field>
+            <field name="arch" type="xml">
+                <tree string="Guests">
+                    <field name="full_name"/>
+                    <field name="citizenships"/>
+                    <field name="birthday"/>
+                    <field name="phone_ids"/>
+                    <field name="email_ids"/>
+                    <field name="comment_for_guest"/>
+                    <field name="guest_status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_guest_form" model="ir.ui.view">
+            <field name="name">guest.form</field>
+            <field name="model">guest</field>
+            <field name="arch" type="xml">
+                <form string="Guest">
+                    <notebook>
+                        <page string="Personal details">
+                            <field name="js_field"/>
+                            <group>
+                                <separator string="Personal details" colspan="1"/>
+                                <field name="citizenships"/>
+                                <field name="last_name"/>
+                                <field name="first_name"/>
+                                <field name="middle_name"/>
+                                <field name="sex" string="Gender"/>
+                                <field name="birthday"/>
+                                <field name="guest_company_id"/>
+                            </group>
+                            <group>
+                                <separator string="Contact details" colspan="1"/>
+                                <field name="email_ids">
+                                    <tree editable="bottom">
+                                        <field name="email"/>
+                                    </tree>
+                                </field>
+                                <field name="phone_ids">
+                                    <tree editable="bottom">
+                                        <field name="phone"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <separator string="Identity document" colspan="1"/>
+                                <field name="invisable_passport" invisible="1"/>
+                                <field name="invisable_title" invisible="1"/>
+                                <field name="document"/>
+                                <field name="document_title" invisible="invisable_title"/>
+                                <field name="series" invisible="invisable_passport"/>
+                                <field name="number" invisible="invisable_passport"/>
+                                <field name="issue_date" invisible="invisable_passport"/>
+                                <field name="expiry_date" invisible="invisable_passport"/>
+                                <field name="issuing_authority" invisible="invisable_passport"/>
+                                <field name="country_of_birth" invisible="0"/>
+                                <field name="passport_city" invisible="0"/>
+                                <field name="document_copy" filename="document_copy_filename" widget="binary" invisible="invisable_passport"/>
+                            </group>
+                            <group>
+                                <separator string="Information about the legal representative" colspan="1"/>
+                                <field name="representative_last_name"/>
+                                <field name="representative_first_name"/>
+                                <field name="representative_middle_name"/>
+                                <field name="representative_sex"/>
+                                <field name="representative_birthday"/>
+                                <field name="representative_birthday_country"/>
+                                <field name="representative_birthday_city"/>
+                                <field name="representative_citizenship"/>
+                                <field name="representative_relationship_to_cardholder"/>
+                                <field name="representative_passport"/>
+                                <field name="representative_invisable_passport" invisible="1"/>
+                                <field name="representative_invisable_title" invisible="1"/>
+                                <field name="representative_document_title" invisible="representative_invisable_title"/>
+                                <field name="representative_series" invisible="representative_invisable_passport"/>
+                                <field name="representative_number" invisible="representative_invisable_passport"/>
+                                <field name="representative_issue_date" invisible="representative_invisable_passport"/>
+                                <field name="representative_expiry_date" invisible="representative_invisable_passport"/>
+                                <field name="representative_issuing_authority" invisible="representative_invisable_passport"/>
+                            </group>
+                            <group>
+                                <separator string="Status" colspan="1"/>
+                                <field name="guest_status"/>
+                            </group>
+                            <group>
+                                <separator string="Comment" colspan="1"/>
+                                <field name="comment_for_guest"/>
+                            </group>
+                            <group>
+                                <separator string="Place of residence" colspan="1"/>
+                                <field name="countries"/>
+                                <field name="zip_code"/>
+                                <field name="region"/>
+                                <field name="district"/>
+                                <field name="city"/>
+                                <field name="location"/>
+                                <field name="street"/>
+                                <field name="home"/>
+                                <field name="building"/>
+                                <field name="apartment"/>
+                            </group>
+                        </page>
+
+                        <page string="Bookings">
+                            <group>
+                                <field name="booking_info" string=""/>
+                                <field name="booking_ids" readonly="1" string="">
+                                    <tree>
+                                        <field name="unique_id"/>
+                                        <field name="arrival_date"/>
+                                        <field name="arrival_time"/>
+                                        <field name="room_type_id"/>
+                                        <field name="room_number"/>
+                                        <field name="total"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Deposit">
+                            <group>
+                                <field name="deposit" string="Deposit" readonly="1"/>
+                                <field name="deposit_data" readonly="1" string="">
+                                    <tree>
+                                        <field name="booking_id"/>
+                                        <field name="created_at"/>
+                                        <field name="amount"/>
+                                        <field name="action_type" widget="badge"  decoration-success="action_type == 'payment'" decoration-danger="action_type == 'penalty'" decoration-warning="action_type == 'refund'"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_guest_tree" model="ir.actions.act_window">
+            <field name="name">Guests</field>
+            <field name="res_model">guest</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_guest_tree"/>
+        </record>
+
+        <record id="action_guest_form" model="ir.actions.act_window">
+            <field name="name">Guest</field>
+            <field name="res_model">guest</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_guest_form"/>
+            <field name="target">current</field>
+        </record>
+
+    </data>
+</odoo>

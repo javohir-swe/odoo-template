@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_max_adv_booking_tree" model="ir.ui.view">
+        <field name="name">rate_plan.max_adv_booking.tree</field>
+        <field name="model">rate_plan.max_adv_booking</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="rate_plan_id" />
+                <field name="room_type_id" />
+                <field name="relevant_date" />
+                <field name="number" />
+                <field name="reset" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_max_adv_booking_form" model="ir.ui.view">
+        <field name="name">rate_plan.max_adv_booking.form</field>
+        <field name="model">rate_plan.max_adv_booking</field>
+        <field name="arch" type="xml">
+            <form string="Max Advance Booking">
+                <sheet>
+                    <group>
+                        <field name="rate_plan_id" />
+                        <field name="room_type_id" />
+                        <field name="filter_id" />
+                        <field name="relevant_date" />
+                        <field name="number" readonly="reset" />
+                        <field name="reset" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

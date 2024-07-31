@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<!-- <template id="assets_backend" name="scheduler_assets" inherit_id="web.assets_backend">
+		<xpath expr="." position="inside">
+			<script type="text/javascript" src="/hms_app/static/src/lib/daypilot/daypilot-all.min.js"></script>
+			<script type="text/javascript" src="/hms_app/static/src/js/scheduler_component.js"></script>
+		</xpath>
+	</template> -->
+</odoo>

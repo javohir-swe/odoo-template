@@ -1,0 +1,18 @@
+<templates>
+
+    <t t-name="hms.WebClient">
+        <t t-if="!state.fullscreen">
+            <!-- <NavBar/> -->
+        </t>
+        <div class="w-100 h-100 sidebar-open" id="container_action">
+            <SideBar />
+            <div class="main_content">
+                <NewNavbar />
+                <ActionContainer />
+                <Footer />
+            </div>
+        </div>
+        <MainComponentsContainer />
+    </t>
+
+</templates>

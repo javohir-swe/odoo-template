@@ -1,0 +1,37 @@
+<!-- accommodation_offer_views.xml -->
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_accommodation_offer_tree" model="ir.ui.view">
+            <field name="name">accommodation.offer.tree</field>
+            <field name="model">accommodation_offer</field>
+            <field name="arch" type="xml">
+                <tree string="Accommodation Offers">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_accommodation_offer_form" model="ir.ui.view">
+            <field name="name">accommodation.offer.form</field>
+            <field name="model">accommodation_offer</field>
+            <field name="arch" type="xml">
+                <form string="Accommodation Offer">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- accommodation_offer uchun yangi menu elementi Menu 2 ostida -->
+
+
+    </data>
+</odoo>
+  

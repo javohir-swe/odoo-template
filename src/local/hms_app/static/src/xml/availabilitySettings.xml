@@ -1,0 +1,359 @@
+<templates xml:space="preserve">
+    <t t-name="hms_app.AvailabilitySettings">
+        <div class="o_list_renderer o_renderer available-container table-responsive" tabindex="-1" t-ref="root">
+            <div class="place_loader" t-att-class="{'active': state.loading}" >
+              <div class="loader"></div>
+            </div>
+
+            <div class="w-100 d-flex justify-content-between align-items-center p-3">
+                <h2 class="font-large">Availability Settings</h2>
+            </div>
+            <div class="av-settings-static ml-3">
+                <b class="font-medium">Increase direct sales:</b>
+                <ol>
+                    <li class="font-regular">Create advanced online sales rules.</li>
+                    <li class="font-regular">Set the validity period for rules in the "Rule calendar" tab.</li>
+                </ol>
+                <p class="font-regular">Learn more about <a href="#">how to manage direct online sales.</a></p>
+                <div>
+                    <p class="font-regular">The rules affect room availability <a href="#">in all distribution channels.</a></p>
+                </div>
+            </div>
+            <button class="av-create-rule" t-on-click.prevent="() => this.createRule()">+ Create a rule</button>
+            <div class="settings-table-container">
+                <div class="av-settings-page">
+                    <ul>
+                        <li class="font-medium" t-att-class="{active: state.activeTab === 'online'}" t-on-click.prevent="() => this.setActiveTab('online')">Online Sales Rules</li>
+                        <li class="font-medium" t-att-class="{active: state.activeTab === 'calendar'}" t-on-click.prevent="() => this.setActiveTab('calendar')">Rule Calendar</li>
+                    </ul>
+                </div>
+                <div class="av-settings-table" t-att-class="state.activeTab === 'calendar' ? 'd-flex' : 'd-none'">
+                    <div class="p-2">
+                        <h2 class="font-large">Rule Calendar For Online Sales</h2>
+                        <pre class="font-regular">To ensure that the rules are applied, assign them to the specific dates.
+Once the rule is assigned, the cell is marked with a certain colour rule.
+Hovering over a cell will display a hint with the rule's name and parameters.</pre>
+                    </div>
+                    <div class="d-flex flex-column gap-1 p-2">
+                        <div class="month w-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" t-on-click="prevMonth" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                <path d="M12.5 5.5L7.5 10.5L12.5 15.5" stroke="#7A869A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p t-esc="this.state.monthName"></p>
+                            <svg xmlns="http://www.w3.org/2000/svg" t-on-click="nextMonth" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                <path d="M7.5 5.5L12.5 10.5L7.5 15.5" stroke="#7A869A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <table class="av_settings-table-main p-2">
+                            <thead>
+                                <tr>
+                                    <t t-foreach="this.state.weekdays" t-as="weekday" t-key="weekday">
+                                        <th><t t-esc="weekday"/></th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.calendar" t-as="week" t-key="week[0].day">
+                                    <tr>
+                                        <t t-foreach="week" t-as="dayObj" t-key="dayObj.day">
+                                            <td id="tooltip-container" t-att-class="{'empty': dayObj.type !== 'current'}"
+                                                t-att-data-date="dayObj.date"
+                                                t-att-data-cell-key="`${dayObj.date}-${dayObj.type}`"
+                                                t-att-data-room-type-id="dayObj.roomTypeId"
+                                                t-on-mousedown="dayObj.date &amp;&amp; startSelection"
+                                                t-on-mouseover="dayObj.date &amp;&amp; handleMouseOver"
+                                                t-on-mouseup="dayObj.date &amp;&amp; endSelection">
+                                                <t t-if="dayObj">
+                                                    <div class="data-container-cell"
+                                                        t-att-data-cell-key="`${dayObj.date}-${dayObj.type}`"
+                                                        t-att-data-day="dayObj.date"
+                                                    >
+                                                        <p class="cell-date" t-esc="dayObj.day" />
+                                                        <p class="cell-rule" t-esc="this.ruleDateName(dayObj.date)"></p>
+                                                    </div>
+                                                </t>
+                                                 <div id="tooltip">
+                                                    <div class="modal-dialog" t-on-click.prevent="closeRuleMenu">
+                                                        <div class="modal-content">
+                                                            <div class="tooltip-body">
+                                                                <div class="modal-rule_name">
+                                                                    <p>Online sales rule</p>
+                                                                    <p class="selected-rule" t-on-click.prevent="showRules">
+                                                                        <div class="d-flex">
+                                                                            <div class="d-flex">
+                                                                                <t t-if="this.state.selectedRuleId">
+                                                                                    <span class="selected-rule_id">
+                                                                                        <t t-esc="this.state.selectedRuleId "/>
+                                                                                    </span>
+                                                                                </t>
+                                                                                <span>
+                                                                                    <t t-esc=" this.state.selectedRule"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                                <path d="M5 7.5L10 12.5L15 7.5" stroke="#83828C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <div t-att-class="state.isRulesVisible ? 'rules-selection' : 'd-none'" t-on-click.prevent="(e) => e.stopPropagation()">
+                                                                            <div class="rule-name-select" t-on-click="(e) => e.stopPropagation()">
+                                                                                <input type="radio" id="option-0" value="Do not change" name="rule_method" t-on-change.prevent='(e) => toggleRules(e, `Do not change`)' t-att-checked="this.state.selectedRule === 'Do not change'"/>
+                                                                                <label for="option-0">Do not change</label>
+                                                                            </div>
+                                                                            <t t-foreach="this.state.rules" t-as="rule" t-key="rule.id">
+                                                                                <div class="rule-name-select" t-on-click="(e) => e.stopPropagation()">
+                                                                                    <input type="radio" t-att-id="'option' + rule.id" t-att-value="rule.name" t-on-change.prevent='(e) => this.toggleRules(e, rule)' name="rule_method" t-att-checked="this.state.selectedRule === rule.name"/>
+                                                                                    <label t-att-for="'option' + rule.id">
+                                                                                        <t t-esc="rule.name"/>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </t>
+                                                                        </div>
+                                                                    </p>
+                                                                </div>
+                                                                <hr class="p-0 m-0"/>
+                                                                <t t-if="this.state.selectionRuleData.length > 0 &amp;&amp; this.state.selectionRuleNumber">
+                                                                    <div class="rule-content">
+                                                                        <h2>Keep the last rooms for Exely Booking Engine</h2>
+                                                                        <div class="rule-room-data">
+                                                                            <t t-foreach="this.state.selectionRuleData" t-as="data" t-key="data.id">
+                                                                                <div class="rule-data-wrapper">
+                                                                                    <p>
+                                                                                        <t t-esc="data.rooms"/>
+                                                                                    </p>
+                                                                                    <div class="last-room">
+                                                                                        <p class="room-number">
+                                                                                            <t t-esc="data.number"/>
+                                                                                        </p>
+                                                                                        <p>last rooms</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </t>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr class="p-0 m-0"/>
+                                                                    <div class="modal-rule_name mt-3">
+                                                                        <p>Number of days before arrival when last rooms return to all points of sale</p>
+                                                                        <p class="selected-rule bg-secondary">
+                                                                            <div class="d-flex">
+                                                                                <span>
+                                                                                    <t t-esc="this.state.selectionRuleNumber"/>
+                                                                                </span>
+                                                                            </div>
+                                                                        </p>
+                                                                    </div>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+
+
+                        </table>
+                        <table t-attf-class="o_list_table d-none table table-sm table-hover position-relative mb-0 {{props.list.isGrouped ? 'o_list_table_grouped' : 'o_list_table_ungrouped table-striped'}}" t-ref="table">
+                            <thead>
+                                <tr>
+                                    <th t-if="hasSelectors" class="o_list_record_selector o_list_controller align-middle pe-1 cursor-pointer" tabindex="-1" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-on-click.stop="toggleSelection">
+                                        <CheckBox disabled="!_canSelectRecord" value="selectAll" className="'d-flex m-0'" onChange.bind="toggleSelection"/>
+                                    </th>
+                                    <t t-foreach="state.columns" t-as="column" t-key="column.id">
+                                        <th t-if="column.type === 'field'"
+                                            t-att-data-name="column.name"
+                                            t-att-class="getColumnClass(column) + ' opacity-trigger-hover'"
+                                            t-on-pointerup="onColumnTitleMouseUp"
+                                            t-on-click="() => this.onClickSortColumn(column)"
+                                            t-on-keydown="(ev) => this.onCellKeydown(ev)"
+                                            t-att-data-tooltip-template="isDebugMode ? 'web.FieldTooltip' : false"
+                                            t-att-data-tooltip-info="isDebugMode ? makeTooltip(column) : false"
+                                            data-tooltip-delay="1000"
+                                            tabindex="-1">
+                                            <t t-if="column.hasLabel and column.widget !== 'handle'">
+                                            <t t-set="isNumeric" t-value="isNumericColumn(column)"/>
+                                                <div t-att-class="{'d-flex': true, 'flex-row-reverse': shouldReverseHeader(column)}">
+                                                    <span class="d-block min-w-0 text-truncate flex-grow-1" t-att-class="isNumeric ? 'o_list_number_th' : ''"
+                                                          t-esc="column.label"/>
+                                                    <i t-att-class="getSortableIconClass(column)"/>
+                                                </div>
+                                                <span
+                                                      class="o_resize position-absolute top-0 end-0 bottom-0 ps-1 bg-black-25 opacity-0 opacity-50-hover z-index-1"
+                                                      t-on-pointerdown.stop.prevent="onStartResize"/>
+                                            </t>
+                                        </th>
+                                        <th t-else="" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-att-class="{o_list_button: column.type === 'button_group'}"/>
+                                    </t>
+                                    <th t-if="props.onOpenFormView" t-on-keydown="(ev) => this.onCellKeydown(ev)" class="o_list_open_form_view"/>
+                                    <th t-if="displayOptionalFields or activeActions.onDelete" t-on-keydown="(ev) => this.onCellKeydown(ev)" class="o_list_controller o_list_actions_header position-sticky end-0">
+                                        <Dropdown t-if="displayOptionalFields"
+                                            class="'o_optional_columns_dropdown text-center border-top-0'"
+                                            togglerClass="'btn p-0'"
+                                            skipTogglerTabbing="true"
+                                            listRendererClass="uniqueRendererClass"
+                                            position="'bottom-end'">
+                                            <t t-set-slot="toggler">
+                                                <i class="o_optional_columns_dropdown_toggle oi oi-fw oi-settings-adjust"/>
+                                            </t>
+
+                                            <t t-foreach="optionalFieldGroups" t-as="group" t-key="group_index">
+                                                <div t-if="!group_first" role="separator" class="dropdown-divider"/>
+                                                <DropdownItem t-if="group.displayName" parentClosingMode="'none'" onSelected="() => this.toggleOptionalFieldGroup(group.id)">
+                                                    <div class="fw-bold" t-esc="group.displayName"/>
+                                                </DropdownItem>
+                                                <t t-foreach="group.optionalFields" t-as="field" t-key="field_index">
+                                                    <DropdownItem parentClosingMode="'none'" onSelected="() => this.toggleOptionalField(field.name)">
+                                                        <CheckBox
+                                                            onChange="() => this.toggleOptionalField(field.name)"
+                                                            value="field.value"
+                                                            name="field.name"
+                                                        >
+                                                            <span class="d-flex align-items-center"><span class="text-truncate" t-esc="field.label"/><span class="ps-1" t-if="env.debug" t-esc="' (' + field.name + ')'" /></span>
+                                                        </CheckBox>
+                                                    </DropdownItem>
+                                                </t>
+                                            </t>
+                                        </Dropdown>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="ui-sortable">
+                                <t t-call="{{ constructor.rowsTemplate }}">
+                                    <t t-set="list" t-value="props.list"/>
+                                </t>
+                            </tbody>
+                            <tfoot t-on-click="() => props.list.leaveEditMode()" class="o_list_footer cursor-default" t-att-class="{o_sample_data_disabled: props.list.model.useSampleModel}">
+                                <tr>
+                                    <td t-if="hasSelectors"/>
+                                    <t t-foreach="state.columns" t-as="column" t-key="column.id">
+                                        <t t-set="aggregate" t-value="aggregates[column.name]"/>
+                                        <td t-if="aggregate" class="o_list_number" >
+                                            <span t-esc="aggregate.value" t-att-data-tooltip="aggregate.help"/>
+                                        </td>
+                                        <td t-else=""/>
+                                    </t>
+                                    <td t-if="props.onOpenFormView"/>
+                                    <td t-if="displayOptionalFields or activeActions.onDelete" />
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="av-online-rule_table p-2" t-att-class="state.activeTab === 'online' ? 'd-flex' : 'd-none'">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Internal Name</th>
+                                <th>Mark on the calendar</th>
+                                <th>Keep the last room for MOVO Booking Engine</th>
+                                <th>Number of days before arrival when last rooms return to all points of sale</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="this.state.rules" t-as="rule" t-key="rule.name">
+                                <tr>
+                                    <td class="rule-name" t-on-click.prevent="() => this.editRule(rule)"><t t-esc="rule.name"/></td>
+                                    <td><t t-esc="rule.mark_on"/></td>
+                                    <td>
+                                        <ul>
+                                            <t t-foreach="rule.room_types" t-as="room" t-key="room.id">
+                                               <li><t t-esc="room.number"/> - <t t-esc="room.rooms"/></li>
+                                            </t>
+                                        </ul>
+                                    </td>
+                                    <td><t t-esc="rule.number_of_days"/></td>
+                                    <td class="d-flex gap-2 align-items-center" style="height: 100px">
+                                        <button class="btn btn-warning p-2" style="height: 45px; width: 75px" t-on-click.prevent="() => this.editRule(rule)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M5.83333 5.8333H5C4.55797 5.8333 4.13405 6.00889 3.82149 6.32146C3.50893 6.63402 3.33333 7.05794 3.33333 7.49997V15C3.33333 15.442 3.50893 15.8659 3.82149 16.1785C4.13405 16.491 4.55797 16.6666 5 16.6666H12.5C12.942 16.6666 13.3659 16.491 13.6785 16.1785C13.9911 15.8659 14.1667 15.442 14.1667 15V14.1666M13.3333 4.16663L15.8333 6.66663M16.9875 5.48747C17.3157 5.15926 17.5001 4.71412 17.5001 4.24997C17.5001 3.78581 17.3157 3.34067 16.9875 3.01247C16.6593 2.68426 16.2142 2.49988 15.75 2.49988C15.2858 2.49988 14.8407 2.68426 14.5125 3.01247L7.5 9.99997V12.5H10L16.9875 5.48747Z" stroke="#42526E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg> Edit
+                                        </button>
+
+                                        <button class="btn btn-danger p-2 disabled" style="height: 45px; width: 90px"><i class="fa fa-trash"/> Delete</button>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Context Menu -->
+            <div t-attf-class="context-menu {{state.contextMenuVisible ? 'd-block' : 'd-none'}}">
+                <div class="context-menu-item" t-on-click="changeValue">Change value</div>
+                <div class="context-menu-item" t-on-click="unmark">Unmark</div>
+            </div>
+            <div t-if="state.isModalVisible" class="modal" style="display: block;" t-on-click.prevent="closeModal">
+                <div class="modal-dialog" t-on-click.prevent="closeRuleMenu">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Online Sales Rule</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-rule_name">
+                                <p>Online sales rule</p>
+                                <p class="selected-rule" t-on-click.prevent="showRules">
+                                    <div class="d-flex">
+                                        <div class="d-flex">
+                                            <t t-if="this.state.selectedRuleId">
+                                                <span class="selected-rule_id"><t t-esc="this.state.selectedRuleId "/></span>
+                                            </t>
+                                            <span><t t-esc=" this.state.selectedRule"/></span>
+                                            </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="#83828C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div t-att-class="state.isRulesVisible ? 'rules-selection' : 'd-none'" t-on-click.prevent="(e) => e.stopPropagation()">
+                                        <div class="rule-name-select" t-on-click="(e) => e.stopPropagation()">
+                                            <input type="radio" id="option-0" value="Do not change" name="rule_method" t-on-change.prevent='(e) => toggleRules(e, `Do not change`)' t-att-checked="this.state.selectedRule === 'Do not change'"/>
+                                            <label for="option-0">Do not change</label>
+                                        </div>
+                                        <t t-foreach="this.state.rules" t-as="rule" t-key="rule.id">
+                                            <div class="rule-name-select" t-on-click="(e) => e.stopPropagation()">
+                                                <input type="radio" t-att-id="'option' + rule.id" t-att-value="rule.name" t-on-change.prevent='(e) => this.toggleRules(e, rule)' name="rule_method" t-att-checked="this.state.selectedRule === rule.name"/>
+                                                <label t-att-for="'option' + rule.id"><t t-esc="rule.name"/></label>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </p>
+                            </div>
+                            <hr class="p-0 m-0"/>
+                            <t t-if="this.state.selectionRuleData.length > 0 &amp;&amp; this.state.selectionRuleNumber">
+                                <div class="rule-content">
+                                    <h2>Keep the last rooms for Movo Booking Engine</h2>
+                                    <div class="rule-room-data">
+                                        <t t-foreach="this.state.selectionRuleData" t-as="data" t-key="data.id">
+                                            <div class="rule-data-wrapper">
+                                                <p><t t-esc="data.rooms"/></p>
+                                                <div class="last-room">
+                                                    <p class="room-number"><t t-esc="data.number"/></p>
+                                                    <p>last rooms</p>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                <hr class="p-0 m-0"/>
+                                <div class="modal-rule_name mt-3">
+                                    <p style="width: 200px">Number of days before arrival when last rooms return to all points of sale</p>
+                                    <p class="selected-rule bg-secondary">
+                                        <div class="d-flex">
+                                            <span><t t-esc="this.state.selectionRuleNumber"/></span>
+                                        </div>
+                                    </p>
+                                </div>
+                            </t>
+                            <div class="action-buttons d-flex p-2 gap-3">
+                                <button class="btn btn-primary" t-on-click.prevent="(e) => saveRule(e)">Save</button>
+                                <button class="btn btn-danger" t-on-click.prevent="closeModal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </t>
+</templates>

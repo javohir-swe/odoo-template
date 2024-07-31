@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_invoice_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="header">
+                        <h2>Emin Hotel</h2>
+                        <p>Address: 22, B.Mashrapkhonli, Fergana, Fergana district, Fergana region, 150100, Uzbekistan</p>
+                        <p>Phone: +998732442828</p>
+                        <p>Email: eminhotel@hotelgman.com</p>
+                    </div>
+                    <h3>Invoice No. <span t-esc="o.invoice_number"/></h3>
+                    <p>Date: <span t-esc="o.create_date"/></p>
+                    <p>Name: <span t-esc="o.bill_to.first_name"/></p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Description</th>
+                                <th>Units</th>
+                                <th>Qty</th>
+                                <th>Price (UZS)</th>
+                                <th>Amount (UZS)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Stay from <span t-esc="o.reception_id.check_in_date"/> to <span t-esc="o.reception_id.check_out_date"/></td>
+                                <td>nights</td>
+                                <td><span t-esc="o.reception_id.nights"/></td>
+                                <td><span t-esc="o.reception_id.total"/></td>
+                                <td><span t-esc="o.amount"/></td>
+                            </tr>
+                            <tr t-foreach="o.room_service_ids" t-as="service" t-if="service.cost">
+                                <td><t t-esc="loop.index + 1"/></td>
+                                <td><t t-esc="o.reception_id.room_service_id"/></td>
+                                <td>pcs</td>
+                                <td>1</td>
+                                <td><t t-esc="o.reception_id.room_service_id.price"/></td>
+                                <td><t t-esc="o.reception_id.room_service_id.price"/></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-right">Subtotal</td>
+                                <td><t t-esc="o.amount"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right">Grand Total</td>
+                                <td><t t-esc="o.to_be_paid"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right">Paid</td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right">Grand Total to be charged</td>
+                                <td><t t-esc="o.to_be_paid"/></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

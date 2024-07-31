@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_hotel_early_checkin_form" model="ir.ui.view">
+        <field name="name">hotel.early.checkin.form</field>
+        <field name="model">check.in.check.out.settings</field>
+        <field name="arch" type="xml">
+            <form string="Hotel Early Checkin">
+                <group>
+<!--                    <field name="checkin_time" options="{'datepicker': {'onlyTime': true}}"/>-->
+                    <field name="checkin_times" widget="float_time"/>
+<!--                    <field name="valid_from_" widget="float_time"/>-->
+<!--                    <field name="valid_till_" widget="float_time"/>-->
+                    <field name="charge_rule"/>
+                    <field name="percent" invisible="charge_rule != 'percent'"/>
+                    <field name="value_uzs" invisible="invisible_price"/>
+                    <field name="value_usd" invisible="invisible_price"/>
+                    <field name="value_rub" invisible="invisible_price"/>
+                    <field name="invisible_price" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

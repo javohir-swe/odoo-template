@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_rate_plan_price_tree" model="ir.ui.view">
+        <field name="name">rate_plan.price.tree</field>
+        <field name="model">rate_plan.price</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="rate_plan_id" />
+                <field name="room_type_id" />
+                <field name="guest_id" />
+                <field name="child_age_range" />
+                <field name="relevant_date" />
+                <field name="price" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_rate_plan_price_form" model="ir.ui.view">
+        <field name="name">rate_plan.price.form</field>
+        <field name="model">rate_plan.price</field>
+        <field name="arch" type="xml">
+            <form string="Price">
+                <sheet>
+                    <group>
+                        <field name="rate_plan_id" />
+                        <field name="room_type_id" />
+                        <field name="guest_id" />
+                        <field name="child_age_range" />
+                        <field name="filter_id" />
+                        <field name="relevant_date" />
+                        <field name="price" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

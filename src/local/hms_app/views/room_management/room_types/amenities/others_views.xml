@@ -1,0 +1,33 @@
+<!-- custom_addons/room_types/views/others_views.xml -->
+<odoo>
+    <data>
+        <!-- Tree View for Others -->
+        <record id="view_others_tree" model="ir.ui.view">
+            <field name="name">others.tree</field>
+            <field name="model">others</field>
+            <field name="arch" type="xml">
+                <tree string="Beds">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for Others -->
+        <record id="view_others_form" model="ir.ui.view">
+            <field name="name">others.form</field>
+            <field name="model">others</field>
+            <field name="arch" type="xml">
+                <form string="Bed">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+							<field name="icon" widget="image"
+								options='{"size": [150, 150],"image_preview": " photo"}' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

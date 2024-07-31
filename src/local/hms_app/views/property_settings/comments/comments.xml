@@ -1,0 +1,150 @@
+<!-- Add the XML header and Odoo file tags if necessary -->
+<odoo>
+    <data>
+
+        <!-- Form view for Comments -->
+        <record id="view_comments_form" model="ir.ui.view">
+            <field name="name">comments.form</field>
+            <field name="model">comments</field>
+            <field name="arch" type="xml">
+                <form string="Comments" create="0" delete="0">
+                    <sheet>
+                        <header>
+                            <h1 class="oe_title">Comments</h1>
+                        </header>
+                        <notebook>
+                            <page string='Booking confirmation' name="comments_box_1">
+                                <group string="Comments on booking confirmation">
+                                    <field name="opening_note"
+                                        placeholder="Comments on booking confirmation" />
+                                    <field name="closing_note" placeholder="Closing note" />
+                                </group>
+                            </page>
+                            <page string='Payment methods'
+                                name="comments_box_2">
+                                <group string="Comments for payment methods in booking confirmation">
+                                </group>
+                                <div class="oe_title" name="comment_at_check_in">
+                                    <label for="at_check_in" id="comment_at_check_in" />
+
+                                    <field name="at_check_in"
+                                        class="d-block" />
+
+                                </div>
+                                <div class="oe_title" name="comment_bank_card_guarantee">
+                                    <label for="bank_card_guarantee"
+                                        id="comment_bank_card_guarantee" />
+
+                                    <field name="bank_card_guarantee"
+                                        class="d-block" />
+
+                                </div>
+                                <div class="oe_title"
+                                    name="comment_bank_transfer_for_individuals">
+                                    <label for="bank_transfer_for_individuals"
+                                        id="comment_bank_transfer_for_individuals" />
+
+                                    <field name="bank_transfer_for_individuals"
+                                        class="d-block" />
+
+                                </div>
+                                <div class="oe_title"
+                                    name="comment_bank_transfer_for_legal_entities">
+                                    <label for="bank_transfer_for_legal_entities"
+                                        id="comment_bank_transfer_for_legal_entities" />
+
+                                    <field name="bank_transfer_for_legal_entities"
+                                        class="d-block" />
+
+                                </div>
+                            </page>
+                            <page string='Movo Booking Engine payment methods '
+                                name="comments_box_3">
+                                <group string="Comments on payment methods in Movo Booking Engine">
+                                </group>
+                                <header>
+                                    <div
+                                        class="alert alert-info" role="alert">
+                                        <p
+                                            class="mb-0">
+                                            <i class="fa fa-info-circle" aria-hidden="true"> </i>  
+                                            Description of some payment methods in Movo Booking
+                                            Engine is generated automatically and cannot be changed.
+                                            You can add an additional description if needed. </p>
+                                    </div>
+                                </header>
+                                <div class="oe_title" name="comment_at_check_in_description">
+                                    <label for="at_check_in_description"
+                                        id="comment_at_check_in_description" />
+
+                                    <field name="at_check_in_description"
+                                        class="d-block" />
+
+                                </div>
+                                <div class="oe_title" name="comment_bank_card_guarantee_description">
+                                    <label for="bank_card_guarantee_description"
+                                        id="comment_bank_card_guarantee_description" />
+
+                                    <field name="bank_card_guarantee_description"
+                                        class="d-block" />
+
+                                </div>
+                                <div class="oe_title"
+                                    name="comment_bank_transfer_for_individuals_description">
+                                    <label for="bank_transfer_for_individuals_description"
+                                        id="comment_bank_transfer_for_individuals_description" />
+
+                                    <field name="bank_transfer_for_individuals_description"
+                                        class="d-block" />
+
+                                </div>
+                                <div class="oe_title"
+                                    name="comment_bank_transfer_for_legal_entities_prepayment_comment">
+                                    <label for="bank_transfer_for_legal_entities_prepayment_comment"
+                                        id="comment_bank_transfer_for_legal_entities_prepayment_comment" />
+
+                                    <field
+                                        name="bank_transfer_for_legal_entities_prepayment_comment"
+                                        class="d-block" />
+
+                                </div>
+                            </page>
+                            <page string='Benefits for guests who join the loyalty program'
+                                name="comments_box_4">
+                                <group string="Benefits for guests who join the loyalty program"></group>
+                                <header>
+                                    <div
+                                        class="alert alert-info" role="alert">
+                                        <p
+                                            class="mb-0">
+                                            <i class="fa fa-info-circle" aria-hidden="true"> </i>  
+                                            Description of some payment methods in Movo Booking
+                                            Engine is generated automatically and cannot be changed.
+                                            You can add an additional description if needed. </p>
+                                    </div>
+                                </header>
+                                <group>
+                                    <field name="heading" placeholder="Join our loyalty program" />
+                                    <field name="benefits"
+                                        placeholder="Unlock exclusive discounts for your stay.
+Top up your discount. The more bookings you make, the bigger the discount you earn for the following bookings.Book accommodation in no time. Your contact details will be filled in automatically." />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Optional: Tree view for the Comments -->
+        <!-- <record id="view_comments_tree" model="ir.ui.view">
+            <field name="name">comments.tree</field>
+            <field name="model">comments</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="opening_note" />
+                    <field name="closing_note" />
+                </tree>
+            </field>
+        </record> -->
+    </data>
+</odoo>

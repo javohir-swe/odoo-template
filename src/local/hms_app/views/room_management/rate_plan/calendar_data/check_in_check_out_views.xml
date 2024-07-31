@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_rate_plan_check_in_check_out_tree" model="ir.ui.view">
+            <field name="name">rate_plan.check_in.check_out.tree</field>
+            <field name="model">rate_plan.check_in.check_out</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="rate_plan_id" />
+                    <field name="relevant_date" />
+                    <field name="checkin_checkout" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_rate_plan_check_in_check_out_form" model="ir.ui.view">
+            <field name="name">rate_plan.check_in.check_out.form</field>
+            <field name="model">rate_plan.check_in.check_out</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="rate_plan_id" />
+                        <field name="relevant_date" />
+                        <field name="filter_id" />
+                        <field name="checkin_checkout" />
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

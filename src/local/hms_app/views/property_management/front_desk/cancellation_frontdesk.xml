@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_front_desk_cancellation_form" model="ir.ui.view">
+        <field name="name">front_desk.cancel_booking.form</field>
+        <field name="model">front_desk.cancel_booking</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="reason"/>
+                        <field name="comment" required="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

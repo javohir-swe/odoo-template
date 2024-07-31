@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record id="view_notes_and_instructions_tree" model="ir.ui.view">
+            <field name="name">notes.and.instructions.tree</field>
+            <field name="model">notes_and_instructions</field>
+            <field name="arch" type="xml">
+                <tree string="Tasks and notes">
+                    <field name="created_changed_time" string="Created/changed"/>
+                    <field name="unique_id" string="Booking Number"/>
+<!--                    <field name="full_name"/>-->
+                    <field name="room_number_id"/>
+                    <field name="text"/>
+                    <field name="scheduled" invisible="[('status', '!=', 'scheduled')]"/>
+                    <field name="user"/>
+                    <field name="status"/>
+                    <button name="action_edit" type="object" icon="fa-edit" string="Edit"/>
+                    <button name="action_done" type="object" icon="fa-check" string="Done"/>
+                    <button name="unlink" type="object" icon="fa-trash" string="Delete"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_notes_and_instructions_form" model="ir.ui.view">
+            <field name="name">notes.and.instructions.form</field>
+            <field name="model">notes_and_instructions</field>
+            <field name="arch" type="xml">
+                <form string="Create or edit a note/task">
+                    <group>
+                        <field name="booking_id" options="{'no_create': True, 'no_create_edit': True}" />
+                        <field name="text"/>
+                        <field name="status"/>
+                        <field name="scheduled" readonly="readonly_schedul_for"/>
+                        <field name="readonly_schedul_for" invisible="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

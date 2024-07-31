@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <record id="view_country_tree" model="ir.ui.view">
+            <field name="name">property_management.countries.tree</field>
+            <field name="model">countries</field>
+            <field name="arch" type="xml">
+                <tree string="Countries">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_country_form" model="ir.ui.view">
+            <field name="name">countries.form</field>
+            <field name="model">countries</field>
+            <field name="arch" type="xml">
+                <form string="Country">
+                    <header>
+                        <h1 class="oe_title">Country</h1>
+                    </header>
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_country_tree" model="ir.actions.act_window">
+            <field name="name">Countries</field>
+            <field name="res_model">countries</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_country_tree"/>
+        </record>
+
+        <record id="action_country_form" model="ir.actions.act_window">
+            <field name="name">Country</field>
+            <field name="res_model">countries</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_country_form"/>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

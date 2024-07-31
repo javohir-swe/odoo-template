@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="room_type_guests_tree_view">
+            <field name="name">room.type.guests.tree</field>
+            <field name="model">room_type.guests</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="guest_number" />
+                    <field name="room_type" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="room_type_guests_form_view">
+            <field name="name">room.type.guests.form</field>
+            <field name="model">room_type.guests</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="guest_number" />
+                            <field name="room_type" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

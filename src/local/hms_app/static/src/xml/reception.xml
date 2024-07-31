@@ -1,0 +1,757 @@
+<templates xml:space="preserve">
+
+  <t t-name="hms_app.Reception">
+    <div class="o_list_renderer o_renderer table-responsive" t-att-class="uniqueRendererClass" tabindex="-1" t-ref="root">
+      <div class="place_loader" t-att-class="{'active': state.loading}">
+        <div class="loader"></div>
+      </div>
+
+      <div class="w-100 d-flex justify-content-between align-items-center p-3">
+        <h2 class="unique-front-desk">Reception</h2>
+      </div>
+
+      <div class="front-statistics">
+        <div class="statistic-container">
+          <h2>Statistics</h2>
+          <div class="statistics-tables">
+            <div class="stats-table">
+              <h3>Today's occupancy</h3>
+              <div class="mt-3 d-flex justify-content-between align-items-center" style="gap: 20px">
+                <div class="chart-data-div" style="position:relative;">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="chart-svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                    <path d="M120 60C120 93.1371 93.1371 120 60 120C26.8629 120 0 93.1371 0 60C0 26.8629 26.8629 0 60 0C93.1371 0 120 26.8629 120 60ZM12 60C12 86.5097 33.4903 108 60 108C86.5097 108 108 86.5097 108 60C108 33.4903 86.5097 12 60 12C33.4903 12 12 33.4903 12 60Z" fill="#FD952C"/>
+                  </svg>
+                  <span class="percentage-span">
+                    <t t-if="this.state.total">
+                      <t t-esc="Math.round(this.state.occupiedRooms * 100 / this.state.total)"/>
+                                        %
+                    </t>
+                    <t t-else="">
+                      <t t-esc="0"/>
+                                    %
+                    </t>
+                  </span>
+                </div>
+                <div class="stats w-50">
+                  <div class="dynamic-datas w-100">
+                    <p>Occupied</p>
+                    <span class="closed">
+                      <t t-esc="this.state.occupiedRooms"/>
+                    </span>
+                  </div>
+                  <hr />
+                  <div class="dynamic-datas w-100">
+                    <p>Vacant rooms</p>
+                    <span class="open">
+                      <t t-esc="this.state.total-this.state.occupiedRooms"/>
+                    </span>
+                  </div>
+                  <hr />
+                  <div class="dynamic-datas w-100">
+                    <p>Total</p>
+                    <span class="total">
+                      <t t-esc="this.state.total"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stats-table">
+              <h3>Today's guests</h3>
+              <div class="stats">
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M5.83333 9.99992H17.5M17.5 9.99992L15 7.49992M17.5 9.99992L15 12.4999" stroke="#4FAC58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p> Arrivals / Same-day bookings</p>
+                    <p>
+                      <t t-esc="this.state.arrivals"/>
+/                      <t t-esc="this.state.sameDayBookings"/>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M16.6667 9.99992H5.83333M5.83333 9.99992L8.33333 7.49992M5.83333 9.99992L8.33333 12.4999" stroke="#FD952C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Departures</p>
+                    <p>
+                      <t t-esc="this.state.departures"/>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3.33341 9.16675C3.77544 9.16675 4.19937 9.34234 4.51193 9.6549C4.82449 9.96746 5.00008 10.3914 5.00008 10.8334V11.6667H15.0001V10.8334C15.0001 10.3914 15.1757 9.96746 15.4882 9.6549C15.8008 9.34234 16.2247 9.16675 16.6667 9.16675M3.33341 9.16675C2.89139 9.16675 2.46746 9.34234 2.1549 9.6549C1.84234 9.96746 1.66675 10.3914 1.66675 10.8334V15.0001C1.66675 15.2211 1.75455 15.4331 1.91083 15.5893C2.06711 15.7456 2.27907 15.8334 2.50008 15.8334H17.5001C17.7211 15.8334 17.9331 15.7456 18.0893 15.5893C18.2456 15.4331 18.3334 15.2211 18.3334 15.0001V10.8334C18.3334 10.3914 18.1578 9.96746 17.8453 9.6549C17.5327 9.34234 17.1088 9.16675 16.6667 9.16675M3.33341 9.16675V6.66675C3.33341 6.00371 3.59681 5.36782 4.06565 4.89898C4.53449 4.43014 5.17037 4.16675 5.83341 4.16675H14.1667C14.8298 4.16675 15.4657 4.43014 15.9345 4.89898C16.4034 5.36782 16.6667 6.00371 16.6667 6.66675V9.16675M10.0001 4.16675V11.6667" stroke="#8D3FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Occupied rooms</p>
+                    <p>
+                      <t t-esc="this.state.occupiedRooms"/>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.0001 11.6667V10.8333C15.0001 10.3913 15.1757 9.96738 15.4882 9.65482C15.8008 9.34226 16.2247 9.16667 16.6667 9.16667M16.6667 9.16667C17.1088 9.16667 17.5327 9.34226 17.8453 9.65482C18.1578 9.96738 18.3334 10.3913 18.3334 10.8333V15M16.6667 9.16667V6.66667C16.6667 6.00363 16.4034 5.36774 15.9345 4.8989C15.4657 4.43006 14.8298 4.16667 14.1667 4.16667H7.50008M15.8334 15.8333H2.50008C2.27907 15.8333 2.06711 15.7455 1.91083 15.5893C1.75455 15.433 1.66675 15.221 1.66675 15V10.8333C1.66675 10.3913 1.84234 9.96738 2.1549 9.65482C2.46746 9.34226 2.89139 9.16667 3.33341 9.16667M3.33341 9.16667C3.77544 9.16667 4.19937 9.34226 4.51193 9.65482C4.82449 9.96738 5.00008 10.3913 5.00008 10.8333V11.6667H11.6667M3.33341 9.16667V6.66667C3.33341 5.765 3.81091 4.975 4.52675 4.535M10.0001 4.16667V6.66667M10.0001 10V11.6667M2.50008 2.5L17.5001 17.5" stroke="#EA1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>No-shows</p>
+                    <p>0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stats-table">
+              <h3>Room statistics</h3>
+              <div class="stats">
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M8.33321 10.0476C8.44771 10.2945 8.62394 10.5078 8.84488 10.6668C9.72821 11.2609 10.9049 10.7601 11.3807 9.90092C12.0799 8.64009 11.3624 7.09425 10.1099 6.50092C8.44321 5.70925 6.46738 6.62925 5.74321 8.23925C4.83071 10.2659 5.98488 12.6126 8.00155 13.4443C10.444 14.4509 13.2374 13.0959 14.1999 10.7318C15.3332 7.94592 13.7357 4.78675 10.9532 3.72342C7.74071 2.49509 4.11988 4.29009 2.92321 7.40842C1.56488 10.9526 3.60905 14.9284 7.15821 16.2218C11.1399 17.6718 15.5899 15.4376 17.019 11.5634C17.299 10.8114 17.4612 10.0207 17.4999 9.21925" stroke="#EA1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Dirty</p>
+                    <span>
+                      <t t-esc="this.state.unclear"/>
+                    </span>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M13.3333 14.9999C13.7754 14.9999 14.1993 15.1755 14.5118 15.4881C14.8244 15.8006 15 16.2246 15 16.6666C15 16.2246 15.1756 15.8006 15.4882 15.4881C15.8007 15.1755 16.2246 14.9999 16.6667 14.9999C16.2246 14.9999 15.8007 14.8243 15.4882 14.5118C15.1756 14.1992 15 13.7753 15 13.3333C15 13.7753 14.8244 14.1992 14.5118 14.5118C14.1993 14.8243 13.7754 14.9999 13.3333 14.9999ZM13.3333 4.99992C13.7754 4.99992 14.1993 5.17551 14.5118 5.48807C14.8244 5.80063 15 6.22456 15 6.66659C15 6.22456 15.1756 5.80063 15.4882 5.48807C15.8007 5.17551 16.2246 4.99992 16.6667 4.99992C16.2246 4.99992 15.8007 4.82432 15.4882 4.51176C15.1756 4.1992 15 3.77528 15 3.33325C15 3.77528 14.8244 4.1992 14.5118 4.51176C14.1993 4.82432 13.7754 4.99992 13.3333 4.99992ZM7.5 14.9999C7.5 13.6738 8.02678 12.4021 8.96447 11.4644C9.90215 10.5267 11.1739 9.99992 12.5 9.99992C11.1739 9.99992 9.90215 9.47313 8.96447 8.53545C8.02678 7.59777 7.5 6.326 7.5 4.99992C7.5 6.326 6.97322 7.59777 6.03553 8.53545C5.09785 9.47313 3.82608 9.99992 2.5 9.99992C3.82608 9.99992 5.09785 10.5267 6.03553 11.4644C6.97322 12.4021 7.5 13.6738 7.5 14.9999Z" stroke="#8D3FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Clean</p>
+                    <span>
+                      <t t-esc="this.state.clear"/>
+                    </span>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M7.49992 9.16659L9.99992 11.6666L16.6666 4.99992M16.6666 9.99992V14.9999C16.6666 15.4419 16.491 15.8659 16.1784 16.1784C15.8659 16.491 15.4419 16.6666 14.9999 16.6666H4.99992C4.55789 16.6666 4.13397 16.491 3.82141 16.1784C3.50885 15.8659 3.33325 15.4419 3.33325 14.9999V4.99992C3.33325 4.55789 3.50885 4.13397 3.82141 3.82141C4.13397 3.50885 4.55789 3.33325 4.99992 3.33325H12.4999" stroke="#4FAC58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Inspected</p>
+                    <span>
+                      <t t-esc="this.state.checked"/>
+                    </span>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.8334 5H16.6667C17.1088 5 17.5327 5.17559 17.8453 5.48816C18.1578 5.80072 18.3334 6.22464 18.3334 6.66667C18.3334 7.77174 17.8944 8.83154 17.113 9.61294C16.3316 10.3943 15.2718 10.8333 14.1667 10.8333H10.0001V12.5M4.16675 4.16667C4.16675 3.72464 4.34234 3.30072 4.6549 2.98816C4.96746 2.67559 5.39139 2.5 5.83341 2.5H14.1667C14.6088 2.5 15.0327 2.67559 15.3453 2.98816C15.6578 3.30072 15.8334 3.72464 15.8334 4.16667V5.83333C15.8334 6.27536 15.6578 6.69928 15.3453 7.01184C15.0327 7.3244 14.6088 7.5 14.1667 7.5H5.83341C5.39139 7.5 4.96746 7.3244 4.6549 7.01184C4.34234 6.69928 4.16675 6.27536 4.16675 5.83333V4.16667ZM8.33342 13.3333C8.33342 13.1123 8.42121 12.9004 8.57749 12.7441C8.73377 12.5878 8.94573 12.5 9.16675 12.5H10.8334C11.0544 12.5 11.2664 12.5878 11.4227 12.7441C11.579 12.9004 11.6667 13.1123 11.6667 13.3333V16.6667C11.6667 16.8877 11.579 17.0996 11.4227 17.2559C11.2664 17.4122 11.0544 17.5 10.8334 17.5H9.16675C8.94573 17.5 8.73377 17.4122 8.57749 17.2559C8.42121 17.0996 8.33342 16.8877 8.33342 16.6667V13.3333Z" stroke="#7A869A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Out of order</p>
+                    <span>
+                      <t t-esc="this.state.modify"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reception m-3 non-select" t-att-class="{' d-none': state.activeTab === 'availability'}">
+        <div class="reception-data">
+          <div class="reception-table-container-data">
+            <ul>
+              <t t-foreach="['Arrivals', 'Departures', 'Occupied']" t-as="i" t-key="i">
+                <li t-att-class="{'active': i === state.activeTab}" t-on-click="() => this.setActiveTab(i)">
+                  <t t-out="i"/>
+                </li>
+              </t>
+            </ul>
+            <div class="header-buttons">
+              <button class="head-btn primary" t-on-click="this.goBooking">+ Create Booking</button>
+              <button class="head-btn secondary" t-on-click="this.goGroupBooking">+ Create Group Booking</button>
+            </div>
+          </div>
+          <hr />
+          <div class="reception-table-name">
+            <div class="d-flex justify-content-between">
+              <h3>
+                <t t-esc="this.state.activeTab"/>
+              </h3>
+              <div class="d-flex gap-2">
+                <button t-on-click.prevent="() => viewModal()" class="primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3.33325 4.16659C3.33325 3.94557 3.42105 3.73361 3.57733 3.57733C3.73361 3.42105 3.94557 3.33325 4.16659 3.33325H7.49992C7.72093 3.33325 7.93289 3.42105 8.08917 3.57733C8.24545 3.73361 8.33325 3.94557 8.33325 4.16659V7.49992C8.33325 7.72093 8.24545 7.93289 8.08917 8.08917C7.93289 8.24545 7.72093 8.33325 7.49992 8.33325H4.16659C3.94557 8.33325 3.73361 8.24545 3.57733 8.08917C3.42105 7.93289 3.33325 7.72093 3.33325 7.49992V4.16659Z" stroke="#364662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33325 4.16659C3.33325 3.94557 3.42105 3.73361 3.57733 3.57733C3.73361 3.42105 3.94557 3.33325 4.16659 3.33325H7.49992C7.72093 3.33325 7.93289 3.42105 8.08917 3.57733C8.24545 3.73361 8.33325 3.94557 8.33325 4.16659V7.49992C8.33325 7.72093 8.24545 7.93289 8.08917 8.08917C7.93289 8.24545 7.72093 8.33325 7.49992 8.33325H4.16659C3.94557 8.33325 3.73361 8.24545 3.57733 8.08917C3.42105 7.93289 3.33325 7.72093 3.33325 7.49992V4.16659Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33325 4.16659C3.33325 3.94557 3.42105 3.73361 3.57733 3.57733C3.73361 3.42105 3.94557 3.33325 4.16659 3.33325H7.49992C7.72093 3.33325 7.93289 3.42105 8.08917 3.57733C8.24545 3.73361 8.33325 3.94557 8.33325 4.16659V7.49992C8.33325 7.72093 8.24545 7.93289 8.08917 8.08917C7.93289 8.24545 7.72093 8.33325 7.49992 8.33325H4.16659C3.94557 8.33325 3.73361 8.24545 3.57733 8.08917C3.42105 7.93289 3.33325 7.72093 3.33325 7.49992V4.16659Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33325 4.16659C3.33325 3.94557 3.42105 3.73361 3.57733 3.57733C3.73361 3.42105 3.94557 3.33325 4.16659 3.33325H7.49992C7.72093 3.33325 7.93289 3.42105 8.08917 3.57733C8.24545 3.73361 8.33325 3.94557 8.33325 4.16659V7.49992C8.33325 7.72093 8.24545 7.93289 8.08917 8.08917C7.93289 8.24545 7.72093 8.33325 7.49992 8.33325H4.16659C3.94557 8.33325 3.73361 8.24545 3.57733 8.08917C3.42105 7.93289 3.33325 7.72093 3.33325 7.49992V4.16659Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 4.16659C11.6666 3.94557 11.7544 3.73361 11.9107 3.57733C12.0669 3.42105 12.2789 3.33325 12.4999 3.33325H15.8333C16.0543 3.33325 16.2662 3.42105 16.4225 3.57733C16.5788 3.73361 16.6666 3.94557 16.6666 4.16659V7.49992C16.6666 7.72093 16.5788 7.93289 16.4225 8.08917C16.2662 8.24545 16.0543 8.33325 15.8333 8.33325H12.4999C12.2789 8.33325 12.0669 8.24545 11.9107 8.08917C11.7544 7.93289 11.6666 7.72093 11.6666 7.49992V4.16659Z" stroke="#364662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 4.16659C11.6666 3.94557 11.7544 3.73361 11.9107 3.57733C12.0669 3.42105 12.2789 3.33325 12.4999 3.33325H15.8333C16.0543 3.33325 16.2662 3.42105 16.4225 3.57733C16.5788 3.73361 16.6666 3.94557 16.6666 4.16659V7.49992C16.6666 7.72093 16.5788 7.93289 16.4225 8.08917C16.2662 8.24545 16.0543 8.33325 15.8333 8.33325H12.4999C12.2789 8.33325 12.0669 8.24545 11.9107 8.08917C11.7544 7.93289 11.6666 7.72093 11.6666 7.49992V4.16659Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 4.16659C11.6666 3.94557 11.7544 3.73361 11.9107 3.57733C12.0669 3.42105 12.2789 3.33325 12.4999 3.33325H15.8333C16.0543 3.33325 16.2662 3.42105 16.4225 3.57733C16.5788 3.73361 16.6666 3.94557 16.6666 4.16659V7.49992C16.6666 7.72093 16.5788 7.93289 16.4225 8.08917C16.2662 8.24545 16.0543 8.33325 15.8333 8.33325H12.4999C12.2789 8.33325 12.0669 8.24545 11.9107 8.08917C11.7544 7.93289 11.6666 7.72093 11.6666 7.49992V4.16659Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 4.16659C11.6666 3.94557 11.7544 3.73361 11.9107 3.57733C12.0669 3.42105 12.2789 3.33325 12.4999 3.33325H15.8333C16.0543 3.33325 16.2662 3.42105 16.4225 3.57733C16.5788 3.73361 16.6666 3.94557 16.6666 4.16659V7.49992C16.6666 7.72093 16.5788 7.93289 16.4225 8.08917C16.2662 8.24545 16.0543 8.33325 15.8333 8.33325H12.4999C12.2789 8.33325 12.0669 8.24545 11.9107 8.08917C11.7544 7.93289 11.6666 7.72093 11.6666 7.49992V4.16659Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33325 12.4999C3.33325 12.2789 3.42105 12.0669 3.57733 11.9107C3.73361 11.7544 3.94557 11.6666 4.16659 11.6666H7.49992C7.72093 11.6666 7.93289 11.7544 8.08917 11.9107C8.24545 12.0669 8.33325 12.2789 8.33325 12.4999V15.8333C8.33325 16.0543 8.24545 16.2662 8.08917 16.4225C7.93289 16.5788 7.72093 16.6666 7.49992 16.6666H4.16659C3.94557 16.6666 3.73361 16.5788 3.57733 16.4225C3.42105 16.2662 3.33325 16.0543 3.33325 15.8333V12.4999Z" stroke="#364662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33325 12.4999C3.33325 12.2789 3.42105 12.0669 3.57733 11.9107C3.73361 11.7544 3.94557 11.6666 4.16659 11.6666H7.49992C7.72093 11.6666 7.93289 11.7544 8.08917 11.9107C8.24545 12.0669 8.33325 12.2789 8.33325 12.4999V15.8333C8.33325 16.0543 8.24545 16.2662 8.08917 16.4225C7.93289 16.5788 7.72093 16.6666 7.49992 16.6666H4.16659C3.94557 16.6666 3.73361 16.5788 3.57733 16.4225C3.42105 16.2662 3.33325 16.0543 3.33325 15.8333V12.4999Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33325 12.4999C3.33325 12.2789 3.42105 12.0669 3.57733 11.9107C3.73361 11.7544 3.94557 11.6666 4.16659 11.6666H7.49992C7.72093 11.6666 7.93289 11.7544 8.08917 11.9107C8.24545 12.0669 8.33325 12.2789 8.33325 12.4999V15.8333C8.33325 16.0543 8.24545 16.2662 8.08917 16.4225C7.93289 16.5788 7.72093 16.6666 7.49992 16.6666H4.16659C3.94557 16.6666 3.73361 16.5788 3.57733 16.4225C3.42105 16.2662 3.33325 16.0543 3.33325 15.8333V12.4999Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33325 12.4999C3.33325 12.2789 3.42105 12.0669 3.57733 11.9107C3.73361 11.7544 3.94557 11.6666 4.16659 11.6666H7.49992C7.72093 11.6666 7.93289 11.7544 8.08917 11.9107C8.24545 12.0669 8.33325 12.2789 8.33325 12.4999V15.8333C8.33325 16.0543 8.24545 16.2662 8.08917 16.4225C7.93289 16.5788 7.72093 16.6666 7.49992 16.6666H4.16659C3.94557 16.6666 3.73361 16.5788 3.57733 16.4225C3.42105 16.2662 3.33325 16.0543 3.33325 15.8333V12.4999Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 12.4999C11.6666 12.2789 11.7544 12.0669 11.9107 11.9107C12.0669 11.7544 12.2789 11.6666 12.4999 11.6666H15.8333C16.0543 11.6666 16.2662 11.7544 16.4225 11.9107C16.5788 12.0669 16.6666 12.2789 16.6666 12.4999V15.8333C16.6666 16.0543 16.5788 16.2662 16.4225 16.4225C16.2662 16.5788 16.0543 16.6666 15.8333 16.6666H12.4999C12.2789 16.6666 12.0669 16.5788 11.9107 16.4225C11.7544 16.2662 11.6666 16.0543 11.6666 15.8333V12.4999Z" stroke="#364662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 12.4999C11.6666 12.2789 11.7544 12.0669 11.9107 11.9107C12.0669 11.7544 12.2789 11.6666 12.4999 11.6666H15.8333C16.0543 11.6666 16.2662 11.7544 16.4225 11.9107C16.5788 12.0669 16.6666 12.2789 16.6666 12.4999V15.8333C16.6666 16.0543 16.5788 16.2662 16.4225 16.4225C16.2662 16.5788 16.0543 16.6666 15.8333 16.6666H12.4999C12.2789 16.6666 12.0669 16.5788 11.9107 16.4225C11.7544 16.2662 11.6666 16.0543 11.6666 15.8333V12.4999Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 12.4999C11.6666 12.2789 11.7544 12.0669 11.9107 11.9107C12.0669 11.7544 12.2789 11.6666 12.4999 11.6666H15.8333C16.0543 11.6666 16.2662 11.7544 16.4225 11.9107C16.5788 12.0669 16.6666 12.2789 16.6666 12.4999V15.8333C16.6666 16.0543 16.5788 16.2662 16.4225 16.4225C16.2662 16.5788 16.0543 16.6666 15.8333 16.6666H12.4999C12.2789 16.6666 12.0669 16.5788 11.9107 16.4225C11.7544 16.2662 11.6666 16.0543 11.6666 15.8333V12.4999Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.6666 12.4999C11.6666 12.2789 11.7544 12.0669 11.9107 11.9107C12.0669 11.7544 12.2789 11.6666 12.4999 11.6666H15.8333C16.0543 11.6666 16.2662 11.7544 16.4225 11.9107C16.5788 12.0669 16.6666 12.2789 16.6666 12.4999V15.8333C16.6666 16.0543 16.5788 16.2662 16.4225 16.4225C16.2662 16.5788 16.0543 16.6666 15.8333 16.6666H12.4999C12.2789 16.6666 12.0669 16.5788 11.9107 16.4225C11.7544 16.2662 11.6666 16.0543 11.6666 15.8333V12.4999Z" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                      View
+                </button>
+                <div class="button-wrapper">
+                  <div t-on-click="openXLS" class="hk-table__excel-btn secondary" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M11.6665 2.5V5.83333C11.6665 6.05435 11.7543 6.26631 11.9106 6.42259C12.0669 6.57887 12.2788 6.66667 12.4998 6.66667H15.8332M11.6665 2.5H5.83317C5.39114 2.5 4.96722 2.67559 4.65466 2.98816C4.3421 3.30072 4.1665 3.72464 4.1665 4.16667V15.8333C4.1665 16.2754 4.3421 16.6993 4.65466 17.0118C4.96722 17.3244 5.39114 17.5 5.83317 17.5H14.1665C14.6085 17.5 15.0325 17.3244 15.345 17.0118C15.6576 16.6993 15.8332 16.2754 15.8332 15.8333V6.66667M11.6665 2.5L15.8332 6.66667M9.99984 14.1667V9.16667M9.99984 14.1667L7.9165 12.0833M9.99984 14.1667L12.0832 12.0833" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Export
+                  </div>
+                  <div class="xls-modal" t-att-class="this.state.xls_modal ? 'd-block' : 'd-none'">
+                    <p>In progress</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mt-3 mb-3">
+              <div class="reception-filters d-flex gap-3">
+                <input type="date" id="calendarDate" t-model="state.todayDate" t-on-change="filterReceptionData" />
+                <t t-if="this.state.activeTab=='Arrivals' ">
+                  <select t-on-change="(e) => { this.state.selected_option = e.target.value; this.filterReceptionData(); }">
+                    <option>All</option>
+                    <option>Arrival</option>
+                    <option>Same-day bookings</option>
+                  </select>
+                </t>
+                <t t-elif="this.state.activeTab=='Departures'">
+                  <select t-on-change="(e) => {this.state.selected_departure = e.target.value; this.filterReceptionData();}">
+                    <option>All</option>
+                    <option>Checked Out</option>
+                    <option>Waiting</option>
+                  </select>
+                </t>
+                <t t-else="">
+                </t>
+                <!-- <select t-att-style="'opacity: ' + (this.state.activeTab == 'Departures' ? '0.3' : '1')" t-att-disabled="this.state.activeTab == 'Departures'">
+                  <option>Teglar</option>
+                  <option>Teglar</option>
+                </select> -->
+              </div>
+              <input type="search" t-att-value="this.state.search" t-on-change.prevent="(e)=> searchFilter(e.target.value)" placeholder="Text"></input>
+            </div>
+          </div>
+
+
+          <t t-if="this.state.filteredData.length > 0">
+            <div style="padding: 0 0px 0px 16px">
+              <table class="w-100 border">
+                <thead class="border">
+                  <tr class="border">
+                    <t t-if="this.state.isChecked.bookingNumber">
+                      <th>Booking number</th>
+                    </t>
+                    <t t-if="this.state.isChecked.customer">
+                      <th>Customer</th>
+                    </t>
+                    <t t-if="this.state.isChecked.guestFullName">
+                      <th>Guest full name</th>
+                    </t>
+                    <t t-if="this.state.isChecked.roomNumber">
+                      <th>Room number</th>
+                    </t>
+                    <t t-if="this.state.activeTab == 'Arrivals' &amp;&amp; this.state.isChecked.checkInTime">
+                      <th>Check-in time</th>
+                    </t>
+                    <t t-elif="this.state.activeTab == 'Departures' &amp;&amp; this.state.isChecked.checkOutTime">
+                      <th>Check-out time</th>
+                    </t>
+                    <t t-elif="this.state.activeTab == 'Occupied' &amp;&amp; this.state.isChecked.period">
+                      <th>Period</th>
+                    </t>
+                    <t t-if="this.state.isChecked.roomType">
+                      <th>Room type</th>
+                    </t>
+                    <t t-if="this.state.activeTab == 'Occupied' &amp;&amp; this.state.isChecked.day">
+                      <th>Day</th>
+                    </t>
+                    <t t-if="this.state.isChecked.balance">
+                      <th>Balance</th>
+                    </t>
+                    <t t-if="this.state.isChecked.tags">
+                      <th>Tags</th>
+                    </t>
+                    <t t-if="this.state.isChecked.notes">
+                      <th>Notes</th>
+                    </t>
+                    <t t-if="this.state.isChecked.nights">
+                      <th>Nights</th>
+                    </t>
+                    <t t-if="this.state.isChecked.guestComment">
+                      <th>Guest comment</th>
+                    </t>
+
+                    <t t-if="!(this.state.activeTab == 'Occupied') &amp;&amp; this.state.isChecked.status">
+                      <th>Status</th>
+                    </t>
+                    <t t-if="!(this.state.activeTab == 'Occupied') &amp;&amp; this.state.isChecked.action">
+                      <th>Action</th>
+                    </t>
+                  </tr>
+                </thead>
+                <tbody class="border">
+                  <t t-if="!this.state.search>0">
+                    <t t-foreach="this.state.filteredData" t-as="record" t-key="record.reception_id">
+                      <tr class="border">
+                        <t t-if="this.state.isChecked.bookingNumber">
+                          <td t-esc="record.booking_number ? record.booking_number : '-'" class="booking-number" t-on-click.prevent="() => this.receptionModal(record)"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.customer">
+                          <td t-esc="record.customer ? record.customer : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.guestFullName">
+                          <td t-esc="record.customer ? record.customer : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.roomNumber">
+                          <td t-esc="record.room_number ? record.room_number : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab == 'Arrivals' &amp;&amp; this.state.isChecked.checkInTime">
+                          <td style="width:100px">
+                            <span>
+                              <t t-esc="record.check_in_date " />
+                            </span>
+                            <span>
+                              <t t-esc=" record.check_in_time" />
+                            </span>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Departures' &amp;&amp; this.state.isChecked.checkOutTime">
+                          <td style="width:100px">
+                            <span>
+                              <t t-esc="record.check_out_date"/>
+                            </span>
+                            <span>
+                              <t t-esc="record.check_out_time"/>
+                            </span>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Occupied' &amp;&amp; this.state.isChecked.period">
+                          <td style="width:100px" class="d-flex flex-column">
+                            <span>
+                              <t t-esc="record.check_in_date" />
+                            </span>
+                            <span>
+                              <t t-esc="record.check_out_date" />
+                            </span>
+                          </td>
+                        </t>
+                        <t t-if="this,state.isChecked.roomType">
+                          <td t-esc="record.room_type ? record.room_type : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab === 'Occupied' &amp;&amp; this.state.isChecked.day">
+                          <td>
+                            <t t-esc="getNightsOccupied(record)" />
+                          </td>
+                        </t>
+                        <t t-if="this.state.isChecked.balance">
+                          <td t-esc="record.Balance ? record.Balance : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.tags">
+                          <td t-esc="record.tags ? record.tags : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.notes">
+                          <td t-esc="record.notes ? record.notes : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.nights">
+                          <td t-esc="record.nights ? record.nights : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.guestComment">
+                          <td t-esc="record.guest_comment ? record.guest_comment : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab == 'Arrivals' &amp;&amp; this.state.isChecked.status">
+                          <td t-esc="changeArrivalStatusName(record.arrival_status)"></td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Departures' &amp;&amp; this.state.isChecked.status">
+                          <td t-esc="changeArrivalStatusName(record.departure_status) ? changeArrivalStatusName(record.departure_status) : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab == 'Arrivals' &amp;&amp; this.state.isChecked.action">
+                          <td t-att-style="'opacity: ' + (!record.is_check_in ? '1' : '0.3')">
+                            <button t-att-disabled="record.is_check_in" class="check-in-button" t-on-click.prevent="() => checkInActive(record)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M5.83333 9.99992H17.5M17.5 9.99992L15 7.49992M17.5 9.99992L15 12.4999" stroke="#03008a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                                Check In</button>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Departures' &amp;&amp; this.state.isChecked.action">
+                          <td t-att-style="'opacity: ' + (!record.is_check_out ? '1' : '0.3')">
+                            <button t-att-disabled="record.is_check_out" class="check-in-button" t-on-click.prevent="() => checkInActive(record)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M5.83333 9.99992H17.5M17.5 9.99992L15 7.49992M17.5 9.99992L15 12.4999" stroke="#03008a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                                Check Out</button>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Occupied'">
+                          <span></span>
+                        </t>
+                      </tr>
+                    </t>
+                  </t>
+                  <t t-else="">
+                    <t t-foreach="this.state.newFilteredData" t-as="record" t-key="record.reception_id">
+                      <tr class="border">
+                        <t t-if="this.state.isChecked.bookingNumber">
+                          <td t-esc="record.booking_number ? record.booking_number : '-'" class="booking-number" t-on-click.prevent="() => this.receptionModal(record)"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.customer">
+                          <td t-esc="record.customer ? record.customer : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.guestFullName">
+                          <td t-esc="record.customer ? record.customer : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.roomNumber">
+                          <td t-esc="record.room_number ? record.room_number : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab == 'Arrivals' &amp;&amp; this.state.isChecked.checkInTime">
+                          <td style="width:100px">
+                            <span>
+                              <t t-esc="record.check_in_date " />
+                            </span>
+                            <span>
+                              <t t-esc=" record.check_in_time" />
+                            </span>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Departures' &amp;&amp; this.state.isChecked.checkOutTime">
+                          <td style="width:100px">
+                            <span>
+                              <t t-esc="record.check_out_date"/>
+                            </span>
+                            <span>
+                              <t t-esc="record.check_out_time"/>
+                            </span>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Occupied' &amp;&amp; this.state.isChecked.period">
+                          <td style="width:100px" class="d-flex flex-column">
+                            <span>
+                              <t t-esc="record.check_in_date" />
+                            </span>
+                            <span>
+                              <t t-esc="record.check_out_date" />
+                            </span>
+                          </td>
+                        </t>
+                        <t t-if="this,state.isChecked.roomType">
+                          <td t-esc="record.room_type ? record.room_type : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab === 'Occupied' &amp;&amp; this.state.isChecked.day">
+                          <td>
+                            <t t-esc="getNightsOccupied(record)" />
+                          </td>
+                        </t>
+                        <t t-if="this.state.isChecked.balance">
+                          <td t-esc="record.Balance ? record.Balance : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.tags">
+                          <td t-esc="record.tags ? record.tags : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.notes">
+                          <td t-esc="record.notes ? record.notes : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.nights">
+                          <td t-esc="record.nights ? record.nights : '-'"></td>
+                        </t>
+                        <t t-if="this.state.isChecked.guestComment">
+                          <td t-esc="record.guest_comment ? record.guest_comment : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab == 'Arrivals' &amp;&amp; this.state.isChecked.status">
+                          <td t-esc="changeArrivalStatusName(record.arrival_status)"></td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Departures' &amp;&amp; this.state.isChecked.status">
+                          <td t-esc="changeArrivalStatusName(record.departure_status) ? changeArrivalStatusName(record.departure_status) : '-'"></td>
+                        </t>
+                        <t t-if="this.state.activeTab == 'Arrivals' &amp;&amp; this.state.isChecked.action">
+                          <td t-att-style="'opacity: ' + (!record.is_check_in ? '1' : '0.3')">
+                            <button t-att-disabled="record.is_check_in" class="check-in-button" t-on-click.prevent="() => checkInActive(record)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M5.83333 9.99992H17.5M17.5 9.99992L15 7.49992M17.5 9.99992L15 12.4999" stroke="#03008a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                                Check In</button>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Departures' &amp;&amp; this.state.isChecked.action">
+                          <td t-att-style="'opacity: ' + (!record.is_check_out ? '1' : '0.3')">
+                            <button t-att-disabled="record.is_check_out" class="check-in-button" t-on-click.prevent="() => checkInActive(record)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M5.83333 9.99992H17.5M17.5 9.99992L15 7.49992M17.5 9.99992L15 12.4999" stroke="#03008a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                                Check Out</button>
+                          </td>
+                        </t>
+                        <t t-elif="this.state.activeTab == 'Occupied'">
+                          <span></span>
+                        </t>
+                      </tr>
+                    </t>
+                  </t>
+                </tbody>
+
+              </table>
+            </div>
+          </t>
+          <t t-else="">
+            <div class="reception-no-data">
+              <svg xmlns="http://www.w3.org/2000/svg" width="120" height="123" viewBox="0 0 120 123" fill="none">
+                <path d="M105.01 45.3346C107.122 45.3346 108.835 43.6208 108.835 41.5066C108.835 39.3924 107.122 37.6786 105.01 37.6786C102.898 37.6786 101.186 39.3924 101.186 41.5066C101.186 43.6208 102.898 45.3346 105.01 45.3346Z" fill="#EAEEF9"/>
+                <path d="M3.41657 66.0358C4.80621 66.0358 5.93274 64.9082 5.93274 63.5173C5.93274 62.1264 4.80621 60.9989 3.41657 60.9989C2.02692 60.9989 0.900391 62.1264 0.900391 63.5173C0.900391 64.9082 2.02692 66.0358 3.41657 66.0358Z" fill="#EAEEF9"/>
+                <path d="M14.983 111.312C16.3726 111.312 17.4991 110.185 17.4991 108.794C17.4991 107.403 16.3726 106.276 14.983 106.276C13.5933 106.276 12.4668 107.403 12.4668 108.794C12.4668 110.185 13.5933 111.312 14.983 111.312Z" fill="#EAEEF9"/>
+                <path d="M28.4326 111.312L63.7416 100.249V54.8868L28.4326 65.8656V111.312Z" fill="#B7BFCD"/>
+                <path opacity="0.4" d="M99.0507 111.312L63.7417 100.249V54.8868L99.0507 65.8656V111.312Z" fill="#6D7C9A"/>
+                <g opacity="0.13">
+                  <path d="M28.4326 111.312L63.7416 100.249V54.8868L28.4326 65.8656V111.312Z" fill="url(#paint0_linear_487_614)"/>
+                  <path d="M99.0506 111.312L63.7416 100.249V54.8868L99.0506 65.8656V111.312Z" fill="url(#paint1_linear_487_614)"/>
+                </g>
+                <path d="M63.7416 122.461L28.4326 111.397V66.0358L63.7416 77.0996V122.461Z" fill="#EDF1F9"/>
+                <path d="M63.7417 122.461L99.0507 111.397V66.0358L63.7417 77.0996V122.461Z" fill="#DAE1ED"/>
+                <path opacity="0.09" d="M55.7416 114.461L28.4326 111.397V66.0358L63.7416 77.0996L55.7416 114.461Z" fill="url(#paint2_linear_487_614)"/>
+                <path opacity="0.2" d="M71.7417 106.461L99.0507 111.397V66.0358L63.7417 77.0996L71.7417 106.461Z" fill="url(#paint3_linear_487_614)"/>
+                <path d="M63.7417 54.8868L47.1406 42.4613L11.2417 54.5464L28.4327 65.8656L63.7417 54.8868Z" fill="#DAE1ED"/>
+                <path d="M63.7417 54.8868L80.3428 42.4613L116.242 54.5464L99.0507 65.8656L63.7417 54.8868Z" fill="#DAE1ED"/>
+                <path d="M28.4327 66.0358L63.7417 77.0996L46.1293 88.3336L11.2417 76.7592L28.4327 66.0358Z" fill="#EFF4FD"/>
+                <path d="M99.0507 66.0358L63.7417 77.0996L81.3541 88.3336L116.242 76.7592L99.0507 66.0358Z" fill="#EDF1F9"/>
+                <path d="M73.5932 11.3381C78.5397 24.7625 80.0142 27.7454 80.4981 40.9733C80.312 43.9927 80.1966 47.2761 78.773 49.92C76.8719 53.9645 72.2219 56.7654 67.8285 56.8108C63.3026 56.8917 58.8655 54.1205 56.8684 49.8474C55.4633 47.2541 55.508 43.7069 57.4354 41.3523C59.5307 39.0941 63.2169 38.5311 65.8686 39.9421C68.7855 41.282 70.5265 44.0682 71.1714 47.0065C71.8162 49.9449 71.5329 53.1318 70.7457 56.0295C69.0995 63.0769 67.736 63.4179 63.6987 75.3496" stroke="#ABB5CC" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="4 4"/>
+                <path d="M79.6136 4.23251C79.6021 6.20649 77.7651 7.41518 75.4356 6.78489C72.9829 6.36678 71.2469 5.93586 71.1352 4.17406C71.1914 2.36726 73.1627 1.66011 75.4701 0.862967C78.2366 -0.236354 79.4571 2.30354 79.6136 4.23251Z" fill="#DAE2EB"/>
+                <path d="M63.7646 10.2689C65.0076 11.5485 67.6283 11.9216 68.9054 9.96704C70.3058 7.80026 71.5044 6.22502 70.2166 4.7782C68.9736 3.49857 67.7638 4.36009 64.9973 5.45941C62.7795 6.59092 62.3088 8.86706 63.7646 10.2689Z" fill="#DAE2EB"/>
+                <path d="M69.5002 2.10355C70.6315 1.62139 71.9867 1.97513 72.5914 2.88821C72.8489 3.17757 73.1512 3.63412 73.2408 3.96848C74.2037 6.21901 73.9009 8.45016 72.6017 8.97732C71.1792 9.71666 69.2193 8.44983 68.4692 6.32149C68.2901 5.65277 68.2006 5.31841 68.0662 4.81687C67.9208 3.60161 68.369 2.58572 69.5002 2.10355C69.6682 2.05856 69.5002 2.10355 69.5002 2.10355Z" fill="#989FB0"/>
+                <path d="M17.499 38.3315H15.3089V36.1415H13.4317V38.3315H11.2417V40.2713H13.4317V42.4613H15.3089V40.2713H17.499V38.3315Z" fill="url(#paint4_linear_487_614)"/>
+                <path d="M22.3098 93.2787H20.1197V91.0886H18.2425V93.2787H16.0525V95.2184H18.2425V97.4085H20.1197V95.2184H22.3098V93.2787Z" fill="url(#paint5_linear_487_614)"/>
+                <path d="M118.048 93.4027L115.368 92.0498L116.721 89.3703L114.424 88.2107L113.071 90.8902L110.392 89.5373L109.194 91.9107L111.873 93.2635L110.52 95.9431L112.817 97.1027L114.17 94.4231L116.849 95.776L118.048 93.4027Z" fill="url(#paint6_linear_487_614)"/>
+                <defs>
+                  <linearGradient id="paint0_linear_487_614" x1="52.5954" y1="58.1722" x2="47.7793" y2="78.222" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.00289017" stop-color="#606673" stop-opacity="0"/>
+                    <stop offset="1" stop-color="#373C47"/>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear_487_614" x1="52.5954" y1="58.1722" x2="47.7793" y2="78.222" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.00289017" stop-color="#606673" stop-opacity="0"/>
+                    <stop offset="1" stop-color="#373C47"/>
+                  </linearGradient>
+                  <linearGradient id="paint2_linear_487_614" x1="36.3487" y1="97.0811" x2="44.8313" y2="73.1229" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.00289017" stop-color="#6C80AA" stop-opacity="0"/>
+                    <stop offset="1" stop-color="#5D6A86"/>
+                  </linearGradient>
+                  <linearGradient id="paint3_linear_487_614" x1="82.7975" y1="103.625" x2="83.4646" y2="73.2229" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.00289017" stop-color="#314F91" stop-opacity="0"/>
+                    <stop offset="1" stop-color="#324264"/>
+                  </linearGradient>
+                  <linearGradient id="paint4_linear_487_614" x1="14.3708" y1="36.361" x2="14.3708" y2="39.9083" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#B0BACC"/>
+                    <stop offset="1" stop-color="#969EAE"/>
+                  </linearGradient>
+                  <linearGradient id="paint5_linear_487_614" x1="19.1816" y1="91.3082" x2="19.1816" y2="94.8554" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#B0BACC"/>
+                    <stop offset="1" stop-color="#969EAE"/>
+                  </linearGradient>
+                  <linearGradient id="paint6_linear_487_614" x1="115.438" y1="89.0594" x2="113.246" y2="93.3995" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#B0BACC"/>
+                    <stop offset="1" stop-color="#969EAE"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <p>There is no information in the list at the moment</p>
+              <h5>Information will appear here as it is added</h5>
+            </div>
+          </t>
+        </div>
+      </div>
+
+      <table class="d-none" t-attf-class="o_list_table table table-sm table-hover position-relative mb-0 {{props.list.isGrouped ? 'o_list_table_grouped' : 'o_list_table_ungrouped table-striped'}}" t-ref="table">
+        <thead>
+          <tr>
+            <th t-if="hasSelectors" class="o_list_record_selector d-none o_list_controller align-middle pe-1 cursor-pointer" tabindex="-1" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-on-click.stop="toggleSelection">
+              <CheckBox disabled="!_canSelectRecord" value="selectAll" className="'d-flex m-0'" onChange.bind="toggleSelection"/>
+            </th>
+            <t t-foreach="state.columns" t-as="column" t-key="column.id">
+              <th t-if="column.type === 'field'" t-att-data-name="column.name" t-att-class="getColumnClass(column) + ' opacity-trigger-hover'" t-on-pointerup="onColumnTitleMouseUp" t-on-click="() => this.onClickSortColumn(column)" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-att-data-tooltip-template="isDebugMode ? 'web.FieldTooltip' : false" t-att-data-tooltip-info="isDebugMode ? makeTooltip(column) : false" data-tooltip-delay="1000" tabindex="-1">
+                <t t-if="column.hasLabel and column.widget !== 'handle'">
+                  <t t-set="isNumeric" t-value="isNumericColumn(column)"/>
+                  <div t-att-class="{'d-flex': true, 'flex-row-reverse': shouldReverseHeader(column)}">
+                    <span class="d-block min-w-0 text-truncate flex-grow-1" t-att-class="isNumeric ? 'o_list_number_th' : ''" t-esc="column.label"/>
+                    <i t-att-class="getSortableIconClass(column)"/>
+                  </div>
+                  <span class="o_resize position-absolute top-0 end-0 bottom-0 ps-1 bg-black-25 opacity-0 opacity-50-hover z-index-1" t-on-pointerdown.stop.prevent="onStartResize"/>
+                </t>
+              </th>
+              <th t-else="" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-att-class="{o_list_button: column.type === 'button_group'}"/>
+            </t>
+            <th t-if="props.onOpenFormView" t-on-keydown="(ev) => this.onCellKeydown(ev)" class="o_list_open_form_view"/>
+            <th t-if="displayOptionalFields or activeActions.onDelete" t-on-keydown="(ev) => this.onCellKeydown(ev)" class="o_list_controller o_list_actions_header position-sticky end-0">
+              <Dropdown t-if="displayOptionalFields" class="'o_optional_columns_dropdown text-center border-top-0'" togglerClass="'btn p-0'" skipTogglerTabbing="true" listRendererClass="uniqueRendererClass" position="'bottom-end'">
+                <t t-set-slot="toggler">
+                  <i class="o_optional_columns_dropdown_toggle oi oi-fw oi-settings-adjust"/>
+                </t>
+                <t t-foreach="optionalFieldGroups" t-as="group" t-key="group_index">
+                  <div t-if="!group_first" role="separator" class="dropdown-divider"/>
+                  <DropdownItem t-if="group.displayName" parentClosingMode="'none'" onSelected="() => this.toggleOptionalFieldGroup(group.id)">
+                    <div class="fw-bold" t-esc="group.displayName"/>
+                  </DropdownItem>
+                  <t t-foreach="group.optionalFields" t-as="field" t-key="field_index">
+                    <DropdownItem parentClosingMode="'none'" onSelected="() => this.toggleOptionalField(field.name)">
+                      <CheckBox onChange="() => this.toggleOptionalField(field.name)" value="field.value" name="field.name">
+                        <span class="d-flex align-items-center">
+                          <span class="text-truncate" t-esc="field.label"/>
+                          <span class="ps-1" t-if="env.debug" t-esc="' (' + field.name + ')'" />
+                        </span>
+                      </CheckBox>
+                    </DropdownItem>
+                  </t>
+                </t>
+              </Dropdown>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="ui-sortable d-none">
+          <t t-call="{{ constructor.rowsTemplate }}">
+            <t t-set="list" t-value="props.list"/>
+          </t>
+        </tbody>
+        <tfoot t-on-click="() => props.list.leaveEditMode()" class="d-none o_list_footer cursor-default" t-att-class="{o_sample_data_disabled: props.list.model.useSampleModel}">
+          <tr class="d-none">
+            <td t-if="hasSelectors"/>
+            <t t-foreach="state.columns" t-as="column" t-key="column.id">
+              <t t-set="aggregate" t-value="aggregates[column.name]"/>
+              <td t-if="aggregate" class="o_list_number">
+                <span t-esc="aggregate.value" t-att-data-tooltip="aggregate.help"/>
+              </td>
+              <td t-else=""/>
+            </t>
+            <td t-if="props.onOpenFormView"/>
+            <td t-if="displayOptionalFields or activeActions.onDelete" />
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="modal" t-att-class="this.state.isCheckInActive ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isCheckInActive = false">
+        <div class="modal-dialog" t-on-click.prevent="(e) => e.stopPropagation()">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Check-in</h5>
+            </div>
+            <div class="modal-body gap-3">
+              <div class="check-content mb-2">
+                <p>Booking number</p>
+                <span id="bookingNumber"></span>
+              </div>
+              <div class="check-content mb-2">
+                <p>Room type</p>
+                <span id="roomType"></span>
+              </div>
+              <div class="check-content mb-2">
+                <p>Room number</p>
+                <span id="roomNumber"></span>
+              </div>
+              <div class="check-content">
+                <p>Date and time</p>
+                <div class="d-flex gap-2">
+                  <input type="date" id="checkDate"/>
+                  <input type="time" id="checkTime"/>
+                </div>
+              </div>
+              <div class="action-buttons d-flex p-2 gap-3">
+                <button class="btn btn-primary" t-on-click="saveData">Save</button>
+                <button class="btn btn-danger" t-on-click.prevent="() => this.state.isCheckInActive = false">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal view-container" t-att-class="this.state.isViewModal ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isViewModal = false">
+        <div class="modal-dialog" style="margin-top: 10px">
+          <div class="modal-content" t-on-click.prevent="(e) => e.stopPropagation()">
+            <div class="modal-header">
+              <h5 class="modal-title">Display data</h5>
+            </div>
+            <div class="modal-body">
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.bookingNumber" t-on-click="()=>this.toggleCheck('bookingNumber')"/>
+                <label>Booking number</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.customer" t-on-click="()=>this.toggleCheck('customer')"/>
+                <label>Customer</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.guestFullName" t-on-click="()=>this.toggleCheck('guestFullName')"/>
+                <label>Guest full name</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.roomNumber" t-on-click="()=>this.toggleCheck('roomNumber')"/>
+                <label>Room number</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.checkInTime" t-on-click="()=>this.toggleCheck('checkInTime')"/>
+                <label>Check-in time</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.checkOutTime" t-on-click="()=>this.toggleCheck('checkOutTime')"/>
+                <label>Check-out time</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.period" t-on-click="()=>this.toggleCheck('period')"/>
+                <label>Period</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.roomType" t-on-click="()=>this.toggleCheck('roomType')"/>
+                <label>Room type</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.day" t-on-click="()=>this.toggleCheck('day')"/>
+                <label>Day</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.balance" t-on-click="()=>this.toggleCheck('balance')"/>
+                <label>Balance</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.tags" t-on-click="()=>this.toggleCheck('tags')"/>
+                <label>Tags</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.notes" t-on-click="()=>this.toggleCheck('notes')"/>
+                <label>Notes</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.nights" t-on-click="()=>this.toggleCheck('nights')"/>
+                <label>Nights</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.guestComment" t-on-click="()=>this.toggleCheck('guestComment')"/>
+                <label>Guest comment</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.status" t-on-click="()=>this.toggleCheck('status')"/>
+                <label>Status</label>
+              </div>
+              <div class="view-content">
+                <input type="checkbox" t-att-checked="this.state.isChecked.action" t-on-click="()=>this.toggleCheck('action')"/>
+                <label>Action</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="save-button" type="button" t-on-click.prevent="()=>this.state.isViewModal=false">Save</button>
+              <button class="cancel-button" type="button" t-on-click.prevent="() => this.state.isViewModal = false">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </t>
+
+</templates>

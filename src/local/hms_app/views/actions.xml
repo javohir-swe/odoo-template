@@ -1,0 +1,1459 @@
+<odoo>
+
+    <!-- Room Types -->
+    <record model="ir.actions.act_window" id="action_triple">
+        <field name="name">Room Type</field>
+        <field name="res_model">triple</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record for Room Types
+            </p>
+        </field>
+    </record>
+
+    <!-- Accommodation Room Image -->
+    <record
+        model="ir.actions.act_window" id="action_room_image">
+        <field name="name">Accommodation Room Image</field>
+        <field name="res_model">room_image</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record for Room Image
+            </p>
+        </field>
+    </record>
+
+    <!-- Accommodation Offers -->
+    <record
+        model="ir.actions.act_window" id="action_accommodation_offer">
+        <field name="name">Accommodation Offers</field>
+        <field name="res_model">accommodation_offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record for Accommodation Offers
+            </p>
+        </field>
+    </record>
+
+    <!-- Smoking In Room -->
+    <record
+        model="ir.actions.act_window" id="action_smoking_in_room">
+        <field name="name">Smoking In Room</field>
+        <field name="res_model">smoking_in_room</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record for Smoking In Room
+            </p>
+        </field>
+    </record>
+
+    <!-- VideoAndAudio -->
+    <record
+        model="ir.actions.act_window" id="action_video_and_audio">
+        <field name="name">Video and Audio</field>
+        <field name="res_model">video_and_audio</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Video and Audio entry
+            </p>
+        </field>
+    </record>
+
+    <!-- Outdoor Area and Window View -->
+    <record
+        model="ir.actions.act_window" id="action_outdoor_area_and_window_view">
+        <field name="name">Outdoor Areas and Window Views</field>
+        <field name="res_model">outdoor_area_and_window_view</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Internet And Telephony record
+            </p>
+        </field>
+    </record>
+
+    <!-- Others -->
+    <record
+        model="ir.actions.act_window" id="action_others">
+        <field name="name">Beds</field>
+        <field name="res_model">others</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Bed
+            </p>
+        </field>
+    </record>
+
+    <!-- Internet And Telephony -->
+    <record
+        model="ir.actions.act_window" id="action_internet_and_telephony">
+        <field name="name">Internet And Telephony</field>
+        <field name="res_model">internet_and_telephony</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Internet And Telephony record
+            </p>
+        </field>
+    </record>
+
+    <!-- Furniture -->
+    <record
+        model="ir.actions.act_window" id="action_furniture">
+        <field name="name">Furniture</field>
+        <field name="res_model">furniture</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Furniture item.
+            </p>
+        </field>
+    </record>
+
+    <!-- Electronic Devices -->
+    <record
+        model="ir.actions.act_window" id="action_electronic_devices">
+        <field name="name">Electronic Devices</field>
+        <field name="res_model">electronic_devices</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Electronic Devices.
+            </p>
+        </field>
+    </record>
+
+    <!-- Beds -->
+    <record
+        model="ir.actions.act_window" id="action_beds">
+        <field name="name">Beds</field>
+        <field name="res_model">beds</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record for Beds
+            </p>
+        </field>
+    </record>
+
+    <!-- Bathroom -->
+    <record
+        model="ir.actions.act_window" id="action_bathroom">
+        <field name="name">Bathrooms</field>
+        <field name="res_model">bathroom</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Bathroom
+            </p>
+        </field>
+    </record>
+    <record
+        model="ir.actions.act_window" id="action_rate_plans">
+        <field name="name">Rate plans</field>
+        <field name="res_model">rate.plan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Rate plans
+            </p>
+        </field>
+    </record>
+    <!-- Rounding policy -->
+    <record
+        model="ir.actions.act_window" id="action_rate_rounding_policy">
+        <field name="name">Rounding policy</field>
+        <field name="res_model">rounding.policy</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Rounding policy
+            </p>
+        </field>
+    </record>
+    <!-- Rate plan types -->
+    <record
+        model="ir.actions.act_window" id="action_rate_type">
+        <field name="name">Types</field>
+        <field name="res_model">types</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Types
+            </p>
+        </field>
+    </record>
+    <!-- Point of sale -->
+    <record
+        model="ir.actions.act_window" id="action_rate_pos">
+        <field name="name">Point of sale</field>
+        <field name="res_model">point.of.sale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Point of sale
+            </p>
+        </field>
+    </record>
+    <!-- Rate plan currencies -->
+    <record
+        model="ir.actions.act_window" id="action_rate_currency">
+        <field name="name">Rate plan currencies</field>
+        <field name="res_model">currency</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Rate plan currencies
+            </p>
+        </field>
+    </record>
+    <!-- Early Check-In and Late Check-Out Rule -->
+    <record
+        model="ir.actions.act_window" id="action_rate_checkinout">
+        <field name="name">Early Check-In and Late Check-Out Rule</field>
+        <field name="res_model">checkinout</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Early Check-In and Late Check-Out Rule
+            </p>
+        </field>
+    </record>
+    <!-- Cancellation terms -->
+    <record
+        model="ir.actions.act_window" id="action_rate_cancel_policy">
+        <field name="name">Cancellation terms</field>
+        <field name="res_model">cancel.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Cancellation terms
+            </p>
+        </field>
+    </record>
+
+    <!-- Building types -->
+    <record
+        id="action_basetype_settings" model="ir.actions.act_window">
+        <field name="name">Building types</field>
+        <field name="res_model">base.types</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Base types
+            </p>
+        </field>
+    </record>
+    <!-- State -->
+    <record
+        id="action_state_settings" model="ir.actions.act_window">
+        <field name="name">State</field>
+        <field name="res_model">state</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first State
+            </p>
+        </field>
+    </record>
+    <!-- City -->
+    <record
+        id="action_city_settings" model="ir.actions.act_window">
+        <field name="name">City</field>
+        <field name="res_model">city</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first City
+            </p>
+        </field>
+    </record>
+    <!-- Child age range -->
+    <record
+        id="action_childagerange_settings" model="ir.actions.act_window">
+        <field name="name">Child age range</field>
+        <field name="res_model">child.age.range</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Child age range
+            </p>
+        </field>
+    </record>
+    <!-- Comments -->
+    <record
+        id="action_comments_form" model="ir.actions.act_window">
+        <field name="name">Comments</field>
+        <field name="res_model">comments</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="hms_app.view_comments_form" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Comments
+            </p>
+        </field>
+    </record>
+    <!-- Payment Methods -->
+    <record
+        id="action_payment_methods" model="ir.actions.act_window">
+        <field name="name">Payment Methods</field>
+        <field name="res_model">payment.methods.for.guests</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Payment Methods
+            </p>
+        </field>
+    </record>
+    <!-- Services Setting -->
+    <record
+        id="action_services_settings" model="ir.actions.act_window">
+        <field name="name">Services</field>
+        <field name="res_model">services.settings</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Services Setting
+            </p>
+        </field>
+    </record>
+    <!-- Group Settings -->
+    <record
+        id="action_group_services" model="ir.actions.act_window">
+        <field name="name">Group Settings</field>
+        <field name="res_model">group.services</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Group Settings
+            </p>
+        </field>
+    </record>
+    <!-- Type Settings -->
+    <record
+        id="action_type_services" model="ir.actions.act_window">
+        <field name="name">Type Settings</field>
+        <field name="res_model">services.types</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Type Settings
+            </p>
+        </field>
+    </record>
+    <!-- Motivator settings -->
+    <record
+        id="action_motivator_services" model="ir.actions.act_window">
+        <field name="name">Motivator settings</field>
+        <field name="res_model">motivator.booking.engine</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Motivator settings
+            </p>
+        </field>
+    </record>
+    <!-- All Times -->
+    <record
+        id="action_all_times" model="ir.actions.act_window">
+        <field name="name">All Times</field>
+        <field name="res_model">all.times</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first All Times
+            </p>
+        </field>
+    </record>
+    <!-- Check In Check Out -->
+    <record
+        id="action_check_in_check_out" model="ir.actions.act_window">
+        <field name="name">Check In Check Out</field>
+        <field name="res_model">check.in.check.out.roles</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Check In Check Out
+            </p>
+        </field>
+    </record>
+
+    <record
+        id="acton_checkin_checkout_settings" model="ir.actions.act_window">
+        <field name="name">Check In Check Out Settings</field>
+        <field name="res_model">check.in.check.out.settings</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Check In Check Out Settings
+            </p>
+        </field>
+    </record>
+    <!-- Cancellation Policy -->
+    <record
+        id="action_cancellation_terms" model="ir.actions.act_window">
+        <field name="name">Cancellation Policy</field>
+        <field name="res_model">cancellation.terms</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create or select cancellation policy.
+            </p>
+        </field>
+    </record>
+    <!-- Rule Names -->
+    <record
+        id="action_rule_names" model="ir.actions.act_window">
+        <field name="name">Rule Names</field>
+        <field name="res_model">rule.name</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create or select rule names.
+            </p>
+        </field>
+    </record>
+    <!-- Stations -->
+    <record
+        id="action_station" model="ir.actions.act_window">
+        <field name="name">Stations</field>
+        <field name="res_model">station</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new Station
+            </p>
+        </field>
+    </record>
+    <!-- Transfer Types -->
+    <record
+        id="action_transfer_type" model="ir.actions.act_window">
+        <field name="name">Transfer Types</field>
+        <field name="res_model">transfer.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Transfer Type
+            </p>
+        </field>
+    </record>
+    <!-- Transfers -->
+    <record
+        id="action_transfers" model="ir.actions.act_window">
+        <field name="name">Transfers</field>
+        <field name="res_model">transfers</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Configure new Transfers
+            </p>
+        </field>
+    </record>
+    <!-- Transport Companies -->
+    <record
+        id="action_transport_companies" model="ir.actions.act_window">
+        <field name="name">Transport Companies</field>
+        <field name="res_model">transport.companies</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register a new Transport Company
+            </p>
+        </field>
+    </record>
+    <!-- Vehicles -->
+    <record
+        id="action_vehicles" model="ir.actions.act_window">
+        <field name="name">Vehicles</field>
+        <field name="res_model">vehicles</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Vehicle
+            </p>
+        </field>
+    </record>
+    <!-- Rounding Rules -->
+    <record
+        id="action_rounding_rules" model="ir.actions.act_window">
+        <field name="name">Rounding Rules</field>
+        <field name="res_model">rounding.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_rounding_rule_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Rounding Rules
+            </p>
+        </field>
+    </record>
+    <!-- Promotion -->
+    <record
+        id="action_promotion" model="ir.actions.act_window">
+        <field name="name">Promotion</field>
+        <field name="res_model">promotion</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="hms_app.view_promotion_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first promotion
+            </p>
+        </field>
+    </record>
+    <!-- Promotion Types -->
+    <record
+        id="action_promotion_types" model="ir.actions.act_window">
+        <field name="name">Promotion Types</field>
+        <field name="res_model">promotion.types</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hms_app.view_promotion_types_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Promotion Types
+            </p>
+        </field>
+    </record>
+    <!-- Extras -->
+    <record
+        id="extras_action" model="ir.actions.act_window">
+        <field name="name">Extras</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rate_plan.extras</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Extras
+            </p>
+        </field>
+    </record>
+    <!-- Extras Type -->
+    <record
+        id="extras_service_action" model="ir.actions.act_window">
+        <field name="name">Extras Service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rate_plan.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Extras Service
+            </p>
+        </field>
+    </record>
+    <!-- Guests -->
+    <record
+        model="ir.actions.act_window" id="action_room_type_guests">
+        <field name="name">Guests</field>
+        <field name="res_model">room_type.guests</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Guests
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > Closed -->
+    <record
+        id="action_rate_plan_closed" model="ir.actions.act_window">
+        <field name="name">Closed</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rate_plan.closed</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_rate_plan_closed_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Closed Rate Plans
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > MinLOS -->
+    <record
+        id="action_rate_plan_min_los" model="ir.actions.act_window">
+        <field name="name">MinLOS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rate_plan.min_los</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Minimum Length of Stay
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > MaxLOS -->
+    <record
+        id="action_rate_plan_max_los" model="ir.actions.act_window">
+        <field name="name">MaxLOS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rate_plan.max_los</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Click to create a new MaxLOS.</p>
+        </field>
+    </record>
+    <!-- Calendar Data > Minimum Length of Stay on Arrival -->
+    <record
+        id="action_rate_plan_min_los_arrival" model="ir.actions.act_window">
+        <field name="name">Minimum Length of Stay on Arrival</field>
+        <field name="res_model">rate_plan.min_los_arrival</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Minimum Length of Stay on Arrival.
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > Maximum Length of Stay on Arrival -->
+    <record
+        id="action_rate_plan_max_los_arrival" model="ir.actions.act_window">
+        <field name="name">Max LOS Arrival</field>
+        <field name="res_model">rate_plan.max_los_arrival</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Maximum Length of Stay on Arrival
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > Full Parent Length of Stay -->
+    <record
+        id="action_full_parent_los" model="ir.actions.act_window">
+        <field name="name">Full Parent Length of Stay</field>
+        <field name="res_model">rate_plan.full_parent_los</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_full_parent_los_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Full Parent Length of Stay
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > MinAdvBooking -->
+    <record
+        id="action_min_adv_booking" model="ir.actions.act_window">
+        <field name="name">MinAdvBooking</field>
+        <field name="res_model">rate_plan.min_adv_booking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new MinAdvBooking
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > MaxAdvBooking -->
+    <record
+        id="action_max_adv_booking" model="ir.actions.act_window">
+        <field name="name">Max Advance Bookings</field>
+        <field name="res_model">rate_plan.max_adv_booking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new MaxAdvBooking
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > CTA -->
+    <record
+        id="action_rate_plan_cta" model="ir.actions.act_window">
+        <field name="name">CTA</field>
+        <field name="res_model">rate_plan.cta</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_rate_plan_cta_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new CTA
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > CTD -->
+    <record
+        id="action_rate_plan_ctd" model="ir.actions.act_window">
+        <field name="name">CTD</field>
+        <field name="res_model">rate_plan.rate_plan_ctd</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first rate plan CTD
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > Stay Controls -->
+    <record
+        id="action_stay_controls" model="ir.actions.act_window">
+        <field name="name">Stay Controls</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rate_plan.stay_controls</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first rate plan Stay Controls
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > CheckIn CheckOut -->
+    <record
+        id="action_rate_plan_check_in_check_out" model="ir.actions.act_window">
+        <field name="name">CheckIn CheckOut</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rate_plan.check_in.check_out</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new CheckIn CheckOut
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > Payment Methods -->
+    <record
+        id="action_rate_plan_payment_methods" model="ir.actions.act_window">
+        <field name="name">Payment Methods</field>
+        <field name="res_model">rate_plan.payment_methods</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Payment Methods.
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > Prices -->
+    <record
+        id="action_rate_plan_prices" model="ir.actions.act_window">
+        <field name="name">Prices</field>
+        <field name="res_model">rate_plan.price</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Price
+            </p>
+        </field>
+    </record>
+    <!-- Calendar Data > Day Selection -->
+    <record
+        id="action_rate_plan_day_selection" model="ir.actions.act_window">
+        <field name="name">Day Selection</field>
+        <field name="res_model">rate_plan.day_selection</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create or select a Day Selection.
+            </p>
+        </field>
+    </record>
+    <!-- Promo Code Valid Dates -->
+    <record
+        id="action_promo_code_valid_date" model="ir.actions.act_window">
+        <field name="name">Promo Code Valid Dates</field>
+        <field name="res_model">property_settings.promo_code.valid_date</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create or select a Promo Code Valid Dates.
+            </p>
+        </field>
+    </record>
+    <!-- Promo Code Groups -->
+    <record
+        id="action_promo_code_groups" model="ir.actions.act_window">
+        <field name="name">Promo Code Groups</field>
+        <field name="res_model">promo_code.groups</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create or select a Promo Code Groups.
+            </p>
+        </field>
+    </record>
+    <!-- Promo Codes -->
+    <record
+        id="action_promo_codes" model="ir.actions.act_window">
+        <field name="name">Promo Codes</field>
+        <field name="res_model">property_settings.promo_code</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create or select a Promo Code.
+            </p>
+        </field>
+    </record>
+    <!-- Generate Promo Codes -->
+    <record
+        id="action_generate_promo_codes" model="ir.actions.act_window">
+        <field name="name">Generate Promo Codes</field>
+        <field name="res_model">promo.code.generate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_promo_code_generate_wizard_form" />
+        <field name="target">new</field>
+    </record>
+    <!-- Room Inventory -->
+
+    <record
+        id="action_property_management_room_inventory" model="ir.actions.act_window">
+        <field name="name">Room Inventory</field>
+        <field name="res_model">room.inventory</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create or select a Room Inventory.</p>
+        </field>
+    </record>
+    <record id="action_room_inventory_generate_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Room Inventory</field>
+        <field name="res_model">room_inventory.generate</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_housekeeping"
+        model="ir.actions.act_window">
+        <field name="name">Housekeeping</field>
+        <field name="res_model">room_inventory.housekeeping</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create or select a Housekeeping.</p>
+        </field>
+    </record>
+
+    <record
+        id="action_housekeeping_form_popup" model="ir.actions.act_window">
+        <field name="name">Housekeeping Popup</field>
+        <field name="res_model">room_inventory.housekeeping</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="property_building_action"
+        model="ir.actions.act_window">
+        <field name="name">Property Buildings</field>
+        <field name="res_model">property.building</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new building.
+            </p>
+        </field>
+    </record>
+    <!-- Availability Room Types -->
+    <record
+        id="action_availability_room_type" model="ir.actions.act_window">
+        <field name="name">Availability Room Types</field>
+        <field name="res_model">availability.room_type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create or select a Availability Room Types.
+            </p>
+        </field>
+    </record>
+
+    <!-- Availability Manager -->
+    <record
+        id="action_availability_manager" model="ir.actions.act_window">
+        <field name="name">Availability Manager</field>
+        <field name="res_model">availability.manager</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Online Sales Roles -->
+    <record
+        id="action_online_sales_role" model="ir.actions.act_window">
+        <field name="name">Online Sales Roles</field>
+        <field name="res_model">availability.online_sales_role</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Online Sales Role
+            </p>
+        </field>
+    </record>
+    <!-- Advanced Availability Settings -->
+    <record
+        id="action_advanced_availability_settings" model="ir.actions.act_window">
+        <field name="name">Advanced Availability Settings</field>
+        <field name="res_model">availability_settings</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Country Action -->
+    <record
+        id="action_property_management_countries" model="ir.actions.act_window">
+        <field name="name">Countries</field>
+        <field name="res_model">countries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first country
+            </p>
+        </field>
+    </record>
+
+    <!-- Company Action -->
+    <record
+        id="action_property_management_company" model="ir.actions.act_window">
+        <field name="name">Companies</field>
+        <field name="res_model">company</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first company
+            </p>
+        </field>
+    </record>
+
+    <!-- Guest Action -->
+    <record
+        id="action_property_management_guest" model="ir.actions.act_window">
+        <field name="name">Guest profiles</field>
+        <field name="res_model">guest</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first guest
+            </p>
+        </field>
+    </record>
+
+    <!-- Additional Account Number Action -->
+    <record
+        id="action_property_management_addition_account_number" model="ir.actions.act_window">
+        <field name="name">Additional Account Numbers</field>
+        <field name="res_model">addition.account.number</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first additional account number
+            </p>
+        </field>
+    </record>
+
+    <!-- Responsible Person Action -->
+    <record
+        id="action_property_management_responsible_person" model="ir.actions.act_window">
+        <field name="name">Responsible Persons</field>
+        <field name="res_model">responsible.person</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first responsible person
+            </p>
+        </field>
+    </record>
+
+    <!-- Legal Representative Action -->
+    <record
+        id="action_property_management_legal_representative" model="ir.actions.act_window">
+        <field name="name">Legal Representatives</field>
+        <field name="res_model">legal.representative</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first legal representative
+            </p>
+        </field>
+    </record>
+
+    <!-- Email Contact Action -->
+    <record
+        id="action_property_management_email_contact" model="ir.actions.act_window">
+        <field name="name">Email Contacts</field>
+        <field name="res_model">email.contact</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first email contact
+            </p>
+        </field>
+    </record>
+
+    <!-- Phone Contact Action -->
+    <record
+        id="action_property_management_phone_contact" model="ir.actions.act_window">
+        <field name="name">Phone Contacts</field>
+        <field name="res_model">phone.contact</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first phone contact
+            </p>
+        </field>
+    </record>
+
+    <!-- Main Availability -->
+    <record
+        id="action_main_availability" model="ir.actions.act_window">
+        <field name="name">Main Availability</field>
+        <field name="res_model">main.availability</field>
+        <field name="view_mode">calendar,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Main Availability
+            </p>
+        </field>
+    </record>
+    <!-- Action for DefaultData -->
+    <record
+        id="action_availability_default_data" model="ir.actions.act_window">
+        <field name="name">Default Data</field>
+        <field name="res_model">availability.default_data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Default Data
+            </p>
+        </field>
+    </record>
+
+    <record
+        id="action_default_availability" model="ir.actions.act_window">
+        <field name="name">Default Availability</field>
+        <field name="res_model">default.availability</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_default_availability_form" />
+        <field name="context">{'search_default_1': 1}</field>
+        <field name="target">current</field>
+        <field name="domain">[]</field>
+    </record>
+
+    <!-- Proprety Management Settings -->
+    <record
+        id="action_custom_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage your custom settings here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_settings_pointofsale" model="ir.actions.act_window">
+        <field name="name">Settings Point Of Sale</field>
+        <field name="res_model">settings.pointofsale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your Settings Point Of Sale Here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_purpose_ofvisit" model="ir.actions.act_window">
+        <field name="name">Purpose Of Visit</field>
+        <field name="res_model">purpose.ofvisit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your Purpose Of Visit Here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_tag" model="ir.actions.act_window">
+        <field name="name">Tag</field>
+        <field name="res_model">tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your Tag Here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_payment_method" model="ir.actions.act_window">
+        <field name="name">Payment Method</field>
+        <field name="res_model">payment.method</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your Payment Method Here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_market_segment" model="ir.actions.act_window">
+        <field name="name">Market Segment</field>
+        <field name="res_model">market.segment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your Market Segment Here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_staff" model="ir.actions.act_window">
+        <field name="name">Staff</field>
+        <field name="res_model">staff</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your Staff Here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_guest_status" model="ir.actions.act_window">
+        <field name="name">Guest Status</field>
+        <field name="res_model">guest.status</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your Guest Status Here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_new_template" model="ir.actions.act_window">
+        <field name="name">New Template</field>
+        <field name="res_model">new.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage Your New Template Here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action to open the views -->
+    <record id="action_notes_and_instructions" model="ir.actions.act_window">
+        <field name="name">Notes And Instructions</field>
+        <field name="res_model">notes_and_instructions</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your Notes here.
+            </p>
+        </field>
+    </record>
+
+
+    <!-- <record id="action_reception" model="ir.actions.act_window">
+        <field name="name">Reception</field>
+        <field name="res_model">booking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('hms_app.views_reception_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('hms_app.view_reception_form')})]"/>
+    </record> -->
+
+    <record id="action_booking" model="ir.actions.act_window">
+        <field name="name">Bookings</field>
+        <field name="res_model">booking</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_move_room" model="ir.actions.act_window">
+        <field name="name">Movo Room</field>
+        <field name="res_model">front_desk.move_room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_booking_checkin" model="ir.actions.act_window">
+        <field name="name">Check In</field>
+        <field name="res_model">booking.check_in</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_booking_checkout" model="ir.actions.act_window">
+        <field name="name">Check Out</field>
+        <field name="res_model">booking.check_out</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_cancel_checkin" model="ir.actions.act_window">
+        <field name="name">Cancel Check In</field>
+        <field name="res_model">front_desk.cancel_checkin</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_cancel_checkout" model="ir.actions.act_window">
+        <field name="name">Cancel Check Out</field>
+        <field name="res_model">front_desk.cancel_checkout</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- <record id="action_booking_reception" model="ir.actions.act_window">
+        <field name="name">Reception</field>
+        <field name="res_model">booking</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+         (0, 0, {'view_mode': 'tree', 'view_id': ref('view_bookinge_tree')})]"/>
+    </record> -->
+
+    <record
+        id="action_booking_price_detai" model="ir.actions.act_window">
+        <field name="name">Booking Price Details</field>
+        <field name="res_model">booking.price.detail</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action for GroupBooking -->
+    <record id="action_group_booking"
+        model="ir.actions.act_window">
+        <field name="name">Group Booking</field>
+        <field name="res_model">group_booking</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_group_booking_accommodation"
+        model="ir.actions.act_window">
+        <field name="name">Group Booking Accommodation</field>
+        <field name="res_model">group.booking.accommodation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action for GroupBookingRoomTypeData -->
+    <record
+        id="action_group_booking_room_type" model="ir.actions.act_window">
+        <field name="name">Group Booking Room Type</field>
+        <field name="res_model">group_booking.room_type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_accommodation" model="ir.actions.act_window">
+        <field name="name">Accommodation</field>
+        <field name="res_model">accommodation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Accommodation
+            </p>
+        </field>
+    </record>
+    <!-- Action for Booking Price Detail -->
+    <record id="action_booking_price_detail" model="ir.actions.act_window">
+        <field name="name">Booking Price Details</field>
+        <field name="res_model">booking.price.detail</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new booking price detail.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action for Booking Discount -->
+    <record id="action_booking_discount" model="ir.actions.act_window">
+        <field name="name">Booking Discounts</field>
+        <field name="res_model">booking.discount</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new booking discount.
+            </p>
+        </field>
+    </record>
+
+    <!-- Booking Reconciliation -->
+    <record id="action_booking_reconciliation" model="ir.actions.act_window">
+        <field name="name">Booking Reconciliation</field>
+        <field name="res_model">booking.reconciliation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    <record id="action_booking_monthly_reconciliation" model="ir.actions.act_window">-->
+<!--        <field name="name">Booking Reconciliation</field>-->
+<!--        <field name="res_model">booking.monthly.reconciliation</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+<!--    <record id="action_booking_monthly_detail_reconciliation" model="ir.actions.act_window">-->
+<!--        <field name="name">Monthly Detail Reconciliation</field>-->
+<!--        <field name="res_model">booking.monthly.detail</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+    <record id="action_booking_details" model="ir.actions.act_window">
+        <field name="name">booking.details</field>
+        <field name="res_model">booking.details</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    <record id="action_report_booking_guest" model="ir.actions.report">-->
+<!--        <field name="name">Guest Information Report</field>-->
+<!--        <field name="model">booking.monthly.detail</field>-->
+<!--        <field name="report_type">qweb-pdf</field>-->
+<!--        <field name="report_name">hms_app.report_booking_guest_document</field>-->
+<!--        <field name="print_report_name">'Guest Information - ' + object.guest_id.full_name</field>-->
+<!--    </record>-->
+
+    <!-- RECEPTION -->
+    <record id="action_reception" model="ir.actions.act_window">
+        <field name="name">Reception</field>
+        <field name="res_model">reception</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reception_notes" model="ir.actions.act_window">
+        <field name="name">Notes</field>
+        <field name="res_model">reception.notes</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create your first Note
+            </p>
+        </field>
+    </record>
+
+    <record id="action_reception_checkin" model="ir.actions.act_window">
+        <field name="name">Check In</field>
+        <field name="res_model">reception.checkin</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reception_checkout" model="ir.actions.act_window">
+        <field name="name">Check Out</field>
+        <field name="res_model">reception.checkout</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_invoice" model="ir.actions.act_window">
+        <field name="name">Invoice</field>
+        <field name="res_model">reception.invoice</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reception_document" model="ir.actions.act_window">
+        <field name="name">Document</field>
+        <field name="res_model">document</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reception_payment" model="ir.actions.act_window">
+        <field name="name">Payment</field>
+        <field name="res_model">reception.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reception_refund" model="ir.actions.act_window">
+        <field name="name">Refund</field>
+        <field name="res_model">reception.refund</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reception_deposit" model="ir.actions.act_window">
+        <field name="name">Deposit</field>
+        <field name="res_model">reception.deposit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payment_methods_rate_plans_wizard" model="ir.actions.act_window">
+        <field name="name">Payment Methods Rates Plans Generate Wizard</field>
+        <field name="res_model">payment_methods_rate_plans.wizard</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_welcome_mail" model="ir.actions.act_window">
+        <field name="name">Welcome mail</field>
+        <field name="res_model">welcome_mail</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="action_feedback_mail" model="ir.actions.act_window">
+        <field name="name">Feedback Mail</field>
+        <field name="res_model">feedback_mail</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="action_incompete_booking_mail" model="ir.actions.act_window">
+        <field name="name">Incomplete Booking</field>
+        <field name="res_model">incomplete_booking.mail</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="action_incompete_booking_mail_for_guest" model="ir.actions.act_window">
+        <field name="name">Incomplete Booking for Guest</field>
+        <field name="res_model">incomplete_booking_mail_for_guest</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="action_mail_list" model="ir.actions.act_window">
+        <field name="name">Mail List</field>
+        <field name="res_model">mail.list</field>
+        <field name="view_mode">form</field>
+    </record>
+<!--
+    <record id="action_reception_arrival" model="ir.actions.act_window">
+        <field name="name">reception.arrival</field>
+        <field name="res_model">reception.arrival</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reception_occupied" model="ir.actions.act_window">
+        <field name="name">reception.occupied</field>
+        <field name="res_model">reception.occupied</field>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+
+
+    <record id="action_sales_and_occupancy" model="ir.actions.act_window">
+        <field name="name">Sales and Occupancy</field>
+        <field name="res_model">sales.and.occupancy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_occupancy_rate" model="ir.actions.act_window">
+        <field name="name">Occupancy Rate</field>
+        <field name="res_model">occupancy.rate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_booking_cancellations" model="ir.actions.act_window">
+        <field name="name">Booking cancellations</field>
+        <field name="res_model">booking.cancellations</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_booking_window" model="ir.actions.act_window">
+        <field name="name">Booking Window</field>
+        <field name="res_model">booking.window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_report_bookings" model="ir.actions.act_window">
+        <field name="name">Bookings</field>
+        <field name="res_model">report.bookings</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_accounting_calendar" model="ir.actions.act_window">
+        <field name="name">Accounting Calendar</field>
+        <field name="res_model">accounting.calendar</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_service_photo" model="ir.actions.act_window">
+        <field name="name">Service Photos</field>
+        <field name="res_model">service.photo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_group_booking_payment" model="ir.actions.act_window">
+        <field name="name">Group Booking Payments</field>
+        <field name="res_model">group_booking.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_booking_cancellations_front_desk" model="ir.actions.act_window">
+        <field name="name">Front Desk booking cancellation</field>
+        <field name="res_model">front_desk.cancel_booking</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_deposit_data" model="ir.actions.act_window">
+        <field name="name">Deposit data</field>
+        <field name="res_model">deposit.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_temp_mail_list" model="ir.actions.act_window">
+        <field name="res_model">mail_list.temp</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

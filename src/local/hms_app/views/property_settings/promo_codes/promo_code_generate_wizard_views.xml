@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Tree view for the wizard (if needed, though generally not used for wizards) -->
+    <record id="view_promo_code_generate_wizard_tree" model="ir.ui.view">
+        <field name="name">promo.code.generate.wizard.tree</field>
+        <field name="model">promo.code.generate.wizard</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="quantity" />
+                <field name="prefix" />
+                <field name="length" />
+                <field name="status" />
+                <field name="usage" />
+                <field name="usage_limit" />
+                <field name="group_ids" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view for the wizard -->
+    <record id="view_promo_code_generate_wizard_form" model="ir.ui.view">
+        <field name="name">promo.code.generate.wizard.form</field>
+        <field name="model">promo.code.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Promo Codes">
+                <group>
+                    <field name="quantity" />
+                    <field name="prefix" />
+                    <field name="length" />
+                    <field name="digits" />
+                    <field name="letters" />
+                    <field name="status" />
+                    <field name="usage" />
+                    <field name="usage_limit" readonly="usage == 'not_limited'" />
+                    <field name="group_ids" />
+                </group>
+                <footer>
+                    <button string="Generate" type="object" name="generate_promo_codes"
+                        class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

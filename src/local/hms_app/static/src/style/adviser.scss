@@ -1,0 +1,30 @@
+.salesAndOccupancy {
+  width: 100%;
+  margin: 0;
+  border-radius: 5px;
+  display: flex;
+  gap: 10px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.5s ease,
+    opacity 0.5s ease,
+    margin 0.5s ease;
+
+  &__btn {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-bottom: 1px dashed rgb(2, 2, 153);
+    color: rgb(2, 2, 153);
+    cursor: pointer;
+  }
+}
+
+.salesAndOccupancy.show {
+  max-height: 35px;
+  opacity: 1;
+  margin: 10px 0 15px;
+}

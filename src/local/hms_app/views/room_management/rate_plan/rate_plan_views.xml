@@ -1,0 +1,280 @@
+<!-- custom_addons/room_types/views/smoking_in_room_views.xml -->
+<odoo>
+	<data>
+		<!-- Tree View for Smoking In Room -->
+		<record id="rate_plan_view_tree" model="ir.ui.view">
+			<field name="name">rateplan view tree</field>
+			<field name="model">rate.plan</field>
+			<field name="arch" type="xml">
+				<tree string="Rate plans">
+					<field name="rate_plan_name" />
+					<field name="type_id" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form View for Smoking In Room -->
+		<record id="rate_plan_view_form" model="ir.ui.view">
+			<field name="name">rateplanviewform</field>
+			<field name="model">rate.plan</field>
+			<field name="arch" type="xml">
+				<form string="Rate plan">
+					<sheet>
+						<group>
+							<field name="active_rate_plan" widget="boolean_toggle" />
+						</group>
+						<notebook>
+							<page string="General Settings">
+								<group>
+									<field name="rate_plan_name"
+										help="Rate plan name will be shown in Booking Engine" />
+									<field name="type_id" />
+									<field name="currency_id" />
+									<field name="room_types" widget="many2many_tags" />
+								</group>
+								<div>
+									<div class="oe_title">
+										<h2>Payment methods for guests</h2>
+									</div>
+									<div>
+										<div class="o_checkbox_label">
+											<field name="at_checkin" />
+											<label for="at_checkin" class="o_form_label">At check-in</label>
+										</div>
+										<div class="o_checkbox_label">
+											<field name="bank_card" />
+											<label for="bank_card" class="o_form_label">Bank card
+												guarantee</label>
+										</div>
+										<div class="o_checkbox_label">
+											<field name="bank_for_individuals" />
+											<label for="bank_for_individuals" class="o_form_label">Bank
+												transfer for individuals (invoice issued by hotel)
+												[100%] [no less than 3 days]</label>
+										</div>
+										<div class="o_checkbox_label">
+											<field name="bank_for_legal" />
+											<label for="bank_for_legal" class="o_form_label">Bank
+												transfer for legal entities (invoice issued by
+												hotel) [First nights: 1] [no less than 3 days]</label>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="oe_title">
+										<h2>Points of sale</h2>
+									</div>
+									<div>
+										<div class="o_checkbox_label">
+											<field name="channel_manager" />
+											<label for="channel_manager" class="o_form_label">Channel
+												manager</label>
+										</div>
+										<div class="o_checkbox_label">
+											<field name="front_desk_booking" />
+											<label for="front_desk_booking" class="o_form_label">Front
+												desk booking</label>
+										</div>
+										<div class="o_checkbox_label">
+											<field name="mobile_extranet" />
+											<label for="mobile_extranet" class="o_form_label">Mobile
+												extranet</label>
+										</div>
+										<div class="o_checkbox_label">
+											<field name="official_site" />
+											<label for="official_site" class="o_form_label">Official
+												site</label>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="oe_title">
+										<h2>Main rules</h2>
+									</div>
+									<group>
+										<field name="cancellation_rule" />
+										<field name="early_check_in_and_late_checkout_rule" />
+										<field name="rounding_rule" />
+									</group>
+								</div>
+							</page>
+							<page string="Rate plan">
+								<div style="width:100%">
+									<field name="scheduler" widget="daypilot_scheduler"
+										style="width:100%" />
+								</div>
+							</page>
+							<page string="Rate Plan display on the website">
+								<header class="mt-1">
+									<div class="alert alert-info" role="alert">
+										<p class="mb-0">
+											<i class="fa fa-info-circle" aria-hidden="true"></i>
+											Make your rate plans more attractive to guests in Movo
+											Booking Engine on your website. Please note that the
+											settings below cannot be uploaded into Channel manager. </p>
+									</div>
+								</header>
+								<group>
+									<field name="rate_plan_name" />
+									<field name="detailed_description"
+										placeholder="To boost sales of rate plan, add a detailed description and booking terms" />
+								</group>
+								<group>
+									<label for="thumbnail" class="o_light_label">Thumbnail</label>
+									<span>
+										<header class="mt-1">
+											<div class="alert alert-info" role="alert"
+												style="margin-left:60px">
+												<p class="mb-0">
+													<i class="fa fa-info-circle" aria-hidden="true"></i>
+													The thumbnail is located next to the rate plan
+													name in Movo Booking Engine on your website.
+													Recommended size: 32х32 px. The icon is
+													displayed sized 1х1 (square). </p>
+											</div>
+										</header>
+										<div style="margin-left:45px;">
+											<field name="thumbnail" widget="image"
+												options='{"size": [150, 150]}' />
+										</div>
+									</span>
+								</group>
+								<group>
+									<label for="promo_picture_for_landing" class="o_light_label">Promo
+										picture for landing</label>
+									<span>
+										<header class="mt-1">
+											<div class="alert alert-info" role="alert">
+												<p class="mb-0">
+													<i class="fa fa-info-circle" aria-hidden="true"></i>
+													The promo picture is placed on the landing page
+													of the rate plan and comes with a detailed
+													description. The landing page helps promote the
+													rate plan and is opened by its direct link.
+													Recommended min size: 300х857 px. The photo is
+													displayed as sized 2,86х1. To prevent the
+													picture from being cut upon display, prepare it
+													in horizontal right-angled format with width
+													=2,86*height. </p>
+											</div>
+										</header>
+										<div>
+											<field name="promo_picture_for_landing" widget="image"
+												options='{"size": [150, 150]}' />
+										</div>
+									</span>
+								</group>
+								<div class="d-flex gap-3">
+									<label for="discount_motivator">Discount motivator (price
+										crossing)</label>
+									<div class="d-flex gap-2">
+										<field name="discount_motivator" />
+										<span>Display price as a discount</span>
+									</div>
+								</div>
+								<group string="Additional parameters"></group>
+								<div class="d-flex gap-3 align-items-center">
+									<label for="date_to_be_displayed_1">Dates when the rate plan is
+										shown to guests</label>
+									<div class="d-flex gap-2">
+										<field name="date_to_be_displayed_1" />
+										<span>-</span>
+										<field name="date_to_be_displayed_2" readonly="limited" />
+									</div>
+									<div class="d-flex gap-2">
+										<field name="limited" />
+										<label for="limited">Not limited</label>
+									</div>
+								</div>
+								<div class="d-flex gap-5 my-1">
+									<span>Days of week when the rate plan is shown to guests</span>
+									<div class="d-flex gap-1">
+										<field name="mon" />
+										<label for="mon">Mon</label>
+									</div>
+									<div class="d-flex gap-1">
+										<field name="tue" />
+										<label for="tue">Tue</label>
+									</div>
+									<div class="d-flex gap-1">
+										<field name="wed" />
+										<label for="wed">Wed</label>
+									</div>
+									<div class="d-flex gap-1">
+										<field name="thu" />
+										<label for="thu">Thu</label>
+									</div>
+									<div class="d-flex gap-1">
+										<field name="fri" />
+										<label for="fri">Fri</label>
+									</div>
+									<div class="d-flex gap-1">
+										<field name="sat" />
+										<label for="sat">Sat</label>
+									</div>
+									<div class="d-flex gap-1">
+										<field name="sun" />
+										<label for="sun">Sun</label>
+									</div>
+								</div>
+								<div class="d-flex gap-3 my-1">
+									<label for="price_details_by_days">Price details by days</label>
+									<div class="d-flex gap-2">
+										<field name="price_details_by_days" />
+										<span>Show in Movo Booking Engine and in booking
+											confirmation</span>
+									</div>
+								</div>
+								<group string="Promocodes"></group>
+								<header class="mt-1">
+									<div class="alert alert-info" role="alert">
+										<p class="mb-0">
+											<i class="fa fa-info-circle" aria-hidden="true"></i> By
+											using promo codes, you can limit access to the rate
+											plan. Guests would be able to book accommodation under
+											the rate plan only after they enter the promo code. </p>
+									</div>
+								</header>
+								<group>
+									<field name="booking_per_rate_plan" string="" class="oe_inline" />
+									<field name="promo_code_groups"
+										invisible="booking_per_rate_plan == 'no_promo_code'" />
+									<field name="promo_code_ids"
+										domain="[('group_ids', 'in', promo_code_groups)]"
+										invisible="booking_per_rate_plan == 'no_promo_code'" />
+									<field name="display_promo_code"
+										invisible="booking_per_rate_plan == 'no_promo_code'" />
+								</group>
+							</page>
+							<page string="Extras">
+								<header>
+									<div class="alert alert-info" role="alert">
+										<p class="mb-0">
+											<i class="fa fa-info-circle" aria-hidden="true"></i> The
+											list contains the services added to the rate plan
+											manually. You can see other services available under
+											this rate plan in "Property settings" > "Extra services"
+											as they are available for all rate plans. </p>
+									</div>
+								</header>
+								<field name="extras_type_ids"
+									context="{'form_view_ref':'hms_app.view_rate_plan_extras_form'}">
+									<tree>
+										<field name="status" invisible="1" column_invisible="1" />
+										<field name="service_name" string="Name" />
+										<field name="service_type" string="Type of service" />
+										<field name="room_types" widget="many2many_tags" />
+										<field name="included_or_extra" />
+										<field name="status_tag" widget="badge"
+											decoration-success="status == True"
+											decoration-danger="status == False" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

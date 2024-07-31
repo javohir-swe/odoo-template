@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="priceTab">
+			<div t-att-class="{'tab-pane': true, 'active': state.activeTab === 'menu3'}">
+        <div class="place_loader" t-att-class="{'active': state.loading}" >
+          <div class="loader"></div>
+        </div>
+        <div class="d-flex justify-content-between  my-3">
+          <h3>Prices, UZS </h3>
+          <div class="d-flex gap-5">
+            <div class="year-navigation">
+              <div class="year-number" t-att-class="{'active':state.showType == 'by_roomtype'}"
+                role="button" t-on-click="() => this.state.showType = 'by_roomtype'">
+                <span>By room types</span>
+              </div>
+              <div class="year-number" t-att-class="{'active':state.showType == 'by_months'}"
+                role="button" t-on-click="() => this.state.showType = 'by_months'">
+                <span>By months</span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span>Hide previous months</span>
+            <input type="checkbox" t-model="state.hidePreviousMonths"
+              t-on-click="toggleHidePreviousMonths" />
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="year-navigation my-3">
+            <div t-foreach="['2024', '2025', '2026','2027']" t-as="year"
+              t-key="year" t-on-click="toggleYear" t-att-data-year="year"
+              t-att-class="{'year-number': true, 'active': state.selectedYears.includes(year)}">
+            <span t-esc="year" />
+            </div>
+          </div>
+          <div class="d-flex gap-5 align-items-center" >
+            <div class="d-flex gap-2 align-items-center" t-on-click.prevent="toggleLegend"
+              role="button">
+              <span style="width:30px;height:15px;background-color:#ED3333;border-radius:3px;cursor:pointer"></span>
+              <span style="font-size:12px">Availability blocked</span>
+            </div>
+            <div class="d-flex gap-2 align-items-center" t-on-click.prevent="toggleLegend"
+              role="button">
+              <span
+                style="width:30px;height:15px;background-color:#F8B3B3;border-radius:3px;cursor:pointer"></span>
+              <span style="font-size:12px">Closed</span>
+            </div>
+            <div class="d-flex gap-2 align-items-center" t-on-click.prevent="toggleLegend"
+              role="button">
+              <span
+                style="width:30px;height:15px;background-color:#FEECC3;border-radius:3px;cursor:pointer"></span>
+              <span style="font-size:12px">Overriding</span>
+            </div>
+            <div class="d-flex gap-2 align-items-center legend" t-on-click.prevent="toggleLegend">
+              <i class="fa fa-flag"></i>
+              <span style="font-size:12px" >Legend</span>
+            </div>
+            <t t-if="state.showLegend">
+              <div class="overlay" t-on-click.prevent="handleClickOverlay"></div>
+            </t>
+            <div class="legend__items"
+              t-att-class="{'show': state.showLegend}">
+              <div class="legend__header d-flex">
+                <h4>Legend: Prices</h4>
+                <span t-on-click.prevent="toggleLegend"
+                  style="cursor:pointer;margin-bottom:15px">
+                  <i class="fa fa-times"></i>
+                </span>
+              </div>
+              <div class="legend__main">
+                <div class="d-flex gap-2 align-items-center">
+                  <span
+                    style="width:40px;height:33px;background-color:#ED3333;border-radius:3px;cursor:pointer"></span>
+                    <div>
+                      <h3 class="p-0 m-0">Closed availability</h3>
+                      <span style="font-size:12px">Availability is closed for sale</span>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 align-items-center">
+                  <span
+                    style="width:40px;height:33px;background-color:#f8b3b3;border-radius:3px;cursor:pointer"></span>
+                    <div>
+                      <h3 class="p-0 m-0">Closed rate plan</h3>
+                      <span style="font-size:12px">Rate plan is closed for sale</span>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 align-items-center">
+                  <span class="d-flex align-items-center justify-content-center"
+                    style="width:40px;height:33px;border-radius:3px;cursor:pointer;border:1px solid #c4cbd5;">
+                     —
+                    </span>
+                    <div>
+                      <h3 class="p-0 m-0">Prices not set</h3>
+                      <span style="font-size:12px">Set prices for sale</span>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 align-items-start">
+                  <div
+                    style="width:68px;height:32px;border-radius:3px;cursor:pointer;border:1px solid #8897ab;display: flex;align-items: center;justify-content: center;">
+                    <div class="rhombus"></div>
+                  </div>
+                  <div >
+                    <h3 class="p-0 m-0">Overriding in the channel/connection</h3>
+                    <span style="font-size:12px">Derivation cancelled "Closed" in the
+                      channel/connection.
+                      Rate may have been changed</span>
+                  </div>
+                </div>
+								<div class="d-flex gap-2 align-items-start">
+                  <span class="d-flex align-items-center justify-content-center"
+                    style="width:40px;height:33px;border-radius:3px;cursor:pointer;border:1px solid #c4cbd5;color:#ED3333;text-decoration:line-through">
+                     2400
+                    </span>
+                    <div>
+                      <h3 class="p-0 m-0">Stay controls</h3>
+                      <span style="font-size:12px">Stay controls stop sales in Movo Booking Engine</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="month-selector" t-if="this.state.showType == 'by_months'">
+          <t t-foreach="state.selectedYears" t-as="year" t-key="year">
+          <t t-set="months" t-value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]" />
+            <t t-foreach="months" t-as="month" t-key="month">
+              <t
+                t-if="!(state.hidePreviousMonths &amp;&amp; year === new Date().getFullYear().toString() &amp;&amp; month &lt; new Date().getMonth())">
+                <a href="#" t-on-click.prevent="switchMonth"
+                  t-att-data-month="month"
+                  t-att-data-year="year"
+                  t-att-class="{'active': state.activeYear === year &amp;&amp; state.activeMonth === month, 'month-year': true}">
+                <span
+                  t-esc="new Date(year, month, 1).toLocaleString('default', { month: 'long' })" />
+                <span t-esc="year" />
+                </a>
+              </t>
+            </t>
+          </t>
+        </div>
+        <div class="table_content" t-if="this.state.showType == 'by_months'" >
+          <div class="table_responsive">
+            <table class="table table-bordered">
+            <!-- Year Header -->
+              <thead>
+              <!-- Month and Day Headers -->
+                <tr>
+                  <th class="sticky-header">
+                  <span t-esc="state.activeYear" /></th>
+                  <th t-foreach="state.dayss" t-as="day" t-key="day_index">
+                    <div>
+                    <span t-esc="day.date.toLocaleDateString('en-US', { weekday: 'short' })" />
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr t-foreach="state.roomtypes" t-as="roomType" t-key="roomType_index">
+                  <td class="sticky-column">
+                  <span t-esc="roomType.rooms"
+                    style="display:block;font-weight:bold;margin-bottom:7px" />
+                  <t t-foreach="roomType.guest_ids" t-as="guest" t-key="guest.id">
+                    <span
+                      t-esc="guest.name" />
+                    <br />
+                  </t>
+                  <t t-foreach="roomType.child_aged_from" t-as="child" t-key="child.id">
+                    <span
+                      t-esc="child.name" />
+                    <br />
+                  </t>
+                  </td>
+                  <t t-foreach="state.dayss" t-as="day" t-key="day_index">
+                  <t t-set="status_key" t-value="`${day.formattedDate}-${roomType.id}`" />
+                    <td
+
+                      t-att-data-cell-key="`${day.formattedDate}-${roomType.id}`"
+                      t-att-data-day="day.formattedDate" t-att-data-room-type-id="roomType.id"
+                      t-att-class="{
+                      'price-cell': true,
+                      'past-date': day.date &amp;&amp; isPastDate(day.date),
+                      'future-date': day.date &amp;&amp; !isPastDate(day.date),
+                      'hidden-cell': state.hidePreviousMonths &amp;&amp; day.date &amp;&amp; day.date &lt; new Date(new Date().getFullYear(), new Date().getMonth(), 1) &amp;&amp; !(day.date &amp;&amp; day.date.getMonth() === state.activeMonth &amp;&amp; day.date.getFullYear() === state.activeYear),
+                      'selected': state.selectedCells.has(`${day.formattedDate}-${roomType.id}`)
+                  }"
+                      t-on-mousedown="day.date &amp;&amp; startSelection"
+                      t-on-mouseover="day.date &amp;&amp; handleMouseOver"
+                      t-on-mouseup="day.date &amp;&amp; endSelection"
+                    >
+                    <span class="default-status"
+                      t-att-class="{
+                          'close-status': state.statusMap[`${day.formattedDate}-${roomType.id}`] === 'close',
+                          'open-status': state.statusMap[`${day.formattedDate}-${roomType.id}`] === 'open'
+                        }"
+                      t-esc="day.date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })" />
+
+                    <t t-foreach="roomType.guest_ids" t-as="guest" t-key="guest.id">
+                      <span
+                        t-esc="getPrice(guest.id, state.ratePlanFields.filter_price, 'guest', day.date, roomType.id).toLocaleString('en-US')" />
+                      <br />
+                    </t>
+                    <t t-foreach="roomType.child_aged_from" t-as="child" t-key="child.id">
+                      <span
+                        t-esc="getPrice(child.id, state.ratePlanFields.filter_price, 'child', day.date, roomType.id).toLocaleString('en-US')" />
+                      <br />
+                    </t>
+                    <!-- <t t-else="">
+                        <span class="custom-empty">
+                          —
+                        </span>
+                      </t> -->
+                    </td>
+                  </t>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="action_btns" t-if="state.selectedCells.size > 0">
+            <span t-on-click="changePriceValue">Change value</span>
+            <span t-on-click="unmarkCells">Unmark</span>
+          </div>
+        </div>
+
+        <div class="month-selector" t-if="this.state.showType == 'by_roomtype'">
+          <t t-foreach="this.state.roomtypes" t-as="roomType" t-key="roomType_index">
+            <a href="#"
+              t-att-class="{'active': state.activeRoomType == roomType.id, 'month-year': true}"
+              t-on-click="setActiveRoomType"
+              t-att-data-room-type-id="roomType.id">
+              <span t-esc="roomType.rooms"></span>
+            </a>
+          </t>
+        </div>
+        <div class="table_content" t-if="this.state.showType == 'by_roomtype'">
+         <div class="table_responsive">
+            <table class="table table-bordered">
+                <tbody>
+                  <t t-foreach="state.selectedYears" t-as="year" t-key="year">
+                  <tr>
+                    <td class="sticky-header">
+                    <span t-esc="year" />
+                    </td>
+                    <t t-foreach="Array.from({ length: 37 }, (_, i) => i)"
+                      t-as="dayIndex" t-key="dayIndex">
+                      <td>
+                        <div style="text-align:center;font-weight:500">
+                        <span
+                          t-esc="['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][dayIndex % 7]" />
+                        </div>
+                      </td>
+                    </t>
+                  </tr>
+                <t t-set="months" t-value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]" />
+                    <t t-foreach="months" t-as="month" t-key="month">
+                  <t t-set="firstDateOfMonth" t-value="new Date(year, month, 1)" />
+                      <tr
+                        t-att-class="{
+                          'hidden-cell': state.hidePreviousMonths &amp;&amp; firstDateOfMonth &lt; new Date(new Date().getFullYear(), new Date().getMonth(), 1) &amp;&amp; !(firstDateOfMonth.getMonth() === state.activeMonth &amp;&amp; firstDateOfMonth.getFullYear() === state.activeYear)
+                      }">
+                        <td class="month-header sticky-column">
+                      <div style="padding-bottom:7px">
+                        <span
+                          t-esc="new Date(year, month, 1).toLocaleString('default', { month: 'long' })"
+                          style="font-weight:bold" />
+                        <span t-esc="' \'' + year.slice(2)"
+                          style="font-weight:bold" />
+                     </div>
+
+                      <t t-set="roomType"
+                        t-value="state.roomtypes.find(rt => rt.id == state.activeRoomType)" />
+                      <t t-foreach="roomType.guest_ids" t-as="guest" t-key="guest.id">
+                        <span t-esc="guest.name" />
+                        <br />
+                      </t>
+                      <t t-foreach="roomType.child_aged_from" t-as="child" t-key="child.id">
+                        <span t-esc="child.name" />
+                        <br />
+                      </t>
+                        </td>
+
+                    <t t-set="firstDayOfMonth"
+                      t-value="(new Date(year, month, 1).getDay() + 6) % 7" />
+                    <t t-set="daysInMonth" t-value="new Date(year, month + 1, 0).getDate()" />
+                    <t t-set="totalCells"
+                      t-value="Math.ceil((firstDayOfMonth + daysInMonth) / 7) * 7" />
+
+                    <!-- Fill empty cells before the first day of the month -->
+                        <t t-foreach="Array.from({ length: firstDayOfMonth })" t-as="empty"
+                          t-key="empty_index">
+                          <td class="empty-cell"></td>
+                        </t>
+
+                    <!-- Fill cells with actual days of the month -->
+                        <t t-foreach="Array.from({ length: daysInMonth }, (_, i) => i + 1)"
+                          t-as="dayNumber" t-key="day_index">
+                      <t t-set="date" t-value="new Date(year, month, dayNumber)" />
+                      <t t-set="formattedDate" t-value="this.formatDate(date)" />
+                      <t t-set="status_key" t-value="`${formattedDate}-${state.activeRoomType}`" />
+
+                          <td
+
+                            t-att-data-cell-key="`${formattedDate}-${state.activeRoomType}`"
+                            t-att-data-day="formattedDate"
+                            t-att-data-room-type-id="state.activeRoomType"
+                            t-att-class="{
+                                  'price-cell': true,
+                                  'past-date': isPastDate(date),
+                                  'future-date': !isPastDate(date),
+                                  'selected': state.selectedCells.has(`${formattedDate}-${state.activeRoomType}`)
+                              }"
+                            t-on-mousedown="startSelection"
+                            t-on-mouseover="handleMouseOver"
+                            t-on-mouseup="endSelection"
+                          >
+                        <span class="default-status"
+                          t-att-class="{
+                                      'close-status': state.statusMap[`${formattedDate}-${state.activeRoomType}`] === 'close',
+                                      'open-status': state.statusMap[`${formattedDate}-${state.activeRoomType}`] === 'open'
+                                  }"
+                          t-esc="date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })" />
+
+
+                        <t t-set="roomType"
+                          t-value="state.roomtypes.find(rt => rt.id == state.activeRoomType)" />
+                        <t t-foreach="roomType.guest_ids" t-as="guest" t-key="guest.id">
+                          <span
+                            t-esc="state.priceMap[`${formattedDate}-${roomType.id}-guest-${guest.id}`] || '—'" />
+                          <br />
+                        </t>
+                        <t t-foreach="roomType.child_aged_from" t-as="child" t-key="child.id">
+                          <span
+                            t-esc="state.priceMap[`${formattedDate}-${roomType.id}-child-${child.id}`] || '—'" />
+                          <br />
+                        </t>
+                          </td>
+                        </t>
+
+                    <!-- Fill empty cells after the last day of the month -->
+                        <t
+                          t-foreach="Array.from({ length: totalCells - (firstDayOfMonth + daysInMonth) })"
+                          t-as="empty" t-key="empty_index">
+                          <td class="empty-cell"></td>
+                        </t>
+                      </tr>
+                    </t>
+                  </t>
+                </tbody>
+            </table>
+         </div>
+          <div class="action_btnss" t-if="state.selectedCells.size > 0">
+            <span t-on-click="changePriceValue">Change value</span>
+            <span t-on-click="unmarkCells">Unmark</span>
+          </div>
+        </div>
+
+
+
+      </div>
+    <!-- Price Update Modal -->
+    <div t-if="state.priceForm.isVisible" class="modal" style="display: block;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Prices, UZS</h5>
+            <span class="close" t-on-click.prevent="() => { state.priceForm.isVisible = false; }"
+              style="cursor:pointer;color:rgb(158 158 158)">
+              <i class="fa fa-times"></i>
+            </span>
+          </div>
+          <div class="modal-body">
+            <form t-on-submit.prevent="savePrice">
+              <header class="mt-1">
+                <div
+                  class="alert alert-info" role="alert">
+                  <p
+                    class="mb-0">
+                    <i class="fa fa-info-circle"
+                      aria-hidden="true"> </i>   If the field is left empty, the price will not be
+                    changed. </p>
+                </div>
+              </header>
+              <div class="form_over">
+                <t t-foreach="Object.keys(state.priceForm.priceMap)" t-key="roomTypeId"
+                  t-as="roomTypeId">
+                  <div class="d-flex flex-column mb-3 gap-2" style="margin-right:10px">
+                    <span style="font-weight:bold;font-size: 16px;"
+                      t-esc="state.roomtypes.find(rt => rt.id.toString() === roomTypeId).rooms || 'Unknown'" />
+                    <t t-foreach="Object.keys(state.priceForm.priceMap[roomTypeId])"
+                      t-key="guestOrChildKey" t-as="guestOrChildKey" class="d-flex flex-column gap-2">
+                      <label class="d-flex gap-5 align-items-center justify-content-between rate-form">
+                        <div t-esc="state.priceForm.priceMap[roomTypeId][guestOrChildKey].name" />
+                        <input type="text"
+                          t-att-id="`${roomTypeId}-${guestOrChildKey}`"
+                          t-att-value="state.priceForm.priceMap[roomTypeId][guestOrChildKey].price > 0 ? state.priceForm.priceMap[roomTypeId][guestOrChildKey].price.toLocaleString() : ''"
+                          style="width:100px"
+                          t-att-data-room-type-id="roomTypeId"
+                          t-att-data-guest-or-child-key="guestOrChildKey"
+                          t-on-input="limitAndFormatInputValue" />
+                      </label>
+                    </t>
+                  </div>
+                </t>
+              </div>
+
+              <button name="action_save_price" type="object" class="btn btn-primary">Save</button>
+              <button t-on-click.prevent="() => { state.priceForm.isVisible = false; }" class="btn">
+                Discard</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- finished -->
+
+		</t>
+  </templates>

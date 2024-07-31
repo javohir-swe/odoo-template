@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="view_main_availability_calendar" model="ir.ui.view">
+            <field name="name">main.availability.calendar</field>
+            <field name="model">main.availability</field>
+            <field name="arch" type="xml">
+                <calendar js_class="NewCalendarTable" string="Main Availability" date_start="date" color="close_open">
+                    <field name="room_type" />
+                    <field name="close_open" />
+                    <field name="front_desk" />
+                    <field name="default" />
+                    <field name="online" />
+                    <field name="bookings" />
+                    <field name="cancellations" />
+                </calendar>
+            </field>
+        </record>
+        <!-- Tree View -->
+        <record id="view_main_availability_tree" model="ir.ui.view">
+            <field name="name">main.availability.tree</field>
+            <field name="model">main.availability</field>
+            <field name="arch" type="xml">
+                <tree  string="Main Availability">
+                    <field name="room_type" />
+                    <field name="close_open" />
+                    <field name="front_desk" />
+                    <field name="default" />
+                    <field name="online" />
+                    <field name="bookings" />
+                    <field name="cancellations" />
+                    <field name="date" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_main_availability_form" model="ir.ui.view">
+            <field name="name">main.availability.form</field>
+            <field name="model">main.availability</field>
+            <field name="arch" type="xml">
+                <form string="Main Availability">
+                    <sheet>
+                        <group>
+                            <field name="close_open" />
+                            <field name="front_desk" />
+                            <field name="default" />
+                            <field name="online" />
+                            <field name="room_type" />
+                            <field name="date" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

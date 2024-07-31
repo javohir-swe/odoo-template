@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_reception_notes_tree" model="ir.ui.view">
+        <field name="name">reception.notes.tree</field>
+        <field name="model">reception.notes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="schedul_for"/>
+                <field name="room_number"/>
+                <field name="text"/>
+                <field name="scheduled"/>
+                <field name="user"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_reception_notes_form" model="ir.ui.view">
+        <field name="name">reception.notes.form</field>
+        <field name="model">reception.notes</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="text"/>
+                        <field name="status"/>
+                        <field name="scheduled" readonly="readonly_schedul_for"/>
+                        <field name="readonly_schedul_for" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

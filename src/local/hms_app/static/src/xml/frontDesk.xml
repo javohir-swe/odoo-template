@@ -1,0 +1,1116 @@
+<templates xml:space="preserve">
+  <t t-name="hms_app.FrontDesk">
+    <div class="o_list_renderer o_renderer table-responsive" tabindex="-1" t-ref="root">
+      <div class="place_loader" t-att-class="{'active': state.loading}">
+        <div class="loader"></div>
+      </div>
+      <div class="w-100 d-flex justify-content-between align-items-center p-3">
+        <h2 class="unique-front-desk">Front desk</h2>
+      </div>
+
+      <div class="front-statistics">
+        <div class="statistic-container">
+          <h2>Statistics</h2>
+          <div class="statistics-tables">
+            <div class="stats-table">
+              <h3>Today's occupancy</h3>
+              <div class="mt-3 d-flex justify-content-between align-items-center" style="gap: 20px">
+                <div class="chart-data-div" style="position:relative;">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="chart-svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                    <path d="M120 60C120 93.1371 93.1371 120 60 120C26.8629 120 0 93.1371 0 60C0 26.8629 26.8629 0 60 0C93.1371 0 120 26.8629 120 60ZM12 60C12 86.5097 33.4903 108 60 108C86.5097 108 108 86.5097 108 60C108 33.4903 86.5097 12 60 12C33.4903 12 12 33.4903 12 60Z" fill="#FD952C"/>
+                  </svg>
+                  <span class="percentage-span">
+                    <t t-esc="Math.round(this.state.occupied * 100 / this.state.total)"/>
+                      %
+                  </span>
+                </div>
+                <div class="stats w-50">
+                  <div class="dynamic-datas w-100">
+                    <p>Occupied</p>
+                    <span class="closed">
+                      <t t-esc="this.state.occupied"/>
+                    </span>
+                  </div>
+                  <hr />
+                  <div class="dynamic-datas w-100">
+                    <p>Vacant rooms</p>
+                    <span class="open">
+                      <t t-esc="this.state.total-this.state.occupied"/>
+                    </span>
+                  </div>
+                  <hr />
+                  <div class="dynamic-datas w-100">
+                    <p>Total</p>
+                    <span class="total">
+                      <t t-esc="this.state.total"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stats-table">
+              <h3>Today's guests</h3>
+              <div class="stats">
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M5.83333 9.99992H17.5M17.5 9.99992L15 7.49992M17.5 9.99992L15 12.4999" stroke="#4FAC58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p> Arrivals / Same-day bookings</p>
+                    <p>
+                      <t t-esc="this.state.arrival"/>
+/                      <t t-esc="this.state.same_day_booking"/>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M11.6667 6.66659V4.99992C11.6667 4.55789 11.4911 4.13397 11.1785 3.82141C10.866 3.50885 10.442 3.33325 10 3.33325H4.16667C3.72464 3.33325 3.30072 3.50885 2.98816 3.82141C2.67559 4.13397 2.5 4.55789 2.5 4.99992V14.9999C2.5 15.4419 2.67559 15.8659 2.98816 16.1784C3.30072 16.491 3.72464 16.6666 4.16667 16.6666H10C10.442 16.6666 10.866 16.491 11.1785 16.1784C11.4911 15.8659 11.6667 15.4419 11.6667 14.9999V13.3333M16.6667 9.99992H5.83333M5.83333 9.99992L8.33333 7.49992M5.83333 9.99992L8.33333 12.4999" stroke="#FD952C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Departures</p>
+                    <p>
+                      <t t-esc="this.state.departure"/>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3.33341 9.16675C3.77544 9.16675 4.19937 9.34234 4.51193 9.6549C4.82449 9.96746 5.00008 10.3914 5.00008 10.8334V11.6667H15.0001V10.8334C15.0001 10.3914 15.1757 9.96746 15.4882 9.6549C15.8008 9.34234 16.2247 9.16675 16.6667 9.16675M3.33341 9.16675C2.89139 9.16675 2.46746 9.34234 2.1549 9.6549C1.84234 9.96746 1.66675 10.3914 1.66675 10.8334V15.0001C1.66675 15.2211 1.75455 15.4331 1.91083 15.5893C2.06711 15.7456 2.27907 15.8334 2.50008 15.8334H17.5001C17.7211 15.8334 17.9331 15.7456 18.0893 15.5893C18.2456 15.4331 18.3334 15.2211 18.3334 15.0001V10.8334C18.3334 10.3914 18.1578 9.96746 17.8453 9.6549C17.5327 9.34234 17.1088 9.16675 16.6667 9.16675M3.33341 9.16675V6.66675C3.33341 6.00371 3.59681 5.36782 4.06565 4.89898C4.53449 4.43014 5.17037 4.16675 5.83341 4.16675H14.1667C14.8298 4.16675 15.4657 4.43014 15.9345 4.89898C16.4034 5.36782 16.6667 6.00371 16.6667 6.66675V9.16675M10.0001 4.16675V11.6667" stroke="#8D3FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Occupied rooms</p>
+                    <p>
+                      <t t-esc="this.state.occupied"/>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.0001 11.6667V10.8333C15.0001 10.3913 15.1757 9.96738 15.4882 9.65482C15.8008 9.34226 16.2247 9.16667 16.6667 9.16667M16.6667 9.16667C17.1088 9.16667 17.5327 9.34226 17.8453 9.65482C18.1578 9.96738 18.3334 10.3913 18.3334 10.8333V15M16.6667 9.16667V6.66667C16.6667 6.00363 16.4034 5.36774 15.9345 4.8989C15.4657 4.43006 14.8298 4.16667 14.1667 4.16667H7.50008M15.8334 15.8333H2.50008C2.27907 15.8333 2.06711 15.7455 1.91083 15.5893C1.75455 15.433 1.66675 15.221 1.66675 15V10.8333C1.66675 10.3913 1.84234 9.96738 2.1549 9.65482C2.46746 9.34226 2.89139 9.16667 3.33341 9.16667M3.33341 9.16667C3.77544 9.16667 4.19937 9.34226 4.51193 9.65482C4.82449 9.96738 5.00008 10.3913 5.00008 10.8333V11.6667H11.6667M3.33341 9.16667V6.66667C3.33341 5.765 3.81091 4.975 4.52675 4.535M10.0001 4.16667V6.66667M10.0001 10V11.6667M2.50008 2.5L17.5001 17.5" stroke="#EA1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>No-shows</p>
+                    <p>0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stats-table">
+              <h3>Room statistics</h3>
+              <div class="stats">
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M8.33321 10.0476C8.44771 10.2945 8.62394 10.5078 8.84488 10.6668C9.72821 11.2609 10.9049 10.7601 11.3807 9.90092C12.0799 8.64009 11.3624 7.09425 10.1099 6.50092C8.44321 5.70925 6.46738 6.62925 5.74321 8.23925C4.83071 10.2659 5.98488 12.6126 8.00155 13.4443C10.444 14.4509 13.2374 13.0959 14.1999 10.7318C15.3332 7.94592 13.7357 4.78675 10.9532 3.72342C7.74071 2.49509 4.11988 4.29009 2.92321 7.40842C1.56488 10.9526 3.60905 14.9284 7.15821 16.2218C11.1399 17.6718 15.5899 15.4376 17.019 11.5634C17.299 10.8114 17.4612 10.0207 17.4999 9.21925" stroke="#EA1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Dirty</p>
+                    <span>
+                      <t t-esc="this.state.unclear"/>
+                    </span>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M13.3333 14.9999C13.7754 14.9999 14.1993 15.1755 14.5118 15.4881C14.8244 15.8006 15 16.2246 15 16.6666C15 16.2246 15.1756 15.8006 15.4882 15.4881C15.8007 15.1755 16.2246 14.9999 16.6667 14.9999C16.2246 14.9999 15.8007 14.8243 15.4882 14.5118C15.1756 14.1992 15 13.7753 15 13.3333C15 13.7753 14.8244 14.1992 14.5118 14.5118C14.1993 14.8243 13.7754 14.9999 13.3333 14.9999ZM13.3333 4.99992C13.7754 4.99992 14.1993 5.17551 14.5118 5.48807C14.8244 5.80063 15 6.22456 15 6.66659C15 6.22456 15.1756 5.80063 15.4882 5.48807C15.8007 5.17551 16.2246 4.99992 16.6667 4.99992C16.2246 4.99992 15.8007 4.82432 15.4882 4.51176C15.1756 4.1992 15 3.77528 15 3.33325C15 3.77528 14.8244 4.1992 14.5118 4.51176C14.1993 4.82432 13.7754 4.99992 13.3333 4.99992ZM7.5 14.9999C7.5 13.6738 8.02678 12.4021 8.96447 11.4644C9.90215 10.5267 11.1739 9.99992 12.5 9.99992C11.1739 9.99992 9.90215 9.47313 8.96447 8.53545C8.02678 7.59777 7.5 6.326 7.5 4.99992C7.5 6.326 6.97322 7.59777 6.03553 8.53545C5.09785 9.47313 3.82608 9.99992 2.5 9.99992C3.82608 9.99992 5.09785 10.5267 6.03553 11.4644C6.97322 12.4021 7.5 13.6738 7.5 14.9999Z" stroke="#8D3FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Clean</p>
+                    <span>
+                      <t t-esc="this.state.clear"/>
+                    </span>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M7.49992 9.16659L9.99992 11.6666L16.6666 4.99992M16.6666 9.99992V14.9999C16.6666 15.4419 16.491 15.8659 16.1784 16.1784C15.8659 16.491 15.4419 16.6666 14.9999 16.6666H4.99992C4.55789 16.6666 4.13397 16.491 3.82141 16.1784C3.50885 15.8659 3.33325 15.4419 3.33325 14.9999V4.99992C3.33325 4.55789 3.50885 4.13397 3.82141 3.82141C4.13397 3.50885 4.55789 3.33325 4.99992 3.33325H12.4999" stroke="#4FAC58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Inspected</p>
+                    <span>
+                      <t t-esc="this.state.checked"/>
+                    </span>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex" style="column-gap: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15.8334 5H16.6667C17.1088 5 17.5327 5.17559 17.8453 5.48816C18.1578 5.80072 18.3334 6.22464 18.3334 6.66667C18.3334 7.77174 17.8944 8.83154 17.113 9.61294C16.3316 10.3943 15.2718 10.8333 14.1667 10.8333H10.0001V12.5M4.16675 4.16667C4.16675 3.72464 4.34234 3.30072 4.6549 2.98816C4.96746 2.67559 5.39139 2.5 5.83341 2.5H14.1667C14.6088 2.5 15.0327 2.67559 15.3453 2.98816C15.6578 3.30072 15.8334 3.72464 15.8334 4.16667V5.83333C15.8334 6.27536 15.6578 6.69928 15.3453 7.01184C15.0327 7.3244 14.6088 7.5 14.1667 7.5H5.83341C5.39139 7.5 4.96746 7.3244 4.6549 7.01184C4.34234 6.69928 4.16675 6.27536 4.16675 5.83333V4.16667ZM8.33342 13.3333C8.33342 13.1123 8.42121 12.9004 8.57749 12.7441C8.73377 12.5878 8.94573 12.5 9.16675 12.5H10.8334C11.0544 12.5 11.2664 12.5878 11.4227 12.7441C11.579 12.9004 11.6667 13.1123 11.6667 13.3333V16.6667C11.6667 16.8877 11.579 17.0996 11.4227 17.2559C11.2664 17.4122 11.0544 17.5 10.8334 17.5H9.16675C8.94573 17.5 8.73377 17.4122 8.57749 17.2559C8.42121 17.0996 8.33342 16.8877 8.33342 16.6667V13.3333Z" stroke="#7A869A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="dynamic-datas w-100">
+                    <p>Out of order</p>
+                    <span>
+                      <t t-esc="this.state.modify"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="front-table">
+        <div class="table-container">
+          <div class="btn-cont">
+            <div class="date-picker">
+              <input type="month" t-model="state.selectedMonth" t-on-change="onMonthChange" placeholder="Month" />
+            </div>
+            <div class="header-buttons">
+              <button class="head-btn primary" t-on-click="this.goBooking">+ Create Booking</button>
+              <button class="head-btn secondary" t-on-click="this.goGroupBooking">+ Create Group Booking</button>
+              <button class="icon-info-btn" t-on-click.prevent="()=>this.state.statusInformation = true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M19 4.3252C19.852 4.3252 20.297 5.3112 19.783 5.9482L19.707 6.0322L15.915 9.8252L19.707 13.6182C20.31 14.2202 19.927 15.2322 19.114 15.3192L19 15.3252H6V21.3252C5.99997 21.5701 5.91004 21.8065 5.74728 21.9896C5.58453 22.1726 5.36025 22.2895 5.117 22.3182L5 22.3252C4.75507 22.3252 4.51866 22.2352 4.33563 22.0725C4.15259 21.9097 4.03566 21.6854 4.007 21.4422L4 21.3252V5.3252C4.00003 5.08026 4.08996 4.84386 4.25272 4.66082C4.41547 4.47779 4.63975 4.36085 4.883 4.3322L5 4.3252H19Z" fill="#000000"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <hr />
+          <!-- <div class="head-filters">
+            <form class="search-box">
+              <input type="search" placeholder="Text" />
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" fill="white" fill-opacity="0.01"/>
+                  <path d="M14.8231 15.883C13.7125 16.725 12.3237 17.1139 10.9373 16.9713C9.55098 16.8287 8.27048 16.165 7.35462 15.1146C6.43876 14.0641 5.95584 12.7051 6.00346 11.3123C6.05108 9.9194 6.62569 8.59657 7.61116 7.6111C8.59663 6.62563 9.91947 6.05102 11.3123 6.0034C12.7052 5.95578 14.0642 6.4387 15.1146 7.35456C16.1651 8.27042 16.8287 9.55092 16.9714 10.9373C17.114 12.3236 16.725 13.7124 15.8831 14.823L18.5301 17.47C18.8231 17.763 19.0601 18.06 18.5301 18.53C18.0001 19 17.7631 18.823 17.4701 18.53L14.8231 15.883ZM11.5001 15.5C12.5609 15.5 13.5783 15.0786 14.3285 14.3284C15.0786 13.5783 15.5001 12.5609 15.5001 11.5C15.5001 10.4391 15.0786 9.42171 14.3285 8.67156C13.5783 7.92142 12.5609 7.49999 11.5001 7.49999C10.4392 7.49999 9.42177 7.92142 8.67162 8.67156C7.92148 9.42171 7.50005 10.4391 7.50005 11.5C7.50005 12.5609 7.92148 13.5783 8.67162 14.3284C9.42177 15.0786 10.4392 15.5 11.5001 15.5Z" fill="#42526E"/>
+                </svg>
+              </span>
+            </form>
+            <div class="filter-dropdown">
+              <select>
+                <option value="">Status: all</option>
+                <option value="">New booking</option>
+                <option value="">Checked In</option>
+                <option value="">Checked out</option>
+              </select>
+            </div>
+            <div class="filter-dropdown">
+              <select>
+                <option value="">Guarantee method: all</option>
+                <option value="">Bank trensfer for legal entities</option>
+                <option value="">Bank trensfer for individuals</option>
+                <option value="">External payment system</option>
+                <option value="">Bank card guarantee</option>
+                <option value="">By cash via cashbox</option>
+                <option value="">By card via terminal</option>
+              </select>
+            </div>
+            <div class="filter-dropdown">
+              <select>
+                <option value="">Point of sale: all</option>
+                <option value="">Official site</option>
+                <option value="">Channel manager</option>
+                <option value="">Extranet booking</option>
+                <option value="">Facebook</option>
+                <option value="">Front desk</option>
+                <option value="">Mobile Extranet</option>
+                <option value="">Mobile version of website</option>
+              </select>
+            </div>
+            <div class="filter-dropdown">
+                <select>
+                  <option value="">Tags: all</option>
+                  <option value="">Tags</option>
+                </select>
+            </div>
+            <div class="date-picker">
+              <input type="month" t-model="state.selectedMonth" t-on-change="onMonthChange" placeholder="Month" />
+            </div>
+          </div> -->
+
+          <div class="table-wrapper">
+            <table class="w-100 front-data-table">
+              <thead class="w-100">
+                <tr class="d-flex w-100">
+                  <td class="static">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <rect width="16" height="16" fill="white" fill-opacity="0.01" />
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.04792 11.5227L5.44459 12.8913C5.33449 12.9492 5.2104 12.9751 5.08633 12.9662C4.96227 12.9572 4.84318 12.9137 4.74254 12.8406C4.6419 12.7675 4.56372 12.6677 4.51684 12.5525C4.46996 12.4373 4.45625 12.3113 4.47726 12.1887L4.97392 9.28933L2.86792 7.236C2.77898 7.14916 2.71609 7.03919 2.68635 6.91849C2.65661 6.7978 2.66121 6.6712 2.69962 6.55298C2.73804 6.43476 2.80873 6.32963 2.90374 6.24947C2.99874 6.16931 3.11426 6.11731 3.23726 6.09933L6.14792 5.676L7.44992 3.03867C7.50494 2.92702 7.59011 2.83301 7.6958 2.76727C7.80148 2.70153 7.92346 2.66669 8.04792 2.66669C8.17239 2.66669 8.29437 2.70153 8.40005 2.76727C8.50574 2.83301 8.59091 2.92702 8.64592 3.03867L9.94726 5.676L12.8579 6.09933C12.981 6.11721 13.0966 6.16913 13.1917 6.24925C13.2868 6.32937 13.3575 6.43449 13.396 6.55273C13.4345 6.67096 13.4392 6.79761 13.4095 6.91835C13.3798 7.03909 13.3169 7.14912 13.2279 7.236L11.1213 9.28933L11.6186 12.1887C11.6395 12.3112 11.6258 12.4371 11.5789 12.5522C11.532 12.6673 11.4539 12.767 11.3534 12.8401C11.2529 12.9132 11.1339 12.9567 11.01 12.9658C10.886 12.9748 10.762 12.949 10.6519 12.8913L8.04792 11.5227Z" fill="#6B778C" />
+                    </svg>
+                  </td>
+                  <td class="room-type type">Room types</td>
+                  <td class="room-status">Room Status</td>
+                  <t t-if="state.calendar &amp;&amp; state.calendar.length">
+                    <t t-foreach="state.calendar" t-as="day" t-key="day.date">
+                      <td class="calendar-header" t-att-class="day.day == 'Sat' || day.day == 'Sun' ? 'weekend' : ''">
+                        <t t-esc="day.date" />
+                        <br />
+                        <t t-esc="day.day" />
+                      </td>
+                    </t>
+                  </t>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-foreach="this.state.defaultData" t-as="roomData" t-key="roomData.room_type">
+                  <tr class="d-flex room-category-row">
+                    <td class="static border-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" t-att-class="this.state.roomVisibility.includes(roomData.room_type) ? 'd-none' : 'd-flex'" width="24" height="24" viewBox="0 0 24 24" fill="none" t-on-click.prevent="() => toggleRoomVisibility(roomData.room_type)">
+                        <path d="M6 9L12 15L18 9" stroke="#131612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" t-att-class="!this.state.roomVisibility.includes(roomData.room_type) ? 'd-none' : 'd-flex'" width="24" height="24" viewBox="0 0 24 24" fill="none" t-on-click.prevent="() => toggleRoomVisibility(roomData.room_type)">
+                        <path d="M9 6L15 12L9 18" stroke="#131612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </td>
+                    <td class="room-type border-0" t-esc="roomData.room_type"></td>
+                    <td class="room-status border-0"></td>
+                    <t t-if="state.calendar &amp;&amp; state.calendar.length">
+                      <t t-foreach="state.calendar" t-as="day" t-key="roomData.room_type + '-' + day.date">
+                        <td class="calendar-header border-0" t-att-class="day.day == 'Sat' || day.day == 'Sun' ? 'weekend' : ''">
+
+                        </td>
+                      </t>
+                    </t>
+                  </tr>
+                  <tr class="room-data d-flex" t-att-class="this.state.roomVisibility.includes(roomData.room_type) ? '' : 'd-none'">
+                    <td class="static"></td>
+                    <td class="room-type room-number" style="font-size: 12px; border-right: none;">Without room</td>
+                    <td class="room-status-without border"></td>
+                    <t t-if="state.calendar &amp;&amp; state.calendar.length">
+                      <t t-foreach="state.calendar" t-as="day" t-key="roomData.room_type + '-' + day.date">
+                        <td class="calendar-header" t-att-class="day.day == 'Sat' || day.day == 'Sun' ? 'weekend' : ''">
+                          <t t-set="cellHasRecord" t-value="false" />
+                          <t t-foreach="this.state.records" t-as="record" t-key="record.id">
+                            <t t-if="record.room_type_id.display_name == roomData.room_type  &amp;&amp; (recordDate(record.check_in_date) == recordCalendarDate(day.date) || (recordCalendarDate(day.date) >= recordDate(record.check_in_date) &amp;&amp; (recordDate(record.check_out_date) > recordCalendarDate(day.date)))) &amp;&amp; record.status == 'done'">
+                              <t t-if="record.booking_condition == 'without_room'">
+                                <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips book_without_room" t-on-click.prevent="() => this.showBookingData(record)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.5M13.1667 14.6667V14.6733M13.1667 12.6667C13.4655 12.6657 13.7554 12.5645 13.99 12.3793C14.2245 12.1941 14.3902 11.9355 14.4604 11.645C14.5306 11.3545 14.5013 11.0489 14.3772 10.777C14.2531 10.5051 14.0414 10.2827 13.776 10.1453C13.5108 10.0095 13.2074 9.96736 12.9152 10.0258C12.623 10.0843 12.3592 10.2399 12.1667 10.4673M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#ECD60A" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </svg>
+                                </div>
+                                <t t-set="cellHasRecord" t-value="true" />
+                              </t>
+                            </t>
+
+                          </t>
+                          <t t-if="!cellHasRecord">
+                            <div class="data-container-cell w-100 h-100" t-att-class="disabledCell(day.date) ? 'disabled-cell' : ''">
+                            </div>
+                          </t>
+                        </td>
+                      </t>
+                    </t>
+                  </tr>
+                  <t t-foreach="roomData.rooms" t-as="room" t-key="room.room_type_id">
+                    <tr class="room-data d-flex" t-att-class="this.state.roomVisibility.includes(roomData.room_type) ? '' : 'd-none'">
+                      <td class="static"></td>
+                      <td class="room-type">
+                        <div class="room-type-data room-number" t-esc="room.number"></div>
+                        <div id="room-beds">
+                          <t t-if="room.beds_in_room == 'double'">
+                            <span data-title="Double" class="frontDeskBeds">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 8.3252L10 6.3252V14.3252M10 1.3252C17.2 1.3252 19 3.1252 19 10.3252C19 17.5252 17.2 19.3252 10 19.3252C2.8 19.3252 1 17.5252 1 10.3252C1 3.1252 2.8 1.3252 10 1.3252Z" stroke="#03008a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </span>
+                          </t>
+                          <t t-elif="room.beds_in_room == 'twin'">
+                            <span data-title="Twin" class="frontDeskBeds">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M10 8.3252H13C13.2652 8.3252 13.5196 8.43055 13.7071 8.61809C13.8946 8.80563 14 9.05998 14 9.3252V11.3252C14 11.5904 13.8946 11.8448 13.7071 12.0323C13.5196 12.2198 13.2652 12.3252 13 12.3252H11C10.7348 12.3252 10.4804 12.4306 10.2929 12.6181C10.1054 12.8056 10 13.06 10 13.3252V15.3252C10 15.5904 10.1054 15.8448 10.2929 16.0323C10.4804 16.2198 10.7348 16.3252 11 16.3252H14M12 3.3252C19.2 3.3252 21 5.1252 21 12.3252C21 19.5252 19.2 21.3252 12 21.3252C4.8 21.3252 3 19.5252 3 12.3252C3 5.1252 4.8 3.3252 12 3.3252Z" stroke="#03008a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </span>
+                          </t>
+                          <t t-else="">
+                            <span></span>
+                          </t>
+                        </div>
+                      </td>
+                      <td class="room-status" t-att-data-title="room.status">
+                        <t t-if="room.status === 'Need to Clean'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M8.33321 10.0476C8.44771 10.2945 8.62394 10.5078 8.84488 10.6668C9.72821 11.2609 10.9049 10.7601 11.3807 9.90092C12.0799 8.64009 11.3624 7.09425 10.1099 6.50092C8.44321 5.70925 6.46738 6.62925 5.74321 8.23925C4.83071 10.2659 5.98488 12.6126 8.00155 13.4443C10.444 14.4509 13.2374 13.0959 14.1999 10.7318C15.3332 7.94592 13.7357 4.78675 10.9532 3.72342C7.74071 2.49509 4.11988 4.29009 2.92321 7.40842C1.56488 10.9526 3.60905 14.9284 7.15821 16.2218C11.1399 17.6718 15.5899 15.4376 17.019 11.5634C17.299 10.8114 17.4612 10.0207 17.4999 9.21925" stroke="#EA1F1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </t>
+                        <t t-elif="room.status === 'Clean'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M13.3333 15C13.7754 15 14.1993 15.1756 14.5118 15.4882C14.8244 15.8008 15 16.2247 15 16.6667C15 16.2247 15.1756 15.8008 15.4882 15.4882C15.8007 15.1756 16.2246 15 16.6667 15C16.2246 15 15.8007 14.8244 15.4882 14.5119C15.1756 14.1993 15 13.7754 15 13.3334C15 13.7754 14.8244 14.1993 14.5118 14.5119C14.1993 14.8244 13.7754 15 13.3333 15ZM13.3333 5.00004C13.7754 5.00004 14.1993 5.17564 14.5118 5.4882C14.8244 5.80076 15 6.22468 15 6.66671C15 6.22468 15.1756 5.80076 15.4882 5.4882C15.8007 5.17564 16.2246 5.00004 16.6667 5.00004C16.2246 5.00004 15.8007 4.82445 15.4882 4.51189C15.1756 4.19932 15 3.7754 15 3.33337C15 3.7754 14.8244 4.19932 14.5118 4.51189C14.1993 4.82445 13.7754 5.00004 13.3333 5.00004ZM7.5 15C7.5 13.674 8.02678 12.4022 8.96447 11.4645C9.90215 10.5268 11.1739 10 12.5 10C11.1739 10 9.90215 9.47326 8.96447 8.53557C8.02678 7.59789 7.5 6.32612 7.5 5.00004C7.5 6.32612 6.97322 7.59789 6.03553 8.53557C5.09785 9.47326 3.82608 10 2.5 10C3.82608 10 5.09785 10.5268 6.03553 11.4645C6.97322 12.4022 7.5 13.674 7.5 15Z" stroke="#8D3FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </t>
+                        <t t-elif="room.status === 'Checked'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.49992 9.16671L9.99992 11.6667L16.6666 5.00004M16.6666 10V15C16.6666 15.4421 16.491 15.866 16.1784 16.1786C15.8659 16.4911 15.4419 16.6667 14.9999 16.6667H4.99992C4.55789 16.6667 4.13397 16.4911 3.82141 16.1786C3.50885 15.866 3.33325 15.4421 3.33325 15V5.00004C3.33325 4.55801 3.50885 4.13409 3.82141 3.82153C4.13397 3.50897 4.55789 3.33337 4.99992 3.33337H12.4999" stroke="#4FAC58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </t>
+                        <t t-elif="room.status === 'Out of Order'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M15.8334 5H16.6667C17.1088 5 17.5327 5.17559 17.8453 5.48816C18.1578 5.80072 18.3334 6.22464 18.3334 6.66667C18.3334 7.77174 17.8944 8.83154 17.113 9.61294C16.3316 10.3943 15.2718 10.8333 14.1667 10.8333H10.0001V12.5M4.16675 4.16667C4.16675 3.72464 4.34234 3.30072 4.6549 2.98816C4.96746 2.67559 5.39139 2.5 5.83341 2.5H14.1667C14.6088 2.5 15.0327 2.67559 15.3453 2.98816C15.6578 3.30072 15.8334 3.72464 15.8334 4.16667V5.83333C15.8334 6.27536 15.6578 6.69928 15.3453 7.01184C15.0327 7.3244 14.6088 7.5 14.1667 7.5H5.83341C5.39139 7.5 4.96746 7.3244 4.6549 7.01184C4.34234 6.69928 4.16675 6.27536 4.16675 5.83333V4.16667ZM8.33342 13.3333C8.33342 13.1123 8.42121 12.9004 8.57749 12.7441C8.73377 12.5878 8.94573 12.5 9.16675 12.5H10.8334C11.0544 12.5 11.2664 12.5878 11.4227 12.7441C11.579 12.9004 11.6667 13.1123 11.6667 13.3333V16.6667C11.6667 16.8877 11.579 17.0996 11.4227 17.2559C11.2664 17.4122 11.0544 17.5 10.8334 17.5H9.16675C8.94573 17.5 8.73377 17.4122 8.57749 17.2559C8.42121 17.0996 8.33342 16.8877 8.33342 16.6667V13.3333Z" stroke="#7A869A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </t>
+                      </td>
+                      <t t-if="state.calendar &amp;&amp; state.calendar.length">
+                        <t t-foreach="state.calendar" t-as="day" t-key="room.room_type_id + '-' + day.date">
+                          <td class="calendar-header" t-att-class="day.day == 'Sat' || day.day == 'Sun' ? 'weekend' : ''">
+                            <t t-set="cellHasRecord" t-value="false" />
+                            <t t-foreach="this.state.records" t-as="record" t-key="record.id">
+                              <t t-if="record.room_type_id.display_name == roomData.room_type  &amp;&amp; (recordDate(record.check_in_date) == recordCalendarDate(day.date) || (recordCalendarDate(day.date) >= recordDate(record.check_in_date) &amp;&amp; (recordDate(record.check_out_date) > recordCalendarDate(day.date)))) &amp;&amp; record.status == 'done'">
+                                <t t-if="record.room_number.display_name == room.number">
+                                  <t t-if="record.booking_condition == 'new_booking'">
+                                    <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips new_booking" t-on-click.prevent="() => this.showBookingData(record)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                        <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.83333M10.5 12.6667L11.8333 14L14.5 11.3333M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#00875A" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                    </div>
+                                  </t>
+                                  <t t-if="record.booking_condition == 'late' || record.booking_condition == 'did_not_go'">
+                                    <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips do_not_come" t-on-click.prevent="() => this.showBookingData(record)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                        <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.83333C10.0653 10 10.2907 10.03 10.5053 10.0853M13.1667 10.6667V12.6667M13.1667 14.6667V14.6733M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#DE350B" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                    </div>
+                                  </t>
+                                  <t t-if="record.booking_condition == 'checked_in'">
+                                    <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips checked_in" t-on-click.prevent="() => this.showBookingData(record)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                        <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H7.5M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667ZM12.3667 13.878L10.9187 14.6367C10.8757 14.659 10.8274 14.669 10.779 14.6655C10.7307 14.662 10.6843 14.6451 10.6451 14.6167C10.6058 14.5884 10.5752 14.5497 10.5566 14.5049C10.5381 14.4602 10.5323 14.4111 10.54 14.3633L10.8167 12.756L9.64533 11.618C9.61037 11.5842 9.58562 11.5412 9.5739 11.494C9.56217 11.4468 9.56396 11.3973 9.57904 11.3511C9.59413 11.3049 9.62191 11.2638 9.65921 11.2326C9.69651 11.2014 9.74183 11.1813 9.79 11.1746L11.4087 10.94L12.1327 9.47798C12.1543 9.43444 12.1877 9.3978 12.229 9.37219C12.2704 9.34658 12.318 9.33301 12.3667 9.33301C12.4153 9.33301 12.463 9.34658 12.5043 9.37219C12.5456 9.3978 12.579 9.43444 12.6007 9.47798L13.3247 10.94L14.9433 11.1746C14.9914 11.1816 15.0365 11.2018 15.0736 11.233C15.1108 11.2642 15.1384 11.3052 15.1535 11.3513C15.1685 11.3975 15.1704 11.4469 15.1588 11.494C15.1472 11.5411 15.1227 11.5841 15.088 11.618L13.9167 12.756L14.1927 14.3627C14.201 14.4106 14.1956 14.4598 14.1773 14.5049C14.159 14.5499 14.1284 14.5889 14.0891 14.6175C14.0497 14.646 14.0031 14.6629 13.9546 14.6663C13.9061 14.6697 13.8576 14.6594 13.8147 14.6367L12.3667 13.878Z" stroke="#8D3FFF" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                    </div>
+                                  </t>
+                                  <t t-if="record.booking_condition == 'moved'">
+                                    <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips moved" t-on-click.prevent="() => this.showBookingData(record)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                        <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.5M13.8333 14L15.1667 12.6667L13.8333 11.3333M11.8333 11.3333L10.5 12.6667L11.8333 14M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#2CB6B6" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                    </div>
+                                  </t>
+                                  <t t-if="record.booking_condition == 'checked_out'">
+                                    <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips departured" t-on-click.prevent="() => this.showBookingData(record)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                        <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.16667M11.1667 14.6667L14.5 11.3333M14.5 11.3333V14.3333M14.5 11.3333H11.5M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#B6762C" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                    </div>
+                                  </t>
+                                  <t t-if="record.booking_condition == 'booking_from_channels'">
+                                    <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips booking_from_channels" t-on-click.prevent="() => this.showBookingData(record)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                        <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H8.83333M13.1673 14C12.8137 14 12.4746 13.8595 12.2245 13.6095C11.9745 13.3594 11.834 13.0203 11.834 12.6667C11.834 12.313 11.9745 11.9739 12.2245 11.7239C12.4746 11.4738 12.8137 11.3333 13.1673 11.3333M13.1673 14C13.521 14 13.8601 13.8595 14.1101 13.6095C14.3602 13.3594 14.5007 13.0203 14.5007 12.6667C14.5007 12.313 14.3602 11.9739 14.1101 11.7239C13.8601 11.4738 13.521 11.3333 13.1673 11.3333M13.1673 14V15M13.1673 11.3333V10.3333M15.188 11.5L14.322 12M12.0133 13.3333L11.1467 13.8333M11.1467 11.5L12.0133 12M14.322 13.3333L15.1887 13.8333M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#A4D224" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                    </div>
+                                  </t>
+                                  <t t-if="record.booking_condition == 'group_booking'">
+                                    <div t-att-data-title="getTooltipContent(record)" class="calendar-cell-data booking_tooltips" t-att-class="record.check_in_date > this.recordCalendarDate(day.date) ? 'group_booking' : 'do_not_come'" t-on-click.prevent="() => this.showBookingData(record)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                        <path d="M5.83333 14V13.3333C5.83333 12.9797 5.97381 12.6406 6.22386 12.3905C6.47391 12.1405 6.81304 12 7.16667 12H9.83333C10.187 12 10.5261 12.1405 10.7761 12.3905C11.0262 12.6406 11.1667 12.9797 11.1667 13.3333V14M11.8333 6.66667H13.1667C13.5203 6.66667 13.8594 6.80714 14.1095 7.05719C14.3595 7.30724 14.5 7.64638 14.5 8V8.66667M2.5 8.66667V8C2.5 7.64638 2.64048 7.30724 2.89052 7.05719C3.14057 6.80714 3.47971 6.66667 3.83333 6.66667H5.16667M7.16667 8.66667C7.16667 9.02029 7.30714 9.35943 7.55719 9.60948C7.80724 9.85952 8.14638 10 8.5 10C8.85362 10 9.19276 9.85952 9.44281 9.60948C9.69286 9.35943 9.83333 9.02029 9.83333 8.66667C9.83333 8.31304 9.69286 7.97391 9.44281 7.72386C9.19276 7.47381 8.85362 7.33333 8.5 7.33333C8.14638 7.33333 7.80724 7.47381 7.55719 7.72386C7.30714 7.97391 7.16667 8.31304 7.16667 8.66667ZM10.5 3.33333C10.5 3.68696 10.6405 4.02609 10.8905 4.27614C11.1406 4.52619 11.4797 4.66667 11.8333 4.66667C12.187 4.66667 12.5261 4.52619 12.7761 4.27614C13.0262 4.02609 13.1667 3.68696 13.1667 3.33333C13.1667 2.97971 13.0262 2.64057 12.7761 2.39052C12.5261 2.14048 12.187 2 11.8333 2C11.4797 2 11.1406 2.14048 10.8905 2.39052C10.6405 2.64057 10.5 2.97971 10.5 3.33333ZM3.83333 3.33333C3.83333 3.68696 3.97381 4.02609 4.22386 4.27614C4.47391 4.52619 4.81304 4.66667 5.16667 4.66667C5.52029 4.66667 5.85943 4.52619 6.10948 4.27614C6.35952 4.02609 6.5 3.68696 6.5 3.33333C6.5 2.97971 6.35952 2.64057 6.10948 2.39052C5.85943 2.14048 5.52029 2 5.16667 2C4.81304 2 4.47391 2.14048 4.22386 2.39052C3.97381 2.64057 3.83333 2.97971 3.83333 3.33333Z" stroke="#69DC43" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                    </div>
+                                  </t>
+                                  <t t-set="cellHasRecord" t-value="true" />
+                                </t>
+                              </t>
+                            </t>
+                            <t t-if="!cellHasRecord">
+                              <div class="data-container-cell w-100 h-100" t-att-class="disabledCell(day.date) ? 'disabled-cell' : ''" t-att-room-type="roomData.room_type" t-att-data-cell-key="recordCalendarDate(day.date)" t-att-data-day="recordCalendarDate(day.date)" t-att-data-room-type-id="room.number" t-on-mousedown="startSelection" t-on-mouseover="handleMouseOver" t-on-mouseup="endSelection">
+                              </div>
+                            </t>
+                          </td>
+                        </t>
+                      </t>
+                      <t t-else="">
+                        <div>No dates available</div>
+                      </t>
+                    </tr>
+                  </t>
+                  <tr class="d-flex room-category-row" t-att-class="this.state.roomVisibility.includes(roomData.room_type) ? '' : 'd-none'">
+                    <td class="static border-0"></td>
+                    <td class="room-type-empty border-0">Vacant rooms</td>
+                    <td class="room-status border-0"></td>
+                    <t t-if="state.calendar &amp;&amp; state.calendar.length">
+                      <t t-foreach="state.calendar" t-as="day" t-key="roomData.room_type + '-' + day.date">
+                        <td class="calendar-header border-0" t-att-class="day.day == 'Sat' || day.day == 'Sun' ? 'weekend' : ''">
+                          <t t-esc="checkVacantRoom(day, roomData)"/>
+                        </td>
+                      </t>
+                    </t>
+                  </tr>
+                </t>
+              </tbody>
+            </table>
+          </div>
+
+          <table class="front-data-table w-100 d-none" t-attf-class="o_list_table table table-sm table-hover position-relative mb-0 {{props.list.isGrouped ? 'o_list_table_grouped' : 'o_list_table_ungrouped table-striped'}}" t-ref="table" style="overflow: none !important">
+            <thead class="w-100" style="overflow-x: scroll">
+              <tr class="d-none">
+                <th t-if="hasSelectors" class="o_list_record_selector o_list_controller align-middle pe-1 cursor-pointer" tabindex="-1" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-on-click.stop="toggleSelection">
+                  <CheckBox disabled="!_canSelectRecord" value="selectAll" className="'d-flex m-0'" onChange.bind="toggleSelection"/>
+                </th>
+                <t t-foreach="state.columns" t-as="column" t-key="column.id">
+                  <th t-if="column.type === 'field'" t-att-data-name="column.name" t-att-class="getColumnClass(column) + ' opacity-trigger-hover'" t-on-pointerup="onColumnTitleMouseUp" t-on-click="() => this.onClickSortColumn(column)" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-att-data-tooltip-template="isDebugMode ? 'web.FieldTooltip' : false" t-att-data-tooltip-info="isDebugMode ? makeTooltip(column) : false" data-tooltip-delay="1000" tabindex="-1">
+                    <t t-if="column.hasLabel and column.widget !== 'handle'">
+                      <t t-set="isNumeric" t-value="isNumericColumn(column)"/>
+                      <div t-att-class="{'d-flex': true, 'flex-row-reverse': shouldReverseHeader(column)}">
+                        <span class="d-block min-w-0 text-truncate flex-grow-1" t-att-class="isNumeric ? 'o_list_number_th' : ''" t-esc="column.label"/>
+                        <i t-att-class="getSortableIconClass(column)"/>
+                      </div>
+                      <span class="o_resize position-absolute top-0 end-0 bottom-0 ps-1 bg-black-25 opacity-0 opacity-50-hover z-index-1" t-on-pointerdown.stop.prevent="onStartResize"/>
+                    </t>
+                  </th>
+                  <th t-else="" t-on-keydown="(ev) => this.onCellKeydown(ev)" t-att-class="{o_list_button: column.type === 'button_group'}"/>
+                </t>
+                <th t-if="props.onOpenFormView" t-on-keydown="(ev) => this.onCellKeydown(ev)" class="o_list_open_form_view"/>
+                <th t-if="displayOptionalFields or activeActions.onDelete" t-on-keydown="(ev) => this.onCellKeydown(ev)" class="o_list_controller o_list_actions_header position-sticky end-0">
+                  <Dropdown t-if="displayOptionalFields" class="'o_optional_columns_dropdown text-center border-top-0'" togglerClass="'btn p-0'" skipTogglerTabbing="true" listRendererClass="uniqueRendererClass" position="'bottom-end'">
+                    <t t-set-slot="toggler">
+                      <i class="o_optional_columns_dropdown_toggle oi oi-fw oi-settings-adjust"/>
+                    </t>
+
+                    <t t-foreach="optionalFieldGroups" t-as="group" t-key="group_index">
+                      <div t-if="!group_first" role="separator" class="dropdown-divider"/>
+                      <DropdownItem t-if="group.displayName" parentClosingMode="'none'" onSelected="() => this.toggleOptionalFieldGroup(group.id)">
+                        <div class="fw-bold" t-esc="group.displayName"/>
+                      </DropdownItem>
+                      <t t-foreach="group.optionalFields" t-as="field" t-key="field_index">
+                        <DropdownItem parentClosingMode="'none'" onSelected="() => this.toggleOptionalField(field.name)">
+                          <CheckBox onChange="() => this.toggleOptionalField(field.name)" value="field.value" name="field.name">
+                            <span class="d-flex align-items-center">
+                              <span class="text-truncate" t-esc="field.label"/>
+                              <span class="ps-1" t-if="env.debug" t-esc="' (' + field.name + ')'" />
+                            </span>
+                          </CheckBox>
+                        </DropdownItem>
+                      </t>
+                    </t>
+                  </Dropdown>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+
+      <div class="booking-form" t-att-class="this.state.bookingMenu ? 'd-block' : 'd-none'" t-on-click="closeModal">
+        <div class="booking-form-container" t-on-click="this.preventClose">
+          <div class="closebtn" t-on-click="this.unmark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M15 5L5 15M5 5L15 15" stroke="#83828C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <form class="form-content" t-on-submit.prevent="() => this.checkGuest()">
+            <div class="form-group">
+              <label>Room type</label>
+              <input id="room-type" readonly="1"></input>
+            </div>
+            <div class="form-group">
+              <label>Room number</label>
+              <input type="text" id="room-number" readonly="1" />
+            </div>
+            <div class="form-group">
+              <label>Check-in Time</label>
+              <input style="width: 280px" type="date" id="check-in-date" readonly="1"/>
+              <input style="width: 150px" id="checkIn-Time" type="time" t-att-value="this.setCheckInTime()"></input>
+            </div>
+            <div class="form-group">
+              <label>Check-out Time</label>
+              <input style="width: 280px" type="date" id="check-out-date" readonly="1"/>
+              <input style="width: 150px" id="checkOut-Time" type="time" t-att-value="this.setCheckOutTime()"></input>
+            </div>
+            <div class="form-group">
+              <label>Nights</label>
+              <input type="number" id="nights" readonly="1" />
+            </div>
+            <div class="form-group">
+              <label>Rate Plan</label>
+              <label>Rate Plan</label>
+              <select id="ratePlan">
+                <t t-foreach="this.state.ratePlanData" t-as="data" t-key="data[1]">
+                  <option t-esc="data[1]"></option>
+                </t>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Accommodation</label>
+              <input type="text" id="accommodation" readonly="1" />
+            </div>
+            <hr />
+            <div class="form-group last-name">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" class="form-control" t-on-input.prevent="(e) => showSuggestions(e.target.value)" autocomplete="0" required="1"/>
+              <t t-if="state.suggestions.length > 0">
+                <div id="suggestions-container" class="suggestions-container">
+                  <t t-foreach="state.suggestions" t-as="suggestion" t-key="suggestion[0]">
+                    <div class="suggestion-item" t-on-click="() => selectSuggestion(suggestion)">
+                      <p>
+                        <t t-esc="suggestion[1]"/>
+                      </p>
+                    </div>
+                  </t>
+                </div>
+              </t>
+            </div>
+
+            <div class="form-group">
+              <label>First name</label>
+              <input type="text" id="firstName" autocomplete="0" required="1"></input>
+            </div>
+            <div class="form-group">
+              <label>Middle name</label>
+              <input type="text" autocomplete="0" id="middleName"></input>
+            </div>
+            <div class="form-group">
+              <label>Citizenship</label>
+              <select id="citizenship">
+                <t t-foreach="this.state.country" t-as="country" t-key="country[0]">
+                  <option t-att-value="country[0]" t-att-selected="country[0] == 'uz'">
+                    <t t-esc="country[1]"/>
+                  </option>
+                </t>
+              </select>
+            </div>
+            <hr />
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" autocomplete="0" id="email"></input>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input id="phone" type="tel" autocomplete="0"></input>
+            </div>
+            <hr />
+            <div class="form-group">
+              <label>Point of sale</label>
+              <select>
+                <t t-foreach="state.pointOfSale" t-as="pointOfSale" t-key="pointOfSale[0]">
+                  <option t-att-value="pointOfSale[0]"><t t-esc="pointOfSale[1]"/></option>
+                </t>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Market segment</label>
+                <select>
+                  <t t-foreach="state.marketSegment" t-as="marketSegment" t-key="marketSegment[0]">
+                    <option t-att-value="marketSegment[0]"><t t-esc="marketSegment[1]"/></option>
+                  </t>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Comment</label>
+              <input type="text" id="customerComment"/>
+            </div>
+            <div class="form-actions">
+              <button class="save">Save</button>
+              <button class="cancel" t-on-click="closeModal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="room-info" t-att-class="this.state.statusInformation ? 'd-block' : 'd-none'" t-on-click.prevent="()=>this.state.statusInformation = false">
+        <div class="room-info-container" t-on-click.prevent="(e)=> e.stopPropagation()">
+          <div class="room-info-header">
+            <h2>Legend: BOOKINGS</h2>
+            <button t-on-click.prevent="()=>this.state.statusInformation = false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M18 6.3252L6 18.3252M6 6.3252L18 18.3252" stroke="#131612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="icon-container">
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data do_not_come">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.83333C10.0653 10 10.2907 10.03 10.5053 10.0853M13.1667 10.6667V12.6667M13.1667 14.6667V14.6733M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#DE350B" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>No-show/Due out</h5>
+                <p>The date and time of check-in or check-out has come but the guest hasn't checked in or checked out yet</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data new_booking">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.83333M10.5 12.6667L11.8333 14L14.5 11.3333M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#00875A" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>New booking</h5>
+                <p>Website and front desk bookings</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data checked_in">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H7.5M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667ZM12.3667 13.878L10.9187 14.6367C10.8757 14.659 10.8274 14.669 10.779 14.6655C10.7307 14.662 10.6843 14.6451 10.6451 14.6167C10.6058 14.5884 10.5752 14.5497 10.5566 14.5049C10.5381 14.4602 10.5323 14.4111 10.54 14.3633L10.8167 12.756L9.64533 11.618C9.61037 11.5842 9.58562 11.5412 9.5739 11.494C9.56217 11.4468 9.56396 11.3973 9.57904 11.3511C9.59413 11.3049 9.62191 11.2638 9.65921 11.2326C9.69651 11.2014 9.74183 11.1813 9.79 11.1746L11.4087 10.94L12.1327 9.47798C12.1543 9.43444 12.1877 9.3978 12.229 9.37219C12.2704 9.34658 12.318 9.33301 12.3667 9.33301C12.4153 9.33301 12.463 9.34658 12.5043 9.37219C12.5456 9.3978 12.579 9.43444 12.6007 9.47798L13.3247 10.94L14.9433 11.1746C14.9914 11.1816 15.0365 11.2018 15.0736 11.233C15.1108 11.2642 15.1384 11.3052 15.1535 11.3513C15.1685 11.3975 15.1704 11.4469 15.1588 11.494C15.1472 11.5411 15.1227 11.5841 15.088 11.618L13.9167 12.756L14.1927 14.3627C14.201 14.4106 14.1956 14.4598 14.1773 14.5049C14.159 14.5499 14.1284 14.5889 14.0891 14.6175C14.0497 14.646 14.0031 14.6629 13.9546 14.6663C13.9061 14.6697 13.8576 14.6594 13.8147 14.6367L12.3667 13.878Z" stroke="#8D3FFF" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>In-house</h5>
+                <p>In-house guests</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data moved">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.5M13.8333 14L15.1667 12.6667L13.8333 11.3333M11.8333 11.3333L10.5 12.6667L11.8333 14M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#2CB6B6" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>Room move</h5>
+                <p>The guest stayed in different rooms</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data departured">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.16667M11.1667 14.6667L14.5 11.3333M14.5 11.3333V14.3333M14.5 11.3333H11.5M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#B6762C" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>Check-out</h5>
+                <p>The guest has checked-out</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data booking_from_channels">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H8.83333M13.1673 14C12.8137 14 12.4746 13.8595 12.2245 13.6095C11.9745 13.3594 11.834 13.0203 11.834 12.6667C11.834 12.313 11.9745 11.9739 12.2245 11.7239C12.4746 11.4738 12.8137 11.3333 13.1673 11.3333M13.1673 14C13.521 14 13.8601 13.8595 14.1101 13.6095C14.3602 13.3594 14.5007 13.0203 14.5007 12.6667C14.5007 12.313 14.3602 11.9739 14.1101 11.7239C13.8601 11.4738 13.521 11.3333 13.1673 11.3333M13.1673 14V15M13.1673 11.3333V10.3333M15.188 11.5L14.322 12M12.0133 13.3333L11.1467 13.8333M11.1467 11.5L12.0133 12M14.322 13.3333L15.1887 13.8333M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#A4D224" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>New OTA booking</h5>
+                <p>Bookings from distribution channels</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data book_without_room">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M4.5 14V12.6667C4.5 11.9594 4.78095 11.2811 5.28105 10.781C5.78115 10.281 6.45942 10 7.16667 10H9.5M13.1667 14.6667V14.6733M13.1667 12.6667C13.4655 12.6657 13.7554 12.5645 13.99 12.3793C14.2245 12.1941 14.3902 11.9355 14.4604 11.645C14.5306 11.3545 14.5013 11.0489 14.3772 10.777C14.2531 10.5051 14.0414 10.2827 13.776 10.1453C13.5108 10.0095 13.2074 9.96736 12.9152 10.0258C12.623 10.0843 12.3592 10.2399 12.1667 10.4673M5.83333 4.66667C5.83333 5.37391 6.11428 6.05219 6.61438 6.55229C7.11448 7.05238 7.79276 7.33333 8.5 7.33333C9.20724 7.33333 9.88552 7.05238 10.3856 6.55229C10.8857 6.05219 11.1667 5.37391 11.1667 4.66667C11.1667 3.95942 10.8857 3.28115 10.3856 2.78105C9.88552 2.28095 9.20724 2 8.5 2C7.79276 2 7.11448 2.28095 6.61438 2.78105C6.11428 3.28115 5.83333 3.95942 5.83333 4.66667Z" stroke="#ECD60A" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>Unassigned booking</h5>
+                <p>Booking with no room</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+              </div>
+              <div class="icon-desc">
+                <h5>Vacant room</h5>
+                <p>Vacant room</p>
+              </div>
+            </div>
+            <div class="icon-wrap">
+              <div class="icon-bg">
+                <div class="calendar-cell-data group_booking">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M5.83333 14V13.3333C5.83333 12.9797 5.97381 12.6406 6.22386 12.3905C6.47391 12.1405 6.81304 12 7.16667 12H9.83333C10.187 12 10.5261 12.1405 10.7761 12.3905C11.0262 12.6406 11.1667 12.9797 11.1667 13.3333V14M11.8333 6.66667H13.1667C13.5203 6.66667 13.8594 6.80714 14.1095 7.05719C14.3595 7.30724 14.5 7.64638 14.5 8V8.66667M2.5 8.66667V8C2.5 7.64638 2.64048 7.30724 2.89052 7.05719C3.14057 6.80714 3.47971 6.66667 3.83333 6.66667H5.16667M7.16667 8.66667C7.16667 9.02029 7.30714 9.35943 7.55719 9.60948C7.80724 9.85952 8.14638 10 8.5 10C8.85362 10 9.19276 9.85952 9.44281 9.60948C9.69286 9.35943 9.83333 9.02029 9.83333 8.66667C9.83333 8.31304 9.69286 7.97391 9.44281 7.72386C9.19276 7.47381 8.85362 7.33333 8.5 7.33333C8.14638 7.33333 7.80724 7.47381 7.55719 7.72386C7.30714 7.97391 7.16667 8.31304 7.16667 8.66667ZM10.5 3.33333C10.5 3.68696 10.6405 4.02609 10.8905 4.27614C11.1406 4.52619 11.4797 4.66667 11.8333 4.66667C12.187 4.66667 12.5261 4.52619 12.7761 4.27614C13.0262 4.02609 13.1667 3.68696 13.1667 3.33333C13.1667 2.97971 13.0262 2.64057 12.7761 2.39052C12.5261 2.14048 12.187 2 11.8333 2C11.4797 2 11.1406 2.14048 10.8905 2.39052C10.6405 2.64057 10.5 2.97971 10.5 3.33333ZM3.83333 3.33333C3.83333 3.68696 3.97381 4.02609 4.22386 4.27614C4.47391 4.52619 4.81304 4.66667 5.16667 4.66667C5.52029 4.66667 5.85943 4.52619 6.10948 4.27614C6.35952 4.02609 6.5 3.68696 6.5 3.33333C6.5 2.97971 6.35952 2.64057 6.10948 2.39052C5.85943 2.14048 5.52029 2 5.16667 2C4.81304 2 4.47391 2.14048 4.22386 2.39052C3.97381 2.64057 3.83333 2.97971 3.83333 3.33333Z" stroke="#69DC43" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="icon-desc">
+                <h5>Group booking</h5>
+                <p>Booking consists of several bookings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-modal" t-att-class="this.state.isModal ? 'd-block' : 'd-none'" t-on-click.prevent="()=> this.closeModalBooking()">
+      <div class="user-container" t-on-click.prevent="(e)=> e.stopPropagation()">
+        <div class="user-content" t-on-click.prevent="(e) => e.stopPropagation()">
+          <div class="user-header">
+            <p id="bookHeader">Booking panel:</p>
+          </div>
+          <div class="user-body">
+            <div class="user-info">
+              <div class="user-info-name">
+                <p>Booking number</p>
+                <p>Status</p>
+                <p>Customer full name</p>
+                <p>Adults</p>
+                <p>Children</p>
+                <!-- <p>Guest</p> -->
+                <p>Phone </p>
+                <p>Guest comment </p>
+              </div>
+              <div class="user-info-data">
+                <div class="number-wrapper">
+                  <p id="bookNumber"></p>
+                  <span id="copy-booking-number">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M13.3335 6.66665V4.99998C13.3335 4.55795 13.1579 4.13403 12.8453 3.82147C12.5328 3.50891 12.1089 3.33331 11.6668 3.33331H5.00016C4.55814 3.33331 4.13421 3.50891 3.82165 3.82147C3.50909 4.13403 3.3335 4.55795 3.3335 4.99998V11.6666C3.3335 12.1087 3.50909 12.5326 3.82165 12.8452C4.13421 13.1577 4.55814 13.3333 5.00016 13.3333H6.66683M6.66683 8.33331C6.66683 7.89129 6.84242 7.46736 7.15499 7.1548C7.46755 6.84224 7.89147 6.66665 8.3335 6.66665H15.0002C15.4422 6.66665 15.8661 6.84224 16.1787 7.1548C16.4912 7.46736 16.6668 7.89129 16.6668 8.33331V15C16.6668 15.442 16.4912 15.8659 16.1787 16.1785C15.8661 16.4911 15.4422 16.6666 15.0002 16.6666H8.3335C7.89147 16.6666 7.46755 16.4911 7.15499 16.1785C6.84242 15.8659 6.66683 15.442 6.66683 15V8.33331Z" stroke="#01001A" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
+                <div >
+                  <p id="bookStatus"></p>
+                </div>
+                <p id="bookName"></p>
+                <p id="bookAdults"></p>
+                <p id="bookChildren"></p>
+                <!-- <p id="bookGuest"></p> -->
+                <p id="bookPhone"></p>
+                <p id="guestComment"></p>
+              </div>
+            </div>
+            <div class="user-info">
+              <div class="user-info-name">
+                <p>Room type</p>
+                <p>Room number</p>
+                <p>Check-in</p>
+                <p>Check-out</p>
+                <p>Nights </p>
+                <p>Rate plan</p>
+              </div>
+              <div class="user-info-data">
+                <p id="bookRoomType2"></p>
+                <p id="bookRoomNumber"></p>
+                <p id="bookCheckIn"></p>
+                <p id="bookCheckOut"></p>
+                <p id="bookNights"></p>
+                <p id="bookRatePlan"></p>
+              </div>
+            </div>
+            <div class="user-info">
+              <div class="user-info-name">
+                <p>Point of sale </p>
+                <p>Guarantee method</p>
+              </div>
+              <div class="user-info-data">
+                <p id="bookSale"></p>
+                <p id="bookGuarantee">Cash</p>
+              </div>
+            </div>
+            <div class="user-info">
+              <div class="user-info-name">
+                <p>Total for accommodation </p>
+                <p>Total for services</p>
+                <p>Total</p>
+                <p>Payment status</p>
+                <p>Paid</p>
+                <p>Amount outstanding</p>
+                <!-- <p>Deposit</p> -->
+              </div>
+              <div class="user-info-data">
+                <p id="bookAccommodation"></p>
+                <p id="bookServices"></p>
+                <p id="bookTotal"></p>
+                <p id="bookPaymentStatus"></p>
+                <p id="bookPaid"></p>
+                <p id="bookBalance"></p>
+                <!-- <p id="bookDeposit"></p> -->
+              </div>
+            </div>
+          </div>
+          <div class="user-footer gap-2">
+            <button type="button" class="modalCloseBtn" title="Close" t-on-click.prevent="() => this.closeModalBooking()">Close</button>
+            <button type="button" class="modalEditBtn" t-on-click.prevent="() => editBooking()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5.83325 5.8333H4.99992C4.55789 5.8333 4.13397 6.00889 3.82141 6.32146C3.50885 6.63402 3.33325 7.05794 3.33325 7.49997V15C3.33325 15.442 3.50885 15.8659 3.82141 16.1785C4.13397 16.491 4.55789 16.6666 4.99992 16.6666H12.4999C12.9419 16.6666 13.3659 16.491 13.6784 16.1785C13.991 15.8659 14.1666 15.442 14.1666 15V14.1666M13.3333 4.16663L15.8333 6.66663M16.9874 5.48747C17.3156 5.15926 17.5 4.71412 17.5 4.24997C17.5 3.78581 17.3156 3.34067 16.9874 3.01247C16.6592 2.68426 16.2141 2.49988 15.7499 2.49988C15.2858 2.49988 14.8406 2.68426 14.5124 3.01247L7.49992 9.99997V12.5H9.99992L16.9874 5.48747Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+                  Edit</button>
+            <t t-if="this.state.canCheckIn">
+              <button type="button" class="modalBtns" data-title="Check-in" t-on-click.prevent="() => this.state.isCheckInActive = true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M16 12.3252L12 8.3252M16 12.3252H8M16 12.3252L12 16.3252M12 3.3252C10.8181 3.3252 9.64778 3.55799 8.55585 4.01028C7.46392 4.46257 6.47177 5.12551 5.63604 5.96123C4.80031 6.79696 4.13738 7.78911 3.68508 8.88104C3.23279 9.97297 3 11.1433 3 12.3252C3 13.5071 3.23279 14.6774 3.68508 15.7693C4.13738 16.8613 4.80031 17.8534 5.63604 18.6892C6.47177 19.5249 7.46392 20.1878 8.55585 20.6401C9.64778 21.0924 10.8181 21.3252 12 21.3252C14.3869 21.3252 16.6761 20.377 18.364 18.6892C20.0518 17.0013 21 14.7121 21 12.3252C21 9.93825 20.0518 7.64906 18.364 5.96123C16.6761 4.27341 14.3869 3.3252 12 3.3252Z" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </t>
+            <t t-if="this.state.canCheckInCancel">
+              <button type="button" class="modalBtns" id="cancelCheckIn" data-title="Cancel check-in" t-on-click.prevent="() => this.state.isCheckInCancelActive = true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M9 8.3252L15 16.3252M15 8.3252L9 16.3252M12 21.3252C14.3869 21.3252 16.6761 20.377 18.364 18.6892C20.0518 17.0013 21 14.7121 21 12.3252C21 9.93825 20.0518 7.64906 18.364 5.96123C16.6761 4.27341 14.3869 3.3252 12 3.3252C9.61305 3.3252 7.32387 4.27341 5.63604 5.96123C3.94821 7.64906 3 9.93825 3 12.3252C3 14.7121 3.94821 17.0013 5.63604 18.6892C7.32387 20.377 9.61305 21.3252 12 21.3252Z" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </t>
+            <t t-if="this.state.canCheckOutCancel">
+              <button type="button" class="modalBtns" id="cancelCheckOut" data-title="Cancel check-out" t-on-click.prevent="() => this.state.isCheckOutCancelActive = true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M9 8.3252L15 16.3252M15 8.3252L9 16.3252M12 21.3252C14.3869 21.3252 16.6761 20.377 18.364 18.6892C20.0518 17.0013 21 14.7121 21 12.3252C21 9.93825 20.0518 7.64906 18.364 5.96123C16.6761 4.27341 14.3869 3.3252 12 3.3252C9.61305 3.3252 7.32387 4.27341 5.63604 5.96123C3.94821 7.64906 3 9.93825 3 12.3252C3 14.7121 3.94821 17.0013 5.63604 18.6892C7.32387 20.377 9.61305 21.3252 12 21.3252Z" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </t>
+            <t t-if="this.state.canCheckOut">
+              <button type="button" class="modalBtns" data-title="Check-out" t-on-click.prevent="() => this.state.isCheckOutActive = true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M15 9.3252L9 15.3252M15 9.3252V15.3252M15 9.3252H9M3 12.3252C3 13.5071 3.23279 14.6774 3.68508 15.7693C4.13738 16.8613 4.80031 17.8534 5.63604 18.6892C6.47177 19.5249 7.46392 20.1878 8.55585 20.6401C9.64778 21.0924 10.8181 21.3252 12 21.3252C13.1819 21.3252 14.3522 21.0924 15.4442 20.6401C16.5361 20.1878 17.5282 19.5249 18.364 18.6892C19.1997 17.8534 19.8626 16.8613 20.3149 15.7693C20.7672 14.6774 21 13.5071 21 12.3252C21 9.93825 20.0518 7.64906 18.364 5.96123C16.6761 4.27341 14.3869 3.3252 12 3.3252C9.61305 3.3252 7.32387 4.27341 5.63604 5.96123C3.94821 7.64906 3 9.93825 3 12.3252Z" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </t>
+            <t t-if="this.state.canMoveRoom">
+              <button type="button" class="modalBtns" data-title="Move room" t-on-click="moveRoom">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M20 11.3254C19.7554 9.56561 18.9391 7.93505 17.6766 6.68489C16.4142 5.43472 14.7758 4.63431 13.0137 4.40694C11.2516 4.17958 9.46362 4.53787 7.9252 5.42664C6.38678 6.3154 5.18325 7.68533 4.5 9.32539M4 5.32539V9.32539H8M4 13.3254C4.24456 15.0852 5.06093 16.7157 6.32336 17.9659C7.58579 19.216 9.22424 20.0165 10.9863 20.2438C12.7484 20.4712 14.5364 20.1129 16.0748 19.2241C17.6132 18.3354 18.8168 16.9654 19.5 15.3254M20 19.3254V15.3254H16" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </t>
+            <button type="button" class="modalBtns" data-title="Notes" t-on-click.prevent="() => this.state.isNoteActive = true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M9 5.3252H7C6.46957 5.3252 5.96086 5.53591 5.58579 5.91098C5.21071 6.28605 5 6.79476 5 7.3252V19.3252C5 19.8556 5.21071 20.3643 5.58579 20.7394C5.96086 21.1145 6.46957 21.3252 7 21.3252H17C17.5304 21.3252 18.0391 21.1145 18.4142 20.7394C18.7893 20.3643 19 19.8556 19 19.3252V7.3252C19 6.79476 18.7893 6.28605 18.4142 5.91098C18.0391 5.53591 17.5304 5.3252 17 5.3252H15M9 5.3252C9 4.79476 9.21071 4.28605 9.58579 3.91098C9.96086 3.53591 10.4696 3.3252 11 3.3252H13C13.5304 3.3252 14.0391 3.53591 14.4142 3.91098C14.7893 4.28605 15 4.79476 15 5.3252M9 5.3252C9 5.85563 9.21071 6.36434 9.58579 6.73941C9.96086 7.11448 10.4696 7.3252 11 7.3252H13C13.5304 7.3252 14.0391 7.11448 14.4142 6.73941C14.7893 6.36434 15 5.85563 15 5.3252" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <!-- <button type="button" class="modalBtns" data-title="Documents">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M14 3.3252V7.3252C14 7.59041 14.1054 7.84477 14.2929 8.0323C14.4804 8.21984 14.7348 8.3252 15 8.3252H19M14 3.3252H7C6.46957 3.3252 5.96086 3.53591 5.58579 3.91098C5.21071 4.28605 5 4.79476 5 5.3252V19.3252C5 19.8556 5.21071 20.3643 5.58579 20.7394C5.96086 21.1145 6.46957 21.3252 7 21.3252H17C17.5304 21.3252 18.0391 21.1145 18.4142 20.7394C18.7893 20.3643 19 19.8556 19 19.3252V8.3252M14 3.3252L19 8.3252M9 9.3252H10M9 13.3252H15M9 17.3252H15" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button> -->
+            <t t-if="this.state.canPay">
+              <button type="button" class="modalBtns" data-title="Payment" t-on-click="savePayment">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17" fill="none">
+                  <path d="M1 6.3252H19M5 11.3252H5.01M9 11.3252H11M1 4.3252C1 3.52955 1.31607 2.76648 1.87868 2.20388C2.44129 1.64127 3.20435 1.3252 4 1.3252H16C16.7956 1.3252 17.5587 1.64127 18.1213 2.20388C18.6839 2.76648 19 3.52955 19 4.3252V12.3252C19 13.1208 18.6839 13.8839 18.1213 14.4465C17.5587 15.0091 16.7956 15.3252 16 15.3252H4C3.20435 15.3252 2.44129 15.0091 1.87868 14.4465C1.31607 13.8839 1 13.1208 1 12.3252V4.3252Z" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </t>
+            <button type="button" class="modalBtns" data-title="Cancel booking" t-on-click="cancelBooking">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M12 10.3252L16 14.3252M16 10.3252L12 14.3252M20 6.3252C20.2652 6.3252 20.5196 6.43055 20.7071 6.61809C20.8947 6.80563 21 7.05998 21 7.3252V17.3252C21 17.5904 20.8947 17.8448 20.7071 18.0323C20.5196 18.2198 20.2652 18.3252 20 18.3252H9.00001L4.00001 13.3252C3.75403 13.0502 3.61804 12.6942 3.61804 12.3252C3.61804 11.9562 3.75403 11.6002 4.00001 11.3252L9.00001 6.3252H20Z" stroke="#03008a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" t-att-class="this.state.isCheckInActive ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isCheckInActive = false">
+      <div class="modal-dialog" t-on-click.prevent="(e) => e.stopPropagation()">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Check-in</h5>
+          </div>
+          <div class="modal-body gap-3">
+            <div class="check-content mb-2">
+              <p>Booking number</p>
+              <span id="bookingNumber"></span>
+            </div>
+            <div class="check-content mb-2">
+              <p>Room type</p>
+              <span id="roomType"></span>
+            </div>
+            <div class="check-content mb-2">
+              <p>Room number</p>
+              <span id="roomNumber"></span>
+            </div>
+            <div class="check-content">
+              <p>Date and time</p>
+              <div class="d-flex gap-2">
+                <input type="date" id="checkDate"/>
+                <input type="time" id="checkTime"/>
+              </div>
+            </div>
+            <div class="modal-footer mt-3">
+              <div class="action-buttons d-flex gap-2">
+                <button class="btn primaryBtn" t-on-click="saveCheckInData">Save</button>
+                <button class="btn dangerBtn" t-on-click.prevent="() => this.state.isCheckInActive = false">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" t-att-class="this.state.isCheckInCancelActive ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isCheckInCancelActive = false">
+      <div class="modal-dialog" t-on-click.prevent="(e) => e.stopPropagation()">
+        <div class="modal-content">
+          <div class="modal-header d-flex flex-column justify-content-start align-items-start">
+            <h5 class="modal-title">Check-in Cancellation</h5>
+            <p id="bookingNumberCancel" class="m-0"></p>
+          </div>
+          <div class="modal-body gap-3">
+            <div class="d-flex mb-2 justify-content-between">
+              <p>Reason for check-in cancellation</p>
+              <div class="d-flex flex-column">
+                <textarea id="cancelCheckInArea" rows="4" style="width: 400px; border-radius: 5px; padding: 5px" required="1"></textarea>
+                <t t-if="this.state.isReasonEmpty">
+                  <p class="text-danger mt-2 mb-0" style="font-size: 12px; font-family: Inter">Please fill this area</p>
+                </t>
+              </div>
+            </div>
+            <div class="modal-footer mt-3">
+              <div class="action-buttons d-flex gap-2">
+                <button class="btn primaryBtn" t-on-click="cancelCheckIn">Save</button>
+                <button class="btn dangerBtn" t-on-click.prevent="() => this.state.isCheckInCancelActive = false">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" t-att-class="this.state.isCheckOutActive ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isCheckOutActive = false">
+      <div class="modal-dialog" t-on-click.prevent="(e) => e.stopPropagation()">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Check-out</h5>
+          </div>
+          <div class="modal-body gap-3">
+            <t t-if="!state.checkOutPayment">
+              <div class="payment-valid">
+                <p class="mark m-0">!</p>
+                <p class="payment-text m-0">This booking has not been fully paid. You can check guests out after you confirm the payment</p>
+              </div>
+            </t>
+            <div class="check-content mb-2">
+              <p>Booking number</p>
+              <span id="bookingNumberOut"></span>
+            </div>
+            <div class="check-content mb-2">
+              <p>Room type</p>
+              <span id="roomTypeOut"></span>
+            </div>
+            <div class="check-content mb-2">
+              <p>Room number</p>
+              <span id="roomNumberOut"></span>
+            </div>
+            <div class="check-content">
+              <p>Date and time</p>
+              <div class="d-flex gap-2">
+                <input type="date" id="checkDateOut"/>
+                <input type="time" id="checkTimeOut"/>
+              </div>
+            </div>
+            <div class="modal-footer mt-3">
+              <div class="action-buttons d-flex gap-2">
+                <button class="btn primaryBtn" t-att-class="state.checkOutPayment ? '' : 'btn-disable'" t-on-click="saveCheckOutData">Save</button>
+                <t t-if="!state.checkOutPayment">
+                  <button class="btn paymentBtn" t-on-click="savePayment">Pay</button>
+                </t>
+                <button class="btn dangerBtn" t-on-click.prevent="() => this.state.isCheckOutActive = false">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" t-att-class="this.state.isCheckOutCancelActive ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isCheckOutCancelActive = false">
+      <div class="modal-dialog" t-on-click.prevent="(e) => e.stopPropagation()">
+        <div class="modal-content">
+          <div class="modal-header d-flex flex-column justify-content-start align-items-start">
+            <h5 class="modal-title">Check-out Cancellation</h5>
+            <p id="bookingNumberCancelOut" class="m-0"></p>
+          </div>
+          <div class="modal-body gap-3">
+            <div class="d-flex mb-2 justify-content-between">
+              <p>Reason for check-out cancellation</p>
+              <div class="d-flex flex-column">
+                <textarea id="cancelCheckOutArea" rows="4" style="width: 400px; border-radius: 5px; padding: 5px" required="1"></textarea>
+                <t t-if="this.state.isReasonOutEmpty">
+                  <p class="text-danger mt-2 mb-0" style="font-size: 12px; font-family: Inter">Please fill this area</p>
+                </t>
+              </div>
+            </div>
+            <div class="modal-footer mt-3">
+              <div class="action-buttons d-flex gap-2">
+                <button class="btn primaryBtn" t-on-click="cancelCheckOut">Save</button>
+                <button class="btn dangerBtn" t-on-click.prevent="() => this.state.isCheckOutCancelActive = false">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" t-att-class="this.state.isNoteActive ? 'd-block' : 'd-none'" t-on-click.prevent="() => this.state.isNoteActive = false">
+      <div class="modal-dialog" t-on-click.prevent="(e) => e.stopPropagation()">
+        <div class="modal-content">
+          <div class="modal-header d-flex flex-column justify-content-start align-items-start">
+            <h5 class="modal-title">Create or edit a note/task</h5>
+            <p id="bookingNumberCancelOut" class="m-0"></p>
+          </div>
+          <div class="modal-body gap-3">
+            <div class="d-flex mb-2 justify-content-between gap-2">
+              <p>Text</p>
+              <div class="d-flex flex-column">
+                <textarea id="noteArea" maxlength="1000" rows="4" style="width: 300px; border-radius: 5px; padding: 5px" required="1" t-on-input="checkCharacters"></textarea>
+                <p id="charCounter" class="mt-2 mb-0" style="font-size: 12px; font-family: Inter; color: gray">
+                  <t t-esc="this.state.charCounter"/>
+                </p>
+              </div>
+            </div>
+            <div class="check-content mb-3">
+              <p>Status</p>
+              <select t-on-change="noteSelection" id="noteSelection">
+                <option selected="1" value="not_scheduled">Not scheduled</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="done">Done</option>
+                <option value="overdue">Overdue</option>
+              </select>
+            </div>
+            <div class="check-content">
+              <p>Date and time</p>
+              <div class="d-flex gap-2">
+                <input t-att-disabled="this.state.noteTimeReadonly" type="date" id="noteDate"/>
+                <input t-att-disabled="this.state.noteTimeReadonly" type="time" id="noteTime"/>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer mt-3">
+            <div class="action-buttons d-flex gap-2">
+              <button class="btn primaryBtn" t-on-click.prevent="() => this.saveNote()">Save</button>
+              <button class="btn dangerBtn" t-on-click.prevent="() => this.closeNoteModal()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </t>
+
+  <t t-name="hms_app.FrontDeskController">
+    <div t-att-class="className" t-ref="root">
+      <Layout className="model.useSampleModel ? 'o_view_sample_data' : ''" display="display">
+        <t t-set-slot="control-panel-create-button">
+          <t t-if="!model.root.editedRecord and activeActions.create and props.showButtons">
+            <button type="button" class="btn btn-primary o_list_button_add" data-hotkey="c" t-on-click="onClickCreate" data-bounce-button="">
+                          New
+            </button>
+          </t>
+        </t>
+
+        <t t-set-slot="layout-buttons">
+          <t t-call="{{ props.buttonTemplate }}"/>
+        </t>
+        <t t-set-slot="control-panel-always-buttons">
+          <t t-foreach="archInfo.headerButtons" t-as="button" t-key="button.id" t-if="!evalViewModifier(button.invisible)">
+            <MultiRecordViewButton t-if="button.display === 'always'" list="model.root" className="button.className" clickParams="button.clickParams" defaultRank="'btn-secondary'" domain="props.domain" icon="button.icon" string="button.string" title="button.title" />
+          </t>
+        </t>
+
+        <t t-set-slot="layout-actions">
+          <SearchBar t-if="searchBarToggler.state.showSearchBar" autofocus="firstLoad"/>
+        </t>
+        <t t-set-slot="control-panel-navigation-additional">
+          <t t-component="searchBarToggler.component" t-props="searchBarToggler.props"/>
+        </t>
+
+        <t t-set-slot="control-panel-additional-actions">
+          <CogMenu t-if="!nbSelected"/>
+        </t>
+        <t t-set-slot="control-panel-selection-actions">
+          <div t-if="nbSelected" class="d-flex gap-1">
+            <t t-call="web.ListView.Selection"/>
+            <t t-foreach="archInfo.headerButtons" t-as="button" t-key="button.id" t-if="!evalViewModifier(button.invisible)">
+              <MultiRecordViewButton t-if="button.display !== 'always'" list="model.root" className="button.className" clickParams="button.clickParams" defaultRank="'btn-secondary'" domain="props.domain" icon="button.icon" string="button.string" title="button.title" />
+            </t>
+            <t t-if="props.info.actionMenus">
+              <ActionMenus getActiveIds="() => model.root.selection.map((r) => r.resId)" context="props.context" domain="props.domain" items="actionMenuItems" isDomainSelected="model.root.isDomainSelected" resModel="model.root.resModel" onActionExecuted="() => model.load()"/>
+            </t>
+          </div>
+        </t>
+        <t t-component="props.Renderer" list="model.root" activeActions="activeActions" archInfo="archInfo" allowSelectors="props.allowSelectors" editable="editable" onOpenFormView="onOpenFormView" openRecord.bind="openRecord" noContentHelp="props.info.noContentHelp" onAdd.bind="createRecord" onOptionalFieldsChanged.bind="onOptionalFieldsChanged" evalViewModifier.bind="evalViewModifier" />
+      </Layout>
+    </div>
+  </t>
+
+</templates>

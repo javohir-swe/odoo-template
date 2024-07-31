@@ -1,0 +1,7 @@
+/* static/src/css/custom_styles.css */
+.custom-send-btn {
+  position: absolute;
+  right: 20px;
+  width: 250px !important;
+  padding: 5px 10px;
+}

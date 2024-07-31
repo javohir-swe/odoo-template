@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="hms_app.GuestProfile" owl="1">
+        <div class="guest-container">
+            <div class="guest-navbar">
+                <ul>
+                    <li class="guest-tabs">
+                        <p class="m-0 p-0">Personal details</p>
+                    </li>
+                    <li class="guest-tabs">
+                        <p class="m-0 p-0">Bookings</p>
+                    </li>
+                    <li class="guest-tabs">
+                        <p class="m-0 p-0">Deposit</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="guest-body">
+                <div class="table-content">
+                    <div class="personal-details table-wrapper">
+                        <div class="table-header">
+                            <h5 class="m-0 p-0">Personal details</h5>
+                        </div>
+                        <div class="input-table">
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Citizenship</div>
+                                <select class="select-text">
+                                    <option>Uznekistan</option>
+                                </select>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Last name</div>
+                                <input class="right-text" type="text"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">First name</div>
+                                <input class="right-text" type="text"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Middle name</div>
+                                <input class="right-text" type="text"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Middle name</div>
+                                <div class="gender-input">
+                                    <label>
+                                        <input id="gender" type="radio"/>
+                                              Male
+                                    </label>
+                                    <label>
+                                        <input id="gender" type="radio"/>
+                                                Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Date of birth</div>
+                                <input class="right-text" type="date"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Company</div>
+                                <div class="m-0 p-0 featured-text">Specify the company name and details</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-details table-wrapper">
+                        <div class="table-header">
+                            <h5 class="m-0 p-0">Contact details</h5>
+                        </div>
+                        <div class="input-table">
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Email</div>
+                                <div class="email-wrapper">
+                                    <div class="email-add">
+                                        <input class="right-text" type="email"/>
+                                        <button class="delete-btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 25" fill="none">
+                                                <path d="M4 7.3252H20M10 11.3252V17.3252M14 11.3252V17.3252M5 7.3252L6 19.3252C6 19.8556 6.21071 20.3643 6.58579 20.7394C6.96086 21.1145 7.46957 21.3252 8 21.3252H16C16.5304 21.3252 17.0391 21.1145 17.4142 20.7394C17.7893 20.3643 18 19.8556 18 19.3252L19 7.3252M9 7.3252V4.3252C9 4.05998 9.10536 3.80562 9.29289 3.61809C9.48043 3.43055 9.73478 3.3252 10 3.3252H14C14.2652 3.3252 14.5196 3.43055 14.7071 3.61809C14.8946 3.80562 15 4.05998 15 4.3252V7.3252" stroke="#8d3fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="featured-text">+ Add Email</div>
+                                </div>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Phone</div>
+                                <div class="email-wrapper">
+                                    <div class="email-add">
+                                        <input class="right-text" type="tel"/>
+                                        <button class="delete-btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 25" fill="none">
+                                                <path d="M4 7.3252H20M10 11.3252V17.3252M14 11.3252V17.3252M5 7.3252L6 19.3252C6 19.8556 6.21071 20.3643 6.58579 20.7394C6.96086 21.1145 7.46957 21.3252 8 21.3252H16C16.5304 21.3252 17.0391 21.1145 17.4142 20.7394C17.7893 20.3643 18 19.8556 18 19.3252L19 7.3252M9 7.3252V4.3252C9 4.05998 9.10536 3.80562 9.29289 3.61809C9.48043 3.43055 9.73478 3.3252 10 3.3252H14C14.2652 3.3252 14.5196 3.43055 14.7071 3.61809C14.8946 3.80562 15 4.05998 15 4.3252V7.3252" stroke="#8d3fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="featured-text">+ Add phone</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="identity-document table-wrapper">
+                        <div class="table-header">
+                            <h5 class="m-0 p-0">Identity document</h5>
+                        </div>
+                        <div class="input-table">
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Document</div>
+                                <select class="select-text" t-on-change="documentType" t-att-value="this.state.documentTab">
+                                    <option>Not specified</option>
+                                    <option>Passport</option>
+                                    <option>Other identity document</option>
+                                </select>
+                            </div>
+                        </div>
+                        <t t-if="this.state.documentTab == 'Passport'">
+                            <div class="input-table">
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Series</div>
+                                    <div class="passport-number">
+                                        <input class="select-text" type="text"/>
+                                        <span>No.</span>
+                                        <input class="select-text" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Issue date</div>
+                                    <input class="select-text" type="date"/>
+                                </div>
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Expiry date</div>
+                                    <input class="select-text" type="date"/>
+                                </div>
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Issuing authority</div>
+                                    <textarea class="right-text issue-comment"/>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-elif="this.state.documentTab == 'Other identity document'">
+                            <div class="input-table">
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Document title</div>
+                                    <input class="right-text" type="text"/>
+                                </div>
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Series</div>
+                                    <div class="passport-number">
+                                        <input class="select-text" type="text"/>
+                                        <span>No.</span>
+                                        <input class="select-text" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Issue date</div>
+                                    <input class="select-text" type="date"/>
+                                </div>
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Expiry date</div>
+                                    <input class="select-text" type="date"/>
+                                </div>
+                                <div class="input-content">
+                                    <div class="m-0 p-0 table-content-name">Issuing authority</div>
+                                    <textarea class="right-text issue-comment"/>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-else=""></t>
+                        <div class="input-table">
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Country of birth</div>
+                                <select class="select-text" readonly="1" disabled="1">
+                                    <option>Not selected</option>
+                                    <option>Not selected</option>
+                                </select>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">City</div>
+                                <input class="right-text" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-content">
+                    <div class="personal-details table-wrapper">
+                        <div class="table-header">
+                            <h5 class="m-0 p-0">Personal details</h5>
+                        </div>
+                        <div class="input-table">
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Citizenship</div>
+                                <select class="right-text">
+                                    <option>Uznekistan</option>
+                                </select>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Last name</div>
+                                <input class="right-text" type="text"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">First name</div>
+                                <input class="right-text" type="text"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Middle name</div>
+                                <input class="right-text" type="text"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Middle name</div>
+                                <div class="gender-input">
+                                    <label>
+                                        <input type="radio"/>
+                                              Male
+                                    </label>
+                                    <label>
+                                        <input type="radio"/>
+                                                Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Date of birth</div>
+                                <input class="right-text" type="date"/>
+                            </div>
+                            <div class="input-content">
+                                <div class="m-0 p-0 table-content-name">Company</div>
+                                <div class="m-0 p-0 featured-text">Specify the company name and details</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

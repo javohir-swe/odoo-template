@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="paymentMethods">
+        <div t-att-class="{'tab-pane': true, 'active': state.activeTab === 'payment'}">
+            <div class="place_loader" t-att-class="{'active': state.loading}" >
+              <div class="loader"></div>
+            </div>
+
+
+            <div class="d-flex justify-content-between  my-3">
+              <h3 style="font-family: 'Inter'">Payment methods</h3>
+              <div class="d-flex gap-5">
+                <div class="year-navigation">
+                  <div class="year-number" t-att-class="{'active':state.showType == 'by_roomtype'}"
+                    role="button" t-on-click="() => this.state.showType = 'by_roomtype'">
+                    <span>By room types</span>
+                  </div>
+                  <div class="year-number" t-att-class="{'active':state.showType == 'by_months'}"
+                    role="button" t-on-click="() => this.state.showType = 'by_months'">
+                    <span>By months</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <span>Hide previous months</span>
+                  <input type="checkbox" t-model="state.hidePreviousMonths"
+                    t-on-click="toggleHidePreviousMonths" />
+                </div>
+              </div>
+            </div>
+            <header class="mt-1">
+              <div
+                class="alert alert-info" role="alert">
+                <p
+                  class="mb-0">
+                  <i class="fa fa-info-circle"
+                    aria-hidden="true"> </i>   "Payment methods" restriction allows to set different payment methods that will be available on different dates. For example, if only guaranteed payment methods are enabled for June 10, a guest will not be offered payment on arrival for any period including June 10.
+                </p>
+              </div>
+            </header>
+            <div class="d-flex justify-content-between align-items-center" style="font-family: 'Inter'">
+              <div class="year-navigation my-3">
+                <div t-foreach="['2024', '2025', '2026','2027']" t-as="year"
+                  t-key="year" t-on-click="toggleYear" t-att-data-year="year"
+                  t-att-class="{'year-number': true, 'active': state.selectedYears.includes(year)}">
+                  <span t-esc="year" />
+                </div>
+              </div>
+              <div class="d-flex gap-5 align-items-center">
+                <div class="d-flex gap-2 align-items-center" t-on-click.prevent="toggleLegend"
+                  role="button">
+                  <span style="width:30px;height:15px;background-color:#ED3333;border-radius:3px;cursor:pointer"></span>
+                  <span style="font-size:12px">Availability blocked</span>
+                </div>
+                <div class="d-flex gap-2 align-items-center" t-on-click.prevent="toggleLegend"
+                  role="button">
+                  <span
+                    style="width:30px;height:15px;background-color:#F8B3B3;border-radius:3px;cursor:pointer"></span>
+                  <span style="font-size:12px">Closed</span>
+                </div>
+                <div class="d-flex gap-2 align-items-center legend" t-on-click.prevent="toggleLegend">
+                  <i class="fa fa-flag"></i>
+                  <span style="font-size:12px" >Legend</span>
+                </div>
+                <t t-if="state.showLegend">
+                  <div class="overlay" t-on-click.prevent="handleClickOverlay"></div>
+                </t>
+                <div class="legend__items"
+                  t-att-class="{'show': state.showLegend}">
+                  <div class="legend__header d-flex">
+                    <h4>Legend: Payment methods</h4>
+                    <span t-on-click.prevent="toggleLegend"
+                      style="cursor:pointer;margin-bottom:15px">
+                      <i class="fa fa-times"></i>
+                    </span>
+                  </div>
+                  <div class="legend__main">
+                    <div class="d-flex gap-2 align-items-center">
+                      <span
+                        style="width:40px;height:33px;background-color:#ED3333;border-radius:3px;cursor:pointer"></span>
+                        <div>
+                          <h3 class="p-0 m-0">Closed availability</h3>
+                          <span style="font-size:12px">Availability is closed for sale</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 align-items-center">
+                      <span
+                        style="width:40px;height:33px;background-color:#f8b3b3;border-radius:3px;cursor:pointer"></span>
+                        <div>
+                          <h3 class="p-0 m-0">Closed rate plan</h3>
+                          <span style="font-size:12px">Rate plan is closed for sale</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 align-items-center">
+                      <h6 class="d-flex align-items-center justify-content-center"
+                        style="width:40px;height:33px;border-radius:3px;cursor:pointer;border:1px solid #c4cbd5;">
+                         <span style="padding: 3px 4px; border-radius: 50%; border: 1px solid #424242">
+                          3
+                         </span>
+                        </h6>
+                        <div>
+                          <h3 class="p-0 m-0">Payment methods</h3>
+                          <span style="font-size:12px">Payment methods specified in the main settings are used</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="month-selector" t-if="this.state.showType == 'by_months'">
+              <t t-foreach="state.selectedYears" t-as="year" t-key="year">
+                <t t-set="months" t-value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]" />
+                <t t-foreach="months" t-as="month" t-key="month">
+                  <t
+                    t-if="!(state.hidePreviousMonths &amp;&amp; year === new Date().getFullYear().toString() &amp;&amp; month &lt; new Date().getMonth())">
+                    <a href="#" t-on-click.prevent="switchMonth"
+                      t-att-data-month="month"
+                      t-att-data-year="year"
+                      t-att-class="{'active': state.activeYear === year &amp;&amp; state.activeMonth === month, 'month-year': true}">
+                      <span
+                        t-esc="new Date(year, month, 1).toLocaleString('default', { month: 'long' })" />
+                      <span t-esc="year" />
+                    </a>
+                  </t>
+                </t>
+              </t>
+            </div>
+            <div class="table_cont" t-if="this.state.showType == 'by_months'" >
+              <div class="table_responsive">
+                <table class="table table-bordered">
+                <!-- Year Header -->
+                  <thead>
+                  <!-- Month and Day Headers -->
+                    <tr>
+                      <th class="sticky-header">
+                        <span t-esc="state.activeYear" /></th>
+                      <th t-foreach="state.dayss" t-as="day" t-key="day_index">
+                        <div>
+                          <span t-esc="day.date.toLocaleDateString('en-US', { weekday: 'short' })" />
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr t-foreach="state.roomtypes" t-as="roomType" t-key="roomType_index">
+                      <td class="sticky-column">
+                        <span t-esc="roomType.rooms" />
+                      </td>
+                      <t t-foreach="state.dayss" t-as="day" t-key="day_index">
+                        <t t-set="status_key" t-value="`${day.formattedDate}-${roomType.id}`" />
+                        <td
+                          t-att-data-cell-key="`${day.formattedDate}-${roomType.id}`"
+                          t-att-data-day="day.formattedDate" t-att-data-room-type-id="roomType.id"
+                          t-att-class="{
+                          'day-cell': true,
+                          'past-date': day.date &amp;&amp; isPastDate(day.date),
+                          'future-date': day.date &amp;&amp; !isPastDate(day.date),
+                          'hidden-cell': state.hidePreviousMonths &amp;&amp; day.date &amp;&amp; day.date &lt; new Date(new Date().getFullYear(), new Date().getMonth(), 1) &amp;&amp; !(day.date &amp;&amp; day.date.getMonth() === state.activeMonth &amp;&amp; day.date.getFullYear() === state.activeYear),
+                          'selected': state.selectedCells.has(`${day.formattedDate}-${roomType.id}`)
+                      }"
+                          t-on-mousedown="day.date &amp;&amp; startSelection"
+                          t-on-mouseover="day.date &amp;&amp; handleMouseOver"
+                          t-on-mouseup="day.date &amp;&amp; endSelection"
+                        >
+                          <span class="default-status"
+                            t-esc="day.date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })" />
+
+                          <t>
+                            <!-- <span t-esc="state.maxlosMap[status_key]" /> -->
+                          <!-- <span t-if="state.statusMap[status_key] === 'close'"
+                          class="custom-danger">
+                              <i class="fa fa-times"></i>
+                            </span>
+                            <span t-if="state.statusMap[status_key] === 'open'" class="custom-primary">
+                              <i class="fa fa-check"></i>
+                            </span> -->
+
+                            <span class="custom-empty-payment" t-esc="this.getPaymentDataLength(status_key)"/>
+                          </t>
+                        </td>
+                      </t>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="action_btns" t-if="state.selectedCells.size > 0">
+                <span t-on-click="changePaymentValue">Change value</span>
+                <span t-on-click="unmarkCells">Unmark</span>
+              </div>
+            </div>
+
+            <div class="month-selector" t-if="this.state.showType == 'by_roomtype'">
+              <t t-foreach="this.state.roomtypes" t-as="roomType" t-key="roomType_index">
+                <a href="#"
+                  t-att-class="{'active': state.activeRoomType == roomType.id, 'month-year': true}"
+                  t-on-click="setActiveRoomType"
+                  t-att-data-room-type-id="roomType.id">
+                  <span t-esc="roomType.rooms"></span>
+                </a>
+              </t>
+            </div>
+            <div class="table_cont" t-if="this.state.showType == 'by_roomtype'">
+             <div class="table_responsive">
+                <table class="table table-bordered">
+                <!-- <thead>
+                    <tr>
+                      <th class="sticky-header">
+                        <span t-esc="year" />
+                      </th>
+                      <t t-foreach="Array.from({ length: state.maxWeeks * 7 }, (_, i) => i)"
+                        t-as="dayIndex" t-key="dayIndex">
+                        <th>
+                          <div>
+                            <span
+                              t-esc="['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][dayIndex % 7]" />
+                          </div>
+                        </th>
+                      </t>
+                    </tr>
+                    </thead> -->
+                    <tbody>
+                      <t t-foreach="state.selectedYears" t-as="year" t-key="year">
+                      <tr>
+                        <td class="sticky-header">
+                          <span t-esc="year" />
+                        </td>
+                        <t t-foreach="Array.from({ length: 37 }, (_, i) => i)"
+                          t-as="dayIndex" t-key="dayIndex">
+                          <td>
+                            <div style="text-align:center;font-weight:500">
+                              <span
+                                t-esc="['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][dayIndex % 7]" />
+                            </div>
+                          </td>
+                        </t>
+                      </tr>
+                        <t t-set="months" t-value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]" />
+                        <t t-foreach="months" t-as="month" t-key="month">
+                          <t t-set="firstDateOfMonth" t-value="new Date(year, month, 1)" />
+                          <tr
+                            t-att-class="{
+                              'hidden-cell': state.hidePreviousMonths &amp;&amp; firstDateOfMonth &lt; new Date(new Date().getFullYear(), new Date().getMonth(), 1) &amp;&amp; !(firstDateOfMonth.getMonth() === state.activeMonth &amp;&amp; firstDateOfMonth.getFullYear() === state.activeYear)
+                          }">
+                            <td class="month-header">
+                              <span
+                                t-esc="new Date(year, month, 1).toLocaleString('default', { month: 'long' })" />
+                              <span t-esc="' \'' + year.slice(2)" />
+                            </td>
+
+                            <t t-set="firstDayOfMonth"
+                              t-value="(new Date(year, month, 1).getDay() + 6) % 7" />
+                            <t t-set="daysInMonth" t-value="new Date(year, month + 1, 0).getDate()" />
+                            <t t-set="totalCells"
+                              t-value="Math.ceil((firstDayOfMonth + daysInMonth) / 7) * 7" />
+
+                        <!-- Fill empty cells before the first day of the month -->
+                            <t t-foreach="Array.from({ length: firstDayOfMonth })" t-as="empty"
+                              t-key="empty_index">
+                              <td class="empty-cell"></td>
+                            </t>
+
+                        <!-- Fill cells with actual days of the month -->
+                            <t t-foreach="Array.from({ length: daysInMonth }, (_, i) => i + 1)"
+                              t-as="dayNumber" t-key="day_index">
+                              <t t-set="date" t-value="new Date(year, month, dayNumber)" />
+                              <t t-set="formattedDate" t-value="this.formatDate(date)" />
+                              <t t-set="status_key" t-value="`${formattedDate}-${state.activeRoomType}`" />
+
+                              <td
+                                t-att-data-cell-key="`${formattedDate}-${state.activeRoomType}`"
+                                t-att-data-day="formattedDate"
+                                t-att-data-room-type-id="state.activeRoomType"
+                                t-att-class="{
+                                      'day-cell': true,
+                                      'past-date': isPastDate(date),
+                                      'future-date': !isPastDate(date),
+                                      'selected': state.selectedCells.has(`${formattedDate}-${state.activeRoomType}`)
+                                  }"
+                                t-on-mousedown="startSelection"
+                                t-on-mouseover="handleMouseOver"
+                                t-on-mouseup="endSelection"
+                              >
+                                <span class="default-status"
+                                  t-esc="date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })" />
+
+                                  <span class="custom-empty-payment" t-esc="this.getPaymentDataLength(status_key)"/>
+                              </td>
+                            </t>
+
+                        <!-- Fill empty cells after the last day of the month -->
+                            <t
+                              t-foreach="Array.from({ length: totalCells - (firstDayOfMonth + daysInMonth) })"
+                              t-as="empty" t-key="empty_index">
+                              <td class="empty-cell"></td>
+                            </t>
+                          </tr>
+                        </t>
+                      </t>
+                    </tbody>
+                </table>
+             </div>
+              <div class="action_btnss" t-if="state.selectedCells.size > 0">
+                <span t-on-click="changePaymentValue">Change value</span>
+                <span t-on-click="unmarkCells">Unmark</span>
+              </div>
+            </div>
+          </div>
+
+          <div t-if="state.paymentForm.isVisible" class="modal" style="display: block;" t-on-click="closeMethodsMenu">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Payment methods</h5>
+                        <span class="close" aria-hidden="true" t-on-click="discardPaymentForm" style="cursor:pointer">X</span>
+                    </div>
+                    <div class="modal-body">
+                        <form t-on-submit.prevent="savePayment">
+                            <t t-if="state.paymentForm.paymentMap">
+                                <t t-foreach="Object.keys(state.paymentForm.paymentMap)" t-key="roomTypeId" t-as="roomTypeId">
+                                    <div class="d-flex gap-5 mb-3 justify-content-between rate-form">
+                                        <span t-esc="state.roomtypes.find(rt => rt.id.toString() === roomTypeId).rooms || 'Unknown'" />
+                                        <div class="position-relative" t-on-click.prevent="(e) => e.stopPropagation()">
+                                            <div class="checkedMethods" t-on-click="() => this.toggleMethodsVisible(roomTypeId)">
+                                                <t t-foreach="this.state.checkedMethods[roomTypeId] || []" t-as="checkedMethod" t-key="checkedMethod">
+                                                    <div class="checkedMethodsName" t-on-click.prevent="(e) => e.stopPropagation()">
+                                                        <t t-esc="checkedMethod" />
+                                                        <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" t-on-click="removeCheckedMethod" t-att-data-roomtypeid="roomTypeId" t-att-data-value="checkedMethod">
+                                                            <path d="M15 5L5 15M5 5L15 15" stroke="#83828C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </div>
+                                                </t>
+                                            </div>
+
+                                            <t t-if="this.state.paymentMethods.length &amp;&amp; this.state.methodsVisible[roomTypeId]">
+                                                <div class="payment-methods-container">
+                                                    <span class="clear" t-on-click="() => this.clearAll(roomTypeId)">
+                                                      <t t-if="this.state.checkedMethods[roomTypeId].length > 0">
+                                                        Clear all
+                                                      </t>
+                                                      <t t-else="">
+                                                        Select all
+                                                      </t>
+                                                    </span>
+                                                    <t t-foreach="this.state.paymentMethods" t-as="method" t-key="method[0]">
+                                                        <div class="method" t-on-click="(e) => e.stopPropagation()">
+                                                            <input type="checkbox" t-att-id="'method_' + method[0]" t-att-value="method[1]" t-att-data-roomtypeid="roomTypeId" t-on-change="toggleMethod" t-att-checked="this.isChecked(roomTypeId, method[1])" />
+                                                            <label t-att-for="'method_' + method[0]"><t t-esc="method[1]" /></label>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                            <button name="action_save_closed" type="object" class="btn btn-primary">Save</button>
+                            <button t-on-click.prevent="discardPaymentForm" class="btn">Discard</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </t>
+</templates>

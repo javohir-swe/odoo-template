@@ -1,0 +1,273 @@
+<odoo>
+    <data>
+        <!-- Settings Point of Sale Form View -->
+        <record id="view_settings_pointofsale_form" model="ir.ui.view">
+            <field name="name">settings.pointofsale.form</field>
+            <field name="model">settings.pointofsale</field>
+            <field name="arch" type="xml">
+                <form string="Point of Sale">
+                    <group>
+                        <field name="element_name"/>
+                        <field name="comment"/>
+                        <field name="datelast_modified"/>
+                        <field name="status"/>
+                        <field name="set_default"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Settings Point of Sale Tree View -->
+        <record id="view_settings_pointofsale_tree" model="ir.ui.view">
+            <field name="name">settings.pointofsale.tree</field>
+            <field name="model">settings.pointofsale</field>
+            <field name="arch" type="xml">
+                <tree string="Point of Sale">
+                    <field name="element_name"/>
+                    <field name="comment"/>
+                    <field name="datelast_modified"/>
+                    <field name="status"/>
+                    <field name="set_default"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Purpose of Visit Form View -->
+        <record id="view_purpose_ofvisit_form" model="ir.ui.view">
+            <field name="name">purpose.ofvisit.form</field>
+            <field name="model">purpose.ofvisit</field>
+            <field name="arch" type="xml">
+                <form string="Purpose of Visit">
+                    <group>
+                        <field name="element_name"/>
+                        <field name="comment"/>
+                        <field name="datelast_modified"/>
+                        <field name="status"/>
+                        <field name="set_default"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Purpose of Visit Tree View -->
+        <record id="view_purpose_ofvisit_tree" model="ir.ui.view">
+            <field name="name">purpose.ofvisit.tree</field>
+            <field name="model">purpose.ofvisit</field>
+            <field name="arch" type="xml">
+                <tree string="Purpose of Visit">
+                    <field name="element_name"/>
+                    <field name="comment"/>
+                    <field name="datelast_modified"/>
+                    <field name="status"/>
+                    <field name="set_default"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Tag Form View -->
+        <record id="view_tag_form" model="ir.ui.view">
+            <field name="name">tag.form</field>
+            <field name="model">tag</field>
+            <field name="arch" type="xml">
+                <form string="Tag">
+                    <group>
+                        <field name="element_name"/>
+                        <field name="comment"/>
+                        <field name="datelast_modified"/>
+                        <field name="status"/>
+                        <field name="set_default"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tag Tree View -->
+        <record id="view_tag_tree" model="ir.ui.view">
+            <field name="name">tag.tree</field>
+            <field name="model">tag</field>
+            <field name="arch" type="xml">
+                <tree string="Tag">
+                    <field name="element_name"/>
+                    <field name="comment"/>
+                    <field name="datelast_modified"/>
+                    <field name="status"/>
+                    <field name="set_default"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Payment Method Form View -->
+        <record id="view_payment_method_form" model="ir.ui.view">
+            <field name="name">payment.method.form</field>
+            <field name="model">payment.method</field>
+            <field name="arch" type="xml">
+                <form string="Payment Method">
+                    <group>
+                        <field name="element_name"/>
+                        <field name="comment"/>
+                        <field name="datelast_modified"/>
+                        <field name="status"/>
+                        <field name="set_default"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Payment Method Tree View -->
+        <record id="view_payment_method_tree" model="ir.ui.view">
+            <field name="name">payment.method.tree</field>
+            <field name="model">payment.method</field>
+            <field name="arch" type="xml">
+                <tree string="Payment Method">
+                    <field name="element_name"/>
+                    <field name="comment"/>
+                    <field name="datelast_modified"/>
+                    <field name="status"/>
+                    <field name="set_default"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Market Segment Form View -->
+        <record id="view_market_segment_form" model="ir.ui.view">
+            <field name="name">market.segment.form</field>
+            <field name="model">market.segment</field>
+            <field name="arch" type="xml">
+                <form string="Market Segment">
+                    <group>
+                        <field name="element_name"/>
+                        <field name="comment"/>
+                        <field name="datelast_modified"/>
+                        <field name="status"/>
+                        <field name="set_default"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Market Segment Tree View -->
+        <record id="view_market_segment_tree" model="ir.ui.view">
+            <field name="name">market.segment.tree</field>
+            <field name="model">market.segment</field>
+            <field name="arch" type="xml">
+                <tree string="Market Segment">
+                    <field name="element_name"/>
+                    <field name="comment"/>
+                    <field name="datelast_modified"/>
+                    <field name="status"/>
+                    <field name="set_default"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Staff Form View -->
+        <record id="view_staff_form" model="ir.ui.view">
+            <field name="name">staff.form</field>
+            <field name="model">staff</field>
+            <field name="arch" type="xml">
+                <form string="Staff">
+                    <group>
+                        <field name="element_name"/>
+                        <field name="comment"/>
+                        <field name="datelast_modified"/>
+                        <field name="status"/>
+                        <field name="set_default"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Staff Tree View -->
+        <record id="view_staff_tree" model="ir.ui.view">
+            <field name="name">staff.tree</field>
+            <field name="model">staff</field>
+            <field name="arch" type="xml">
+                <tree string="Staff">
+                    <field name="element_name"/>
+                    <field name="comment"/>
+                    <field name="datelast_modified"/>
+                    <field name="status"/>
+                    <field name="set_default"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Guest Status Form View -->
+        <record id="view_guest_status_form" model="ir.ui.view">
+            <field name="name">guest.status.form</field>
+            <field name="model">guest.status</field>
+            <field name="arch" type="xml">
+                <form string="Guest Status">
+                    <group>
+                        <field name="element_name"/>
+                        <field name="comment"/>
+                        <field name="datelast_modified"/>
+                        <field name="status"/>
+                        <field name="set_default"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Guest Status Tree View -->
+        <record id="view_guest_status_tree" model="ir.ui.view">
+            <field name="name">guest.status.tree</field>
+            <field name="model">guest.status</field>
+            <field name="arch" type="xml">
+                <tree string="Guest Status">
+                    <field name="element_name"/>
+                    <field name="comment"/>
+                    <field name="datelast_modified"/>
+                    <field name="status"/>
+                    <field name="set_default"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_new_template_tree" model="ir.ui.view">
+            <field name="name">new.template.tree</field>
+            <field name="model">new.template</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="room_type"/>
+                    <field name="document_name"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_new_template_form" model="ir.ui.view">
+            <field name="name">new.template.form</field>
+            <field name="model">new.template</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <sheet>
+                        <h2 class="oe_title">Template settings</h2>
+                        <h6 class="custom-hr"></h6>
+                        <div class="alert alert-info" role="alert">
+                            <p class="mb-0">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                Create a file in *.docx format (for example, in the Microsoft Word editor).
+                                Copy the list information below and paste it into the text of the document.
+                                When generating a report, the booking data is automatically substituted for
+                                the behavior variables. Download the document template.
+                                The created document can be downloaded in the "Documents" section and in
+                                the list of documents in the quick view of the reservation.
+                            </p>
+                        </div>
+                        <group>
+                            <field name="status" widget="boolean_toggle"/>
+                            <field name="name"/>
+                            <field name="room_type"/>
+                            <field name="document_rules"/>
+                            <field name="document"/>
+                            <field name="document_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,50 @@
+<!-- room_image_views.xml -->
+<odoo>
+	<data>
+
+		<!-- Tree View -->
+		<record id="view_location_tree" model="ir.ui.view">
+			<field name="name">accommodation.location.tree</field>
+			<field name="model">my.location</field>
+			<field name="arch" type="xml">
+				<tree string="Location">
+					<field name="latitude" />
+					<field name="longitude" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form View -->
+		<record id="view_location_form" model="ir.ui.view">
+			<field name="name">accommodation.location.form</field>
+			<field name="model">my.location</field>
+			<field name="arch" type="xml">
+				<form string="Location">
+					<sheet>
+						<group>
+							<field name="latitude" />
+							<field name="longitude" />
+							<div class="o_form_sheet_bg">
+								<div class="map" ref="map" style="width:600px; height:400px;"></div>
+							</div>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_location_settings" model="ir.actions.act_window">
+			<field name="name">Location</field>
+			<field name="res_model">my.location</field>
+			<field name="view_mode">tree,form</field>
+			<!-- <field name="tag">GoogleMapComponentTemplate</field> -->
+			<field name="target">new</field>
+		</record>
+
+		<!-- <menuitem name="Location" id="location_menu"
+			parent="menu_main_settings" sequence="2"
+			action="action_location_settings" /> -->
+
+	</data>
+</odoo>
+  

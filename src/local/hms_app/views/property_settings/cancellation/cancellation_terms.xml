@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_cancellation_terms_tree" model="ir.ui.view">
+        <field name="name">cancellation.terms.tree</field>
+        <field name="model">cancellation.terms</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="penalty" />
+                <field name="period_title" />
+                <field name="arrival_dates" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cancellation_terms_form" model="ir.ui.view">
+        <field name="name">cancellation.terms.form</field>
+        <field name="model">cancellation.terms</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+<!--                        <group>-->
+                            <field name="penalty" />
+                            <field name="percentage" invisible="invisable_percentage"/>
+                            <field name="invisable_percentage" invisible="1" />
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <group>-->
+                                <field name="period_before_arrival"/>
+                                <field name="invisable_periods" invisible="1" />
+                                <field name="invisable_periods_till" invisible="1" />
+                                <field name="number_of_days_hours" invisible="invisable_periods"/>
+                                <field name="number_of_days_hours_till" invisible="invisable_periods_till"/>
+                                <field name="days_hours" invisible="invisable_periods"/>
+<!--                            </group>-->
+                            <field name="arrival_dates_from" />
+                            <field name="arrival_dates_to" readonly="not_limited"/>
+                            <field name="not_limited" />
+<!--                        </group>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
